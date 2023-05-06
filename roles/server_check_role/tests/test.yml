@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - check_role
+    - server_check_role
