@@ -3,6 +3,6 @@
 - name: Run a task to Gather Facts and run custom tests across the Inventory of servers
   hosts: localhost
   roles:
-    - check_role
+    - server_check_role
 
 ...
