@@ -1,3 +1,4 @@
 ansible-navigator.log
 main_playbook-artifact*.json
+collections/ansible_collections
 
