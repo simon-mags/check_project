@@ -1,0 +1,31 @@
+---
+
+- name: Gather uptime, kernel, and release for Red Hat Linux
+  when: ansible_facts['os_family'] == 'RedHat'
+  ansible.builtin.command: "{{ item }}"
+  with_items:
+    - uptime
+    - uname -r
+    - cat /etc/redhat-release
+  changed_when: false
+  check_mode: false
+
+- name: Gather uptime, kernel, and release for AIX
+  when: ansible_facts['os_family'] == 'AIX'
+  ansible.builtin.command: "{{ item }}"
+  with_items:
+    - uptime
+    - uname -a
+    - oslevel
+  changed_when: false
+  check_mode: false
+
+- name: Gather uptime, kernel, and release for Solaris
+  when: ansible_facts['os_family'] == 'Solaris'
+  ansible.builtin.command: "{{ item }}"
+  with_items:
+    - uptime
+    - uname -a
+    - cat /etc/release
+  changed_when: false
+  check_mode: false

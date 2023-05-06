@@ -1,0 +1,45 @@
+---
+# tasks file for check_role
+
+- name: Gather system facts
+  ansible.builtin.setup:
+
+# Run Standard checks and tests with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
+- name: Run custom tests
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop: "{{ query('glob', './standard_tests/*.yml') }}"
+  when: .yml in item
+
+# Run any custom checks with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
+- name: Run custom tests
+  ansible.builtin.include_tasks: "{{ item }}"
+  loop: "{{ query('glob', './custom_tests/*.yml') }}"
+  when: .yml in item
+
+# Gather output for the custom tests and collate them in a Jinja2 output Template that will be written in Mark Down
+- name: Gather custom test files
+  ansible.builtin.find:
+    paths: "{{ playbook_dir }}/check_role/tasks/custom_tests"
+    patterns: "*.yml"
+  register: custom_tests_files
+
+- name: Read custom test files
+  ansible.builtin.set_fact:
+    custom_tests_files: "{{ custom_tests_files.files |
+      map(attribute='path') |
+      map('regex_replace', '^.*/') |
+      map('regex_replace', '\\.yml$') |
+      zip(custom_tests_files.files |
+      map(attribute='path') |
+      map('regex_replace', '^.*/')) |
+      map(dict) |
+      list }}"
+    custom_tests_contents: "{{ custom_tests_files.files |
+      map(attribute='path') |
+      map('regex_replace', '^.*/') |
+      map('regex_replace', '\\.yml$') |
+      map('regex_replace', '^', playbook_dir + '/check_role/tasks/custom_tests/') |
+      map('include') |
+      list }}"
+
+...

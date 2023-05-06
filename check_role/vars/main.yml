@@ -1,0 +1,3 @@
+---
+# vars file for check_role
+report_file: /tmp/report.md

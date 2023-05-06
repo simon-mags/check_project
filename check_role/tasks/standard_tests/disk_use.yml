@@ -1,0 +1,12 @@
+---
+
+- name: Get disk usage for each mount point
+  ansible.posix.disk_usage:
+    path: "{{ item.mount }}"
+    unit: "g"
+  loop: "{{ ansible_mounts }}"
+  register: disk_usage_output
+
+- name: Format output
+  ansible.builtin.set_fact:
+    disk_usage_by_mount_point: "{{ disk_usage_output.results | map(attribute='ansible_facts') | list }}"
