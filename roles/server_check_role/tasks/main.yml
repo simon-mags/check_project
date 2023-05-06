@@ -7,14 +7,14 @@
 # Run Standard checks and tests with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
 - name: Run custom tests
   ansible.builtin.include_tasks: "{{ item }}"
-  loop: "{{ query('glob', './standard_tests/*.yml') }}"
-  when: .yml in item
+  loop: "{{ query('fileglob', './standard_tests/*.yml') }}"
+  when: item is match('.*\.yml$')
 
 # Run any custom checks with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
 - name: Run custom tests
   ansible.builtin.include_tasks: "{{ item }}"
-  loop: "{{ query('glob', './custom_tests/*.yml') }}"
-  when: .yml in item
+  loop: "{{ query('ansible.builtin.fileglob', './custom_tests/*.yml') }}"
+  when: item is match('.*\.yml$')
 
 # Gather output for the custom tests and collate them in a Jinja2 output Template that will be written in Mark Down
 - name: Gather custom test files
