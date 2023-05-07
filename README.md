@@ -32,7 +32,7 @@ $ cd check_project
 $ ansible-playbook main_playbook.yml -i hosts
 ```
 
-## Roles
+## Role
 
 ### `server_check_role`
 
@@ -43,19 +43,11 @@ This role checks the following:
 - major and minor operating system release
 - Swap usage
 
+The project will aim to write some further functions such as:
 
-the project will aim to write some further roles such as:
-
-### `user_check_role`
-
-This role checks the following:
+The ability to check on the status of the following items:
 
 - Password aging for all users
-
-### `network_check_role`
-
-This role checks the following:
-
 - DNS resolution
 - Network latency to a specified host
 - Open ports on the server
