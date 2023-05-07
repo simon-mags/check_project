@@ -1,9 +1,6 @@
 ---
 # tasks file for check_role
 
-- name: Gather system facts
-  ansible.builtin.setup:
-
 # Run Standard checks and tests with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
 - name: Run custom tests
   ansible.builtin.include_tasks: "{{ item }}"
