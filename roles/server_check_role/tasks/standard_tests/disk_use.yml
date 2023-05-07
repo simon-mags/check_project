@@ -2,7 +2,9 @@
 
 - name: Get disk usage for each mount point
   ansible.builtin.set_fact:
-    disk_usage_by_mount_point: "{{ ansible_mounts | map('regex_replace', '(.+) .* (.+) (.+) (.+) .+', {'mount': '\\1', 'block_total': '\\2', 'block_used': '\\3', 'block_available': '\\4'}) | list }}"
+    disk_usage_by_mount_point: "{{ ansible_mounts |
+      map('regex_replace', '(.+) .* (.+) (.+) (.+) .+', {'mount': '\\1', 'block_total': '\\2', 'block_used': '\\3', 'block_available': '\\4'}) |
+      list }}"
   register: disk_usage_output
 
 - name: Format output
