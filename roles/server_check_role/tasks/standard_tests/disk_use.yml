@@ -1,12 +1,23 @@
 ---
 
-- name: Get disk usage for each mount point
-  ansible.builtin.set_fact:
-    disk_usage_by_mount_point: "{{ ansible_mounts |
-      map('regex_replace', '(.+) .* (.+) (.+) (.+) .+', {'mount': '\\1', 'block_total': '\\2', 'block_used': '\\3', 'block_available': '\\4'}) |
-      list }}"
-  register: disk_usage_output
+# - name: Gather the disk information for each mount point
+#   ansible.builtin.shell: |
+#     set -o pipefail
+#     "df -hT -x tmpfs -x devtmpfs -x squashfs -x debugfs | tail -n +2"
+#   register: disk_usage_output
+#   changed_when: false
+#   check_mode: false
 
-- name: Format output
-  ansible.builtin.set_fact:
-    disk_usage_by_mount_point: "{{ disk_usage_output.results | map(attribute='ansible_facts') | list }}"
+# - name: Format the disk output into a new Fact
+#   ansible.builtin.set_fact:
+#     disk_usage_by_mount_point: "{{ disk_usage_output.stdout_lines |
+#       map('split') |
+#       map({'mount_point': '{{ item[6] }}',
+#       'total': '{{ item[2] }}',
+#       'used': '{{ item[3] }}',
+#       'free': '{{ item[4] }}',
+#       'percent_free': '{{ item[5] }}'}) |
+#       list }}"
+#   when: disk_usage_output is defined
+#   changed_when: false
+#   check_mode: false
