@@ -4,9 +4,16 @@
   ansible.builtin.shell: "grep -E '^\\s*[^#].*\\sALL=\\(ALL\\)\\s+ALL\\s*$' /etc/sudoers"
   register: sudoers_output
   changed_when: false
+  become: true
+  tags:
+    - sudo_tag
+    - never
 
 - name: Format sudoers output
   ansible.builtin.set_fact:
     sudoers: "{{ sudoers_output.stdout_lines | join('\n') }}"
-
+  tags:
+    - sudo_tag
+    - never
+    
 ...
