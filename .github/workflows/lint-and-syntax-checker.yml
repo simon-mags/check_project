@@ -1,5 +1,4 @@
 ---
-
 name: ansible-lint
 
 on:
@@ -23,11 +22,9 @@ jobs:
           pip install ansible
 
       - name: Ansible Lint
-        uses: ansible/ansible-lint-action@v5.1.0
+        uses: ansible/ansible-lint-action@v5
         with:
           args: -p roles/**/*.yml main_playbook.yml --exclude=roles/junos_*
 
       - name: Syntax check
         run: ansible-playbook --syntax-check main_playbook.yml
-
-...
