@@ -2,7 +2,27 @@
 
 - name: Run a task to Gather Facts and run custom tests across the Inventory of servers
   hosts: localhost
+  gather_facts: true
   roles:
     - server_check_role
+
+  pre_tasks:
+    - name: Ensure pip is installed
+      ansible.builtin.package:
+        name: python3-pip
+        state: present
+      become: true
+      tags:
+        - first_run
+        - never
+
+    - name: Install jmespath
+      ansible.builtin.pip:
+        name: jmespath
+        state: present
+      become: true
+      tags:
+        - first_run
+        - never
 
 ...
