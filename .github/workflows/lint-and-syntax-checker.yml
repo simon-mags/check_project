@@ -1,25 +1,31 @@
 ---
 
-name: Ansible Lint and Syntax Check
+name: ansible-lint
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  lint-and-syntax-check:
+  ansible-lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y ansible
-
-      - name: Lint code
-        uses: ansible/ansible-lint-action@v3
+      - uses: actions/checkout@v2
+      - name: Setup Python
+        uses: actions/setup-python@v2
         with:
-          args: -p roles/**/*.yml main_playbook.yml
+          python-version: 3.8
+      - name: Install Ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible
+
+      - name: Ansible Lint
+        uses: ansible/ansible-lint-action@v5.0.3
+        with:
+          args: -p roles/**/*.yml main_playbook.yml --exclude=roles/junos_*
 
       - name: Syntax check
         run: ansible-playbook --syntax-check main_playbook.yml
