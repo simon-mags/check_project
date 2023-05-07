@@ -1,11 +1,33 @@
-- name: Get uptime information
-  ansible.builtin.shell: |
-    case "{{ ansible_facts['os_family'] }}" in
-      'RedHat') uptime ;;
-      'AIX') uptime -s ;;
-      'Solaris') uptime ;;
-      *) echo "Unsupported OS" ;;
-    esac
-  register: uptime_output
-  changed_when: false
-  check_mode: false
+---
+
+# - name: Display system uptime in normal linux uptime format
+#   ansible.builtin.set_fact:
+#     system_uptime: "{{ ansible_facts.uptime_seconds | int | strftime('%H:%M:%S up %d days, %H:%M') }}"
+
+# - name: Display system uptime
+#   debug:
+#     var: system_uptime
+
+# - name: Display system uptime
+#   ansible.builtin.shell: |
+#     set -o pipefail
+#     "uptime | awk '{print $3,$4}' | sed 's/,//'"
+#   register: system_uptime
+#   failed_when: system_uptime.rc != 0
+#   changed_when: false
+#   check_mode: false
+
+# - name: Print system uptime
+#   ansible.builtin.debug:
+#     msg: "System uptime: {{ system_uptime.stdout }}"
+#   when: system_uptime.rc == 0
+#   changed_when: false
+#   check_mode: false
+
+# - name: Set system uptime fact
+#   ansible.builtin.set_fact:
+#     system_uptime_output: "{{ system_uptime.stdout }}"
+#   changed_when: false
+#   check_mode: false
+
+...
