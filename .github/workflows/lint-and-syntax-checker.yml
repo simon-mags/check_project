@@ -23,7 +23,7 @@ jobs:
           pip install ansible
 
       - name: Ansible Lint
-        uses: ansible/ansible-lint-action@v5.0.3
+        uses: ansible/ansible-lint-action@v5.1.0
         with:
           args: -p roles/**/*.yml main_playbook.yml --exclude=roles/junos_*
 
