@@ -7,11 +7,6 @@
     kernel_version: "{{ ansible_kernel }}"
     os_release: "{{ ansible_distribution }} {{ ansible_distribution_version }}"
 
-- name: Gather installed software facts
-  ansible.builtin.package_facts:
-    manager: "{{ ansible_pkg_mgr }}"
-  register: software_facts
-
 - name: Gather hardware facts
   ansible.builtin.setup:
     filter: ansible_product_name
@@ -36,8 +31,9 @@
   check_mode: false
 
 - name: Get current swap devices and usage
-  ansible.builtin.command: "free -h | grep Swap"
-  register: swap_output
+  ansible.builtin.shell: free -h | grep Swap
+  register: swap_facts
+  ignore_errors: true
   changed_when: false
   check_mode: false
 
@@ -49,10 +45,8 @@
 
 - name: Format output
   ansible.builtin.set_fact:
-    uptime: "{{ uptime_output.stdout }}"
     logged_in_users: "{{ who_output.stdout_lines }}"
     grub_config: "{{ grub_output.stdout }}"
     fstab_config: "{{ fstab_output.stdout }}"
-    disk_usage: "{{ disk_usage_output.stdout }}"
-    swap: "{{ swap_output.stdout }}"
+    swap: "{{ swap_facts.stdout }}"
     route_info: "{{ route_output.stdout }}"
