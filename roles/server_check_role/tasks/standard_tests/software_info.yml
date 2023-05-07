@@ -1,0 +1,21 @@
+---
+
+# - name: Gather installed software facts
+#   ansible.builtin.package_facts:
+#     manager: "{{ lookup('pipe', 'if which dnf > /dev/null 2>&1; then echo dnf;
+#       elif which yum > /dev/null 2>&1; then echo yum;
+#       elif which apt-get > /dev/null 2>&1; then echo apt;
+#       elif which apk > /dev/null 2>&1; then echo apk;
+#       else echo unknown; fi') }}"
+#   register: software_facts
+
+# - name: Check if package manager is supported
+#   ansible.builtin.fail:
+#     msg: "Unsupported package manager: {{ software_facts['manager'] }}"
+#   when: "'manager' not in software_facts or software_facts['manager'] == 'unknown'"
+
+- name: Display installed software
+  ansible.builtin.debug:
+    var: ansible_facts.packages
+
+...
