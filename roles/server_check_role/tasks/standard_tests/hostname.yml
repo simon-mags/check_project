@@ -1,0 +1,10 @@
+---
+
+- name: Add hostname to server_report_data
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      hostname: "{{ ansible_facts.fqdn }}"
+
+...

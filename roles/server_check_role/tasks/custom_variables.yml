@@ -1,0 +1,36 @@
+---
+
+# This playbook runs and adds in any custom variables as they are defined for each operating system
+# it matches on the most specific to least specific, i.e. ansible distribution + ansible distribution version
+# is more specific than ansible distribution + ansible distribution major version
+
+- name: Include common variables
+  include_vars: "vars/common.yml"
+
+- name: add OS specific variables
+  include_vars: "{{ loop_vars }}"
+  with_first_found:
+    - files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml"
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_system }}.yml"
+        - "defaults.yml"
+      paths:
+        - "vars"
+  loop_control:
+    loop_var: loop_vars
+  register: os_vars
+
+- name: Create error list
+  set_fact:
+    missing_var_files: "{{ ansible_hostname }} skipped, could not find variable file vars/{{ ansible_os_family }}{{ ansible_distribution_major_version }}.yml"
+  when: os_vars.skipped is defined and os_vars.skipped
+
+- fail:
+    msg: "{{ ansible_hostname }} skipped, could not match a supported platform"
+  when: os_vars.skipped is defined and os_vars.skipped
+
+- meta: end_host
+  when: os_vars.skipped is defined and os_vars.skipped

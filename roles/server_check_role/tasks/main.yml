@@ -1,14 +1,33 @@
 ---
 # tasks file for check_role
+- name: Include variables task
+  tags:
+    - always
+  include_tasks: custom_variables.yml
+
+# Gather all the Service Fact information from the hosts
+- name: Gather Service facts
+  ansible.builtin.service_facts:
+
+# Gather all the Package Fact information from the hosts as we may look for specific info in some of our standard and custom tests
+- name: Gather package facts
+  ansible.builtin.package_facts:
+  ignore_errors: true
+  register: ignore_errors_register
+
+# Setup out Report Data Structure
+- name: Initialize compliance data
+  ansible.builtin.set_fact:
+    server_report_data: {}
 
 # Run Standard checks and tests with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
-- name: Run custom tests
+- name: Run Standard tests from subfolder
   ansible.builtin.include_tasks: "{{ item }}"
   loop: "{{ query('fileglob', './standard_tests/*.yml') }}"
   when: item is match('.*\.yml$')
 
 # Run any custom checks with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
-- name: Run custom tests
+- name: Run custom tests from subfolder
   ansible.builtin.include_tasks: "{{ item }}"
   loop: "{{ query('ansible.builtin.fileglob', './custom_tests/*.yml') }}"
   when: item is match('.*\.yml$')
@@ -20,7 +39,7 @@
     patterns: "*.yml"
   register: custom_tests_files
 
-- name: Read custom test files
+- name: Read custom test files into a new Fact
   ansible.builtin.set_fact:
     custom_tests_files: "{{ custom_tests_files.files |
       map(attribute='path') |
@@ -38,5 +57,8 @@
       map('regex_replace', '^', playbook_dir + '/check_role/tasks/custom_tests/') |
       map('include') |
       list }}"
+
+
+
 
 ...

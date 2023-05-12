@@ -1,0 +1,18 @@
+---
+# vars file for firewall_check
+time_cmd: 'chronyc sources'
+time_service: 'chronyd.service'
+time_check_regex: '\^\*.*'
+firewall_cmd: 'firewall-cmd'
+firewall_service: 'firewalld.service'
+selinux_cmd: 'getenforce'
+selinux_check_regex: 'Enforcing'
+repo_cmd: 'yum repolist --quiet'
+iptables_sysv: 'iptables'
+ufw_sysv: 'ufw'
+firewalld_sysv: 'firewalld'
+nftables_sysv: 'nftables'
+
+# SAR-related vars
+sar_package: sysstat
+sar_config: '/usr/lib64/sa/sa1'

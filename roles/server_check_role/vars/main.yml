@@ -1,3 +1,5 @@
 ---
-# vars file for check_role
-report_file: /tmp/report.md
+# main common vars space for the server_check_role
+report_file: "/tmp/server_check_report_{{ ansible_hostname }}"
+
+check_project_version: 1.1.101
