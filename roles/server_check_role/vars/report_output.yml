@@ -1,0 +1,7 @@
+---
+
+# report_fields:
+#   - label: "Host"
+#     field_name: "hostname"
+#   - label: "IPv4"
+#     field_name: "ipv4_address"

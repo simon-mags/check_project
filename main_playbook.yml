@@ -6,15 +6,15 @@
   roles:
     - server_check_role
 
-  pre_tasks:
+  # pre_tasks:
 
-    - name: Gather Service facts
-      ansible.builtin.service_facts:
+  #   - name: Gather Service facts
+  #     ansible.builtin.service_facts:
 
-    - name: Gather package facts
-      ansible.builtin.package_facts:
-      ignore_errors: true
-      register: ignore_errors_register
+  #   - name: Gather package facts
+  #     ansible.builtin.package_facts:
+  #     ignore_errors: true
+  #     register: ignore_errors_register
 
   #   - name: Ensure pip is installed
   #     ansible.builtin.package:
