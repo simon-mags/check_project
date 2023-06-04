@@ -6,32 +6,21 @@
   roles:
     - server_check_role
 
-  # pre_tasks:
+# want a way to call the role and pass in the variable name for the output file
+# then run a task to do a comparison or diff task as an ansible task, probaby with the diff module
+# The aim is for someone to run this role pre and post patching or pre and post a major server change
+# The diff would then highlight any changes an operator needs to look Inventory
+# Some of these changes could potentially trigger actions such as starting or restarting a servicethat has failed.
 
-  #   - name: Gather Service facts
-  #     ansible.builtin.service_facts:
+- ansible.builtin.set_fact:
+    before:
+      # read in the file before changes
+    after:
+      # read in the file after any changes have been made
 
-  #   - name: Gather package facts
-  #     ansible.builtin.package_facts:
-  #     ignore_errors: true
-  #     register: ignore_errors_register
-
-  #   - name: Ensure pip is installed
-  #     ansible.builtin.package:
-  #       name: python3-pip
-  #       state: present
-  #     become: true
-  #     tags:
-  #       - first_run
-  #       - never
-
-  #   - name: Install jmespath
-  #     ansible.builtin.pip:
-  #       name: jmespath
-  #       state: present
-  #     become: true
-  #     tags:
-  #       - first_run
-  #       - never
+- name: Show the difference in json format
+  ansible.utils.fact_diff:
+    before: "{{ before }}"
+    after: "{{ after }}"
 
 ...
