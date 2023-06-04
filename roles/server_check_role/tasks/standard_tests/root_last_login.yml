@@ -1,0 +1,20 @@
+---
+
+- name: Execute 'last -1 -R root | head -1 | awk '{print $4 ,$5 ,$6}'' checks for last root login
+  become: true
+  ansible.builtin.shell:
+    executable: /bin/bash
+    cmd: "last -1 -R root | head -1 | awk '{print $4, $5, $6}'"
+  register: __root_last_login
+  changed_when: false
+  failed_when: "__root_last_login.rc == -1"
+  # Hack to make the task return "changed"
+
+- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      root_last_login: "{{ __root_last_login.stdout | trim | default }}"
+
+...

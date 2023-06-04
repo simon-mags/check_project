@@ -1,0 +1,10 @@
+# common variables
+internet_check_urls:
+  - http://www.google.com/
+  - https://www.redhat.com/
+administrative_groups:
+  - adm
+  - sudo
+  - wheel
+uptime_limit: 5200000
+open_vm_tools_package: 'open-vm-tools'

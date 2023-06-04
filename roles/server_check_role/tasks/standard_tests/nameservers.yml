@@ -1,0 +1,19 @@
+---
+- name: Check for nameservers from network manager
+  become: true
+  ansible.builtin.shell: |
+    awk '/DNS/ {print $2}'<<<$(nmcli dev show 2>/dev/null)
+    sed -n '/DNS Servers/,/^$/p'<<<$(systemd-resolve --status 2>/dev/null)
+  args:
+    executable: /bin/bash
+  changed_when: resolv_conf.rc != -1
+  register: resolv_conf
+
+- name: Add Namserver data to server_report_data from network manager or ansible facts"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      nameservers: "{{ (resolv_conf.stdout_lines + ansible_dns['nameservers']) | unique }}"
+
+...

@@ -1,0 +1,10 @@
+---
+
+- name: Add IPV6 address to server_report_data
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      ipv6_address: "{{ ansible_facts.default_ipv6.address | default('ipv6 address not found') }}"
+
+...

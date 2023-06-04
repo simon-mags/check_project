@@ -1,0 +1,18 @@
+---
+- name: Check for ntp sources within ntp/chrony conf
+  become: true
+  ansible.builtin.shell: |
+    awk '/^pool/ {print $2}'<<<$(cat /etc/ntp.conf /etc/chrony.conf 2>/dev/null)
+  args:
+    executable: /bin/bash
+  changed_when: ntp_pool.rc != -1
+  register: ntp_pool
+
+- name: Add NTP data to server_report_data  / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      ntp_sources: "{{ ntp_pool.stdout | default }}"
+
+...

@@ -1,0 +1,10 @@
+---
+
+- name: Add ostype to server_report_data
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      os_type: "{{ ansible_facts.distribution }} {{ ansible_facts.distribution_version }}"
+
+...

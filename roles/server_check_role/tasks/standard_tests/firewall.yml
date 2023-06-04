@@ -1,0 +1,86 @@
+---
+- name: Initialize working facts
+  ansible.builtin.set_fact:
+    __firewall_running: false
+    __firewall_service_list: []
+
+- name: Check status of firewalld service
+  ansible.builtin.set_fact:
+    __firewall_running: true
+    __firewall_service_list: "{{ __firewall_service_list + ['firewalld'] }}"
+  when:
+    - firewalld_service is defined
+    - ansible_facts.services[firewalld_service].state|default('') == 'running'
+
+- name: Check the status of the firewalld service - sysvinit
+  ansible.builtin.set_fact:
+    __firewall_running: true
+    __firewall_service_list: "{{ __firewall_service_list + ['firewalld'] }}"
+  when:
+    - firewalld_sysv is defined
+    - ansible_facts.services[firewalld_sysv].source|default('') == 'sysv' or ansible_facts.services[firewalld_sysv].source|default('') == 'upstart'
+    - ansible_facts.services[firewalld_sysv].state|default('') == 'running'
+
+- name: Check the status of the iptables service - systemd
+  ansible.builtin.set_fact:
+    __firewall_running: true
+    __firewall_service_list: "{{ __firewall_service_list + ['iptables'] }}"
+  when:
+    - iptables_service is defined
+    - ansible_facts.services[iptables_service].source|default('') == 'systemd'
+    - ansible_facts.services[iptables_service].status|default('') == 'enabled'
+
+- name: Check the status of the iptables service - sysvinit
+  ansible.builtin.set_fact:
+    __firewall_running: true
+    __firewall_service_list: "{{ __firewall_service_list + ['iptables'] }}"
+  when:
+    - iptables_sysv is defined
+    - ansible_facts.services[iptables_sysv].source|default('') == 'sysv' or ansible_facts.services[iptables_sysv].source|default('') == 'upstart'
+    - ansible_facts.services[iptables_sysv].state|default('') == 'running'
+
+- name: Check the status of the nftables service
+  ansible.builtin.set_fact:
+    __firewall_running: true
+    __firewall_service_list: "{{ __firewall_service_list + ['nftables'] }}"
+  when:
+    - nftables_service is defined
+    - ansible_facts.services[nftables_service].source|default('') == 'systemd'
+    - ansible_facts.services[nftables_service].status|default('') == 'enabled'
+
+- name: Check the status of the nftables service - sysvinit
+  ansible.builtin.set_fact:
+    __firewall_running: true
+    __firewall_service_list: "{{ __firewall_service_list + ['nftables'] }}"
+  when:
+    - nftables_sysv is defined
+    - ansible_facts.services[nftables_sysv].source|default('') == 'sysv' or ansible_facts.services[nftables_sysv].source|default('') == 'upstart'
+    - ansible_facts.services[nftables_sysv].state|default('') == 'running'
+
+- name: Check the status of the UFW service
+  ansible.builtin.set_fact:
+    __firewall_running: true
+    __firewall_service_list: "{{ __firewall_service_list + ['ufw'] }}"
+  when:
+    - ufw_service is defined
+    - ansible_facts.services[ufw_service].source|default('') == 'systemd'
+    - ansible_facts.services[ufw_service].status|default('') == 'enabled'
+
+- name: Check the status of the ufw service - sysvinit
+  ansible.builtin.set_fact:
+    __firewall_running: true
+    __firewall_service_list: "{{ __firewall_service_list + ['ufw'] }}"
+  when:
+    - ufw_sysv is defined
+    - ansible_facts.services[ufw_sysv].source|default('') == 'sysv' or ansible_facts.services[ufw_sysv].source|default('') == 'upstart'
+    - ansible_facts.services[ufw_sysv].state|default('') == 'running'
+
+- name: Add firewall data into existing server_report_data dict
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      firewall_running: "{{ __firewall_running }}"
+      firewall_service_list: "{{ __firewall_service_list | join('\n')  }}"
+
+...

@@ -1,0 +1,27 @@
+---
+
+- name: Root account info
+  become: true
+  ansible.builtin.getent:
+    database: shadow
+    key: root
+  register: __getent_root
+
+- name: Get root's last modification time
+  ansible.builtin.set_fact:
+    __getent_root_lastmod: "{{ __getent_root.ansible_facts.getent_shadow.root[1] | int }}"
+
+  # /etc/shadow stores "last modified" as the number of days since the epoch.
+  # Convert this to proper unix time, and then use strftime to turn this into a string
+- name: Convert to a date string
+  ansible.builtin.set_fact:
+    __getent_root_lastmod_string: "{{ '%Y-%m-%d' | strftime((0) + (86400 * (__getent_root_lastmod | int))) }}"
+
+- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      root_last_changed: "{{ __getent_root_lastmod_string | default('Unknown') }}"
+
+...

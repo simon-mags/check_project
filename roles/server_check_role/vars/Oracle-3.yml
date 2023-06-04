@@ -1,0 +1,27 @@
+---
+# vars file for firewall_check
+time_cmd: '/usr/sbin/ntpq -q'
+time_service: 'ntpd'
+time_check_regex: '\^\*.*'
+firewall_cmd: 'iptables'
+iptables_service: 'iptables'
+iptables_package: iptables
+selinux_cmd: 'getenforce'
+selinux_check_regex: 'Enforcing'
+repo_cmd: 'yum repolist --quiet'
+iptables_sysv: 'iptables'
+ufw_sysv: 'ufw'
+firewalld_sysv: 'firewalld'
+nftables_sysv: 'nftables'
+
+# SAR-related vars
+sar_package: sysstat
+sar_config: '/usr/lib64/sa/sa1'
+
+# Samba related Variables per OS Distro
+samba_daemon: smb
+
+# Apache Things
+httpd_package: httpd
+
+...

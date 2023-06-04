@@ -1,0 +1,10 @@
+---
+
+- name: Determine what the Package Manager is for the server
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      package_manager: "{{ ansible_facts.pkg_mgr | default('package manager not found') }} "
+
+...

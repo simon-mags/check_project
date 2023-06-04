@@ -1,0 +1,23 @@
+---
+# Author: Martin Pascoe
+- name: Execute 'sshd -T'
+  become: true
+  ansible.builtin.command: "/usr/sbin/sshd -T"
+  register: sshd_config
+  changed_when: "sshd_config.rc != 0"
+  ignore_errors: true
+
+- name: Set the fact that reads the SSH Config for permit root login
+  ansible.builtin.set_fact:
+    ssh_permit_root_login: "{{ sshd_config.stdout | regex_search(regexp, '\\1') }}"
+  vars:
+    regexp: '(?<=permitrootlogin )+(.*)'
+
+- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      ssh_permit_root_login: "{{ ssh_permit_root_login | join('\n') | default('ssh setting for root login not found')  }}"
+
+...

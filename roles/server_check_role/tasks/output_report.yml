@@ -1,0 +1,76 @@
+---
+
+# This playbook generates a Server Status report with included output from all the standard and custom check sub tasks.
+- name: A block that is delegated to localhost and set to run once
+  delegate_to: localhost
+  run_once: true
+  block:
+    # This task creates the directory on the localhost to store the output report.
+    - name: Create output destination directory
+      become: true
+      ansible.builtin.file:
+        path: "{{ report_dir }}"
+        state: directory
+        mode: '0764'
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    # find module is used to locate the standard test files in the ./standard_tests directory.
+    - name: Read Standard Test Files
+      ansible.builtin.find:
+        paths: ./standard_tests
+        patterns: '*.yml'
+      register: test_files
+
+    # Set an empty fact to initialise the variable names
+    - name: Extract Variable Names
+      ansible.builtin.set_fact:
+        variable_names: []
+
+    - name: Process Test Files
+      ansible.builtin.lineinfile:
+        path: "{{ item.path }}"
+        regex: 'ansible.builtin.set_fact:.*$'
+        backrefs: yes
+        register: result
+      loop: "{{ test_files.files }}"
+
+    - name: Append Variable Names
+      ansible.builtin.set_fact:
+        variable_names: "{{ variable_names + [item.matched|regex_replace('^ansible.builtin.set_fact: (.+)$', '\\1')] }}"
+      loop: "{{ result.results }}"
+
+    - name: Display Variable Names
+      debug:
+        var: variable_names
+
+    # # This task will gather all variables from the set_fact tasks within the standard_tests folder:
+    # - name: Gather unique variable names
+    #   ansible.builtin.set_fact:
+    #     unique_variable_names: "{{ unique_variable_names | default([]) + [item] }}"
+    #   loop: "{{ query('fileglob', './standard_tests/*.yml') }}"
+    #   register: variable_names_result
+    #   when: item is match('.*\.yml$')
+    #   changed_when: false
+    #   ignore_errors: true
+
+    - name: Run the Template Task to create the report.json file and output
+    # This task templates the report.json file from the compliance report data mentioned in the j2 file
+      become: true
+      ansible.builtin.template:
+        src: "report.json.j2"
+        dest: "{{ report_dir }}{{ report_file }}"
+        mode: '0755'
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+      register: report_output_file
+      loop: "{{ play_hosts }}"
+      loop_control:
+        loop_var: host
+      vars:
+        unique_variable_names: "{{ variable_names_result.results | map(attribute='ansible_facts.unique_variable_names') | flatten | unique }}"
+
+    - name: Show the output path
+      ansible.builtin.debug:
+        msg: "A new report has been generated with output at {{ report_output_file.dest }}"
+      when: report_output_file.dest is defined

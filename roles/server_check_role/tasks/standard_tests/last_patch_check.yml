@@ -1,0 +1,68 @@
+---
+# tasks file for last_patched
+
+# Note: The logs that these commands use seem to get culled reasonably often
+# This has been seen with Debian and RHEL based OSs, at the least
+# Failures here do not mean the server was never patched, just not "recently"
+
+- name: Get last patch (yum/dnf)
+  # With RHEL we can use yum history and look for when the last upgrade was run
+  # This returns the same result for DNF and YUM, so we may just need to detect
+  # if one or the other is missing before using it.
+  when: ansible_os_family == "RedHat"
+  block:
+
+    - name: Search yum log
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: "awk -F'|' '$2 ~ /up(grade|date)/ { print $3;exit }'<<<$(yum history)"
+      changed_when: false
+      register: yum_history_output
+
+    - name: Set fact based on returned value
+      when: yum_history_output.stdout is defined and yum_history_output.stdout
+      ansible.builtin.set_fact:
+        audit_last_patch: "{{ yum_history_output.stdout | regex_replace('^ ', '') }}"
+
+- name: Get last patch (apt)
+  # With Debian based updates are logged in /var/log/apt/history.log
+  when: ansible_os_family == "Debian"
+  block:
+
+    - name: Search apt log
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: "tac /var/log/apt/history.log |awk '/^Commandline: apt.*upgrade/ {getline;print;exit}'"
+      changed_when: false
+      register: apt_history_output
+
+    - name: Set fact based on returned value
+      ansible.builtin.set_fact:
+        audit_last_patch: "{{ apt_history_output.stdout | regex_replace('Start-Date: ', '') }}"
+      when: apt_history_output.stdout is defined and apt_history_output.stdout
+
+- name: Get last patch (zypper)
+  # We can retrieve a command history for zypper distros (SUSE) like yum above
+  when: ansible_os_family == "Suse"
+  block:
+
+    - name: Search zypper log
+      ansible.builtin.shell:
+        executable: /bin/bash
+        cmd: "zypper-log | grep 'zypper up' | awk ' {print $1,$2}'"
+      changed_when: false
+      register: zypper_history_output
+
+    - name: Set fact based on returned value
+      ansible.builtin.set_fact:
+        audit_last_patch: "{{ zypper_history_output.stdout | regex_replace('Start-Date: ', '') }}"
+      when: zypper_history_output.stdout is defined and zypper_history_output.stdout
+
+- name: Add hostname to server_report_data
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      last_patch_date: "{{ audit_last_patch | default('Not Found') }}"
+
+...
