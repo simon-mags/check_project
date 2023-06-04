@@ -1,12 +1,17 @@
 ---
 
 - name: Set Fact for the server uptime
+  # Calculate the server uptime by subtracting the current time from the time
+  # obtained by subtracting the uptime seconds from the current timestamp.
+  # where __server_uptime is a local fact we create in this play
   ansible.builtin.set_fact:
     __server_uptime: "{{ now().replace(microsecond=0) - now().fromtimestamp(now(fmt='%s') | int - ansible_uptime_seconds) }}"
 
-- name: Add the server uptime to the server output report
+- name: Set fact for the Server Uptime and send it to our server output report
+  # Add the server uptime information to the server_report_data dictionary, which will be used
+  # to populate the server report output.
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
-      server_uptime: "{{ __server_uptime | default('uptime not discovered') }}"
+    data_var:
+      __server_uptime: "{{ __server_uptime | default('uptime not found in ansible facts') }}"

@@ -1,40 +1,17 @@
 {
-  "report_fields": {{ report_fields | to_json }},
-
-  // Array of objects containing server information and collected facts
-  "report_data": [
+  "server_report_data":
+  [
     {
-      // Server name
       "server_name": {{ hostvars[host]['inventory_hostname'] }},
 
-      // IP address of the server
-      "ip_address": "{{ hostvars[host]['ansible_host'] }}"//,
+      "ip_address": "{{ hostvars[host]['ansible_host'] }}",
 
-      // Collected facts for the server
       "server_report_data": {
-        {% for variable_name in unique_variable_names %}
+        {% for variable_name in server_report_data %}
         "{{ variable_name }}": "{{ hostvars[host]['server_report_data'][variable_name] | default('NOVALUE') }}"{% if not loop.last %},{% endif %}
         {% endfor %}
-
-        {% set data = hostvars[host]['server_report_data'] %}
-
-        {% for this_field in report_fields %}
-        "{{
-          this_field['field_name']
-        }}": "{{
-          'MANUAL' if this_field.is_manual|default(false) else data[this_field['field_name']]|default('NOVALUE')
-        }}"{% if not loop.last %},{% endif %}
-        {% endfor %}
-      }
-
-
-  ,
-    // Additional server data objects go here...
-  ],
-
-  // Version of this project under the vars main.yml
+        }
+  ]
   "check_project_version": "{{ check_project_version }}",
-
-  // Timestamp when the report was generated
   "run_time": "{{ ansible_date_time.iso8601 }}"
 }

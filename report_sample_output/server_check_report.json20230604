@@ -1,0 +1,33 @@
+{
+  // Array of objects containing server information and collected facts
+  "server_report_data": [
+    {
+      // Server name
+      "server_name": localhost,
+
+      // IP address of the server
+      "ip_address": "127.0.0.1"//,
+
+      // All the collected facts for the server
+      "server_report_data": {
+                "ansible_package_info": "Package Information not found",                "running_kernel_version": "5.14.0-162.23.1.el9_1.x86_64",                "audit_repolist": "mirror.aarnet.edu.au
+ftp.swin.edu.au
+packages.microsoft.com
+rocky-linux-australia-southeast1.production.gcp.mirrors.ctrliq.cloud
+developer.download.nvidia.com
+download.docker.com
+ap.edge.kernel.org
+mirror.aarnet.edu.au
+ftp.swin.edu.au
+packages.gitlab.com
+dl.google.com",                "end_of_support_bool": "unknown",                "end_of_life_bool": "unknown",                "firewall_running": "True",                "firewall_service_list": "firewalld",                "ipv4_address": "192.168.1.174",                "last_patch_date": "2023-06-04 20:32 ",                "latest_installed_kernel": "5.14.0-284.11.1.el9_2.x86_64",                "ipv6_address": "ipv6 address not found",                "nameservers": "['1.1.1.2']",                "ntp_sources": "2.rocky.pool.ntp.org",                "os_type": "Rocky 9.2",                "open_vm_tools": "12.1.5-1.el9.x86_64",                "package_manager": "dnf ",                "root_last_changed": "1970-01-01",                "root_last_login": "",                "selinux_status": "enabled",                "selinux_mode": "enforcing",                "selinux_config_mode": "enforcing",                "ssh_permit_root_login": "without-password",                "sudo_users": "root	ALL=(ALL) 	ALL",                "sudo_groups": "%wheel	ALL=(ALL)	ALL",                "hostname": "localhost.localdomain",                "__server_uptime": "6 days, 9:56:51"                }
+  ,
+    // Additional server data objects go here...
+  ],
+
+  // Version of this project under the vars main.yml
+  "check_project_version": "1.1.101",
+
+  // Timestamp when the report was generated
+  "run_time": "2023-06-04T13:28:41Z"
+}
