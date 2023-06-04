@@ -12,15 +12,20 @@
 # The diff would then highlight any changes an operator needs to look Inventory
 # Some of these changes could potentially trigger actions such as starting or restarting a servicethat has failed.
 
-- ansible.builtin.set_fact:
-    before:
-      # read in the file before changes
-    after:
-      # read in the file after any changes have been made
+- name: Compare two files
+  diff:
+    src: /path/to/file1.json
+    dest: /path/to/file2.json
 
-- name: Show the difference in json format
-  ansible.utils.fact_diff:
-    before: "{{ before }}"
-    after: "{{ after }}"
+# - ansible.builtin.set_fact:
+#     before:
+#       # read in the file before changes
+#     after:
+#       # read in the file after any changes have been made
+
+# - name: Show the difference in json format
+#   ansible.utils.fact_diff:
+#     before: "{{ before }}"
+#     after: "{{ after }}"
 
 ...
