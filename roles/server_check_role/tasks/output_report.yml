@@ -22,7 +22,7 @@
         patterns: '*.yml'
       register: test_files
 
-    # Set an empty fact to initialise the variable names
+    # Set an empty variable which will be populated later in the Append vriable names task
     - name: Extract Variable Names
       ansible.builtin.set_fact:
         variable_names: []
