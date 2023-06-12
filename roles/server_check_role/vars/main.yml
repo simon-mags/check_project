@@ -4,7 +4,7 @@
 collected_facts: {}
 
 # main common vars space for the server_check_role
-report_dir: /home/smaginnity/report_output/
+report_dir: "{{playbook_dir}}/report_sample_output/"
 report_file: "server_check_report.json"
 
 check_project_version: 1.1.101

@@ -1,24 +1,44 @@
 {
   "server_report_data":
   [
-    {
-      "server_name": localhost,
-
-      "ip_address": "127.0.0.1",
-
-      "server_report_data": {
-                "ansible_package_info": "Package Information not found",                "running_kernel_version": "5.14.0-162.23.1.el9_1.x86_64",                "audit_repolist": "mirror.aarnet.edu.au
+    "Host","IP Address","IPv4","IPv6","kernel version","os_release","logged_in_users","route_info","swap","free","disk_usage","ansible_package_info","running_kernel_version","audit_repolist","end_of_support_bool","end_of_life_bool","firewall_running","firewall_service_list","ipv4_address","last_patch_date","latest_installed_kernel","ipv6_address","nameservers","ntp_sources","os_type","open_vm_tools","package_manager","root_last_changed","root_last_login","selinux_status","selinux_mode","selinux_config_mode","ssh_permit_root_login","sudo_users","sudo_groups","__server_uptime","httpd_version","nfs_exports","nfs_mounts","samba_shares","samba_version","vmtoolsd_version","grub_config","fstab_config"
+                                                                                                                                                                                                "localhost.localdomain","192.168.1.187","192.168.1.187","ipv6 address not found","5.14.0-284.11.1.el9_2.x86_64","Rocky 9.2","['user seat0        2023-06-12 15:38 (login screen)', 'user tty2         2023-06-12 15:38 (tty2)', 'user pts/3        2023-06-12 19:52 (127.0.0.1)']","default via 192.168.1.1 dev wlp2s0 proto dhcp src 192.168.1.187 metric 600
+192.168.1.0/24 dev wlp2s0 proto kernel scope link src 192.168.1.187 metric 600 ","NAME      TYPE      SIZE USED PRIO
+/dev/dm-1 partition 7.7G   0B   -2","Swap:          7.7Gi          0B       7.7Gi","['/dev/mapper/rl-root xfs    70G   45G   26G  64% /', '/dev/mapper/rl-home xfs   160G   31G  129G  20% /home', '/dev/sda2           xfs  1014M  445M  570M  44% /boot', '/dev/sda1           vfat  599M  7.0M  592M   2% /boot/efi']","Package Information not found","5.14.0-284.11.1.el9_2.x86_64","mirror.aarnet.edu.au
 ftp.swin.edu.au
 packages.microsoft.com
 rocky-linux-australia-southeast1.production.gcp.mirrors.ctrliq.cloud
 developer.download.nvidia.com
 download.docker.com
 ap.edge.kernel.org
-mirror.aarnet.edu.au
-ftp.swin.edu.au
+gsl-syd.mm.fcix.net
+rockylinux.mirror.digitalpacific.com.au
 packages.gitlab.com
-dl.google.com",                "end_of_support_bool": "unknown",                "end_of_life_bool": "unknown",                "firewall_running": "True",                "firewall_service_list": "firewalld",                "ipv4_address": "192.168.1.174",                "last_patch_date": "2023-06-04 20:32 ",                "latest_installed_kernel": "5.14.0-284.11.1.el9_2.x86_64",                "ipv6_address": "ipv6 address not found",                "nameservers": "['1.1.1.2']",                "ntp_sources": "2.rocky.pool.ntp.org",                "os_type": "Rocky 9.2",                "open_vm_tools": "12.1.5-1.el9.x86_64",                "package_manager": "dnf ",                "root_last_changed": "1970-01-01",                "root_last_login": "",                "selinux_status": "enabled",                "selinux_mode": "enforcing",                "selinux_config_mode": "enforcing",                "ssh_permit_root_login": "without-password",                "sudo_users": "root	ALL=(ALL) 	ALL",                "sudo_groups": "%wheel	ALL=(ALL)	ALL",                "hostname": "localhost.localdomain",                "__server_uptime": "6 days, 10:13:33"                }
-  ]
+dl.google.com","unknown","unknown","True","firewalld","192.168.1.187","2023-06-04 20:32 ","5.14.0-284.11.1.el9_2.x86_64","ipv6 address not found","['1.1.1.2']","2.rocky.pool.ntp.org","Rocky 9.2","12.1.5-1.el9.x86_64","dnf ","1970-01-01","","enabled","enforcing","enforcing","without-password","root	ALL=(ALL) 	ALL","%wheel	ALL=(ALL)	ALL
+%user	ALL=(ALL)	NOPASSWD  ALL","4:14:57","Not Installed","","","","Not Installed","","GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR="$(sed 's, release .*$,,g' /etc/system-release)"
+GRUB_DEFAULT=saved
+GRUB_DISABLE_SUBMENU=true
+GRUB_TERMINAL_OUTPUT="console"
+GRUB_CMDLINE_LINUX="crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M resume=/dev/mapper/rl-swap rd.lvm.lv=rl/root rd.lvm.lv=rl/swap rd.driver.blacklist=nouveau"
+GRUB_DISABLE_RECOVERY="true"
+GRUB_ENABLE_BLSCFG=true","
+#
+# /etc/fstab
+# Created by anaconda on Sat Sep 17 00:06:50 2022
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+/dev/mapper/rl-root     /                       xfs     defaults        0 0
+UUID=1fb7b207-7874-47e3-a809-58728c4db22c /boot                   xfs     defaults        0 0
+UUID=F976-6E7D          /boot/efi               vfat    umask=0077,shortname=winnt 0 2
+/dev/mapper/rl-home     /home                   xfs     defaults        0 0
+/dev/mapper/rl-swap     none                    swap    defaults        0 0"
+      ]
   "check_project_version": "1.1.101",
-  "run_time": "2023-06-04T13:45:23Z"
+  "run_time": "2023-06-12T10:21:49Z"
 }
