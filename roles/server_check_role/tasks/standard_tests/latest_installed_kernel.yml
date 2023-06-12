@@ -25,9 +25,9 @@
 
 - name: Add latest kernel to server_report_data
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       latest_installed_kernel: "{{ __installed_kernels | sort | last }}"
 
 ...

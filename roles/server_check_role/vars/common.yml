@@ -8,3 +8,12 @@ administrative_groups:
   - wheel
 uptime_limit: 5200000
 open_vm_tools_package: 'open-vm-tools'
+
+# This sets the name of the Apache package to look out for
+httpd_package: httpd
+
+# Set the Samba Package name to look for
+samba_package: 'samba'
+
+# Set the name of the Winbind Service to look for
+winbind_service: 'winbind.service'

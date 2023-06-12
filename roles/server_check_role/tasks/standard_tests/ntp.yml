@@ -8,11 +8,11 @@
   changed_when: ntp_pool.rc != -1
   register: ntp_pool
 
-- name: Add NTP data to server_report_data  / combine it into additional data"
+- name: Add NTP data to server_report_data  / combine it with the data_var"
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       ntp_sources: "{{ ntp_pool.stdout | default }}"
 
 ...

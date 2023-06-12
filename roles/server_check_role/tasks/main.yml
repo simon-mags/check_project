@@ -15,6 +15,12 @@
   ignore_errors: true
   register: ignore_errors_register
 
+# Gather any hardware fact information about the hosts
+- name: Gather hardware facts
+  ansible.builtin.setup:
+    filter: ansible_product_name
+  register: hardware_facts
+
 # Setup out Report Data Structure
 - name: Initialize compliance data
   ansible.builtin.set_fact:

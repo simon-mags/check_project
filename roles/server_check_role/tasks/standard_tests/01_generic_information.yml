@@ -1,0 +1,25 @@
+---
+
+- name: Get list of current users logged in
+  ansible.builtin.command: "who"
+  register: who_output
+  changed_when: who_output.stdout != ansible_facts.who.stdout | default('')
+  check_mode: false
+
+- name: Get current route information
+  ansible.builtin.command: "ip route show"
+  register: route_output
+  changed_when: false
+  check_mode: false
+
+- name: Add Basic facts to the server_report_data and Jinja2 Template output
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
+  vars:
+    data_var:
+      hostname: "{{ ansible_fqdn }}"
+      ip_address: "{{ ansible_default_ipv4.address }}"
+      kernel_version: "{{ ansible_kernel }}"
+      os_release: "{{ ansible_distribution }} {{ ansible_distribution_version }}"
+      logged_in_users: "{{ who_output.stdout_lines }}"
+      route_info: "{{ route_output.stdout }}"

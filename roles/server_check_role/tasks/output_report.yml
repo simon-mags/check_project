@@ -15,47 +15,10 @@
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"
 
-    # find module is used to locate the standard test files in the ./standard_tests directory.
-    - name: Read Standard Test Files
-      ansible.builtin.find:
-        paths: ./standard_tests/
-        patterns: '*.yml'
-      register: test_files
-
-    - name: Display Variable Names for file names
-      debug:
-        var: test_files
-
-    # Set an empty variable which will be populated later in the Append vriable names task
-    - name: Extract Variable Names
-      ansible.builtin.set_fact:
-        variable_names: []
-        report_fields: []
-
-    - name: Process Test Files
-      ansible.builtin.lineinfile:
-        path: "{{ item.path }}"
-        regex: 'ansible.builtin.set_fact:.*$'
-        backrefs: yes
-      loop: "{{ test_files.files }}"
-      register: result
-
-    - name: Display Result of reg ex looking through files
-      debug:
-        var: result
-
-    - name: Display Result of results of reg ex looking through files
-      debug:
-        var: result.results
-
-    - name: Append Variable Names
-      ansible.builtin.set_fact:
-        variable_names: "{{ variable_names + [item.matched|regex_replace('^ansible.builtin.set_fact: (.+)$', '\\1')] }}"
-      loop: "{{ result.results }}"
-
-    - name: Display Variable Names
-      debug:
-        var: variable_names
+    # Debug to output the data from the custom tests and standard tests
+    - name: Debug of vars in all the places
+      ansible.builtin.debug:
+        var: server_report_data
 
     - name: Run the Template Task to create the report.json file and output
     # This task templates the report.json file from the compliance report data mentioned in the j2 file
@@ -70,8 +33,6 @@
       loop: "{{ play_hosts }}"
       loop_control:
         loop_var: host
-      vars:
-        unique_variable_names: "{{ variable_names.results | map(attribute='ansible_facts.unique_variable_names') | flatten | unique }}"
 
     - name: Show the output path
       ansible.builtin.debug:

@@ -17,11 +17,11 @@
   ansible.builtin.set_fact:
     __getent_root_lastmod_string: "{{ '%Y-%m-%d' | strftime((0) + (86400 * (__getent_root_lastmod | int))) }}"
 
-- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+- name: "Add output of yml file to the server_report_data and combine it with the data_var"
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       root_last_changed: "{{ __getent_root_lastmod_string | default('Unknown') }}"
 
 ...

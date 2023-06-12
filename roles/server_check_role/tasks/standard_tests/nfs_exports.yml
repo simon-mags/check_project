@@ -1,0 +1,19 @@
+---
+
+- name: Execute showmount shell command and register output
+  become: true
+  ansible.builtin.command: "showmount --no-headers --exports localhost"
+  register: showmount
+  failed_when: "showmount.rc == -1"
+  changed_when:
+  - "showmount.rc == 0"
+  - "showmount.rc == 2"
+
+- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      nfs_exports: "{{ showmount.stdout | default | default('NFS exports not found') }}"
+
+...

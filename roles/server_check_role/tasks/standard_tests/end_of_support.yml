@@ -52,9 +52,9 @@
 
 - name: Add end of support information to dictionary
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       end_of_support_bool: "{{ end_of_support }}"
 
 # Checks to see if host is at OS version is at end of life
@@ -91,9 +91,9 @@
 
 - name: Add end of life information to dictionary
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       end_of_life_bool: "{{ end_of_life }}"
 
 ...

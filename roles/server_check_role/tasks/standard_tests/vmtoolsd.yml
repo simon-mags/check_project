@@ -1,0 +1,24 @@
+---
+
+- name: Execute 'vmtoolsd --version'
+  become: true
+  ansible.builtin.command: "vmtoolsd --version"
+  register: __vmtoolsd_version_output
+  changed_when: false
+  failed_when: "__vmtoolsd_version_output.rc == -1"
+  # Hack to make the task return "changed"
+
+- name: Set the vmtoolsd version fact
+  ansible.builtin.set_fact:
+    __vmtoolsd_version: "{{ __vmtoolsd_version_output.stdout | default() | regex_search(regexp, '\\1') }}"
+  vars:
+    regexp: '(\d+.*)\s'
+
+- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      vmtoolsd_version: "{{ __vmtoolsd_version | default(['Not Found']) | join('\n') }}"
+
+...

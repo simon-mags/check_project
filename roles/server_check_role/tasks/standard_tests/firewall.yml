@@ -77,9 +77,9 @@
 
 - name: Add firewall data into existing server_report_data dict
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       firewall_running: "{{ __firewall_running }}"
       firewall_service_list: "{{ __firewall_service_list | join('\n')  }}"
 

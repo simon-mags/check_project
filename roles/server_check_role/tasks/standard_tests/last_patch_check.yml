@@ -60,9 +60,9 @@
 
 - name: Add hostname to server_report_data
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       last_patch_date: "{{ audit_last_patch | default('Not Found') }}"
 
 ...

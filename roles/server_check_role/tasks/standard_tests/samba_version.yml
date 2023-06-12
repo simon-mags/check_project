@@ -1,0 +1,17 @@
+---
+
+- name: Get version of installed Samba package
+  ansible.builtin.set_fact:
+    __samba_version: "{{ __samba_version | default([]) + ['%s-%s.%s' | format(samba.version, samba.release | default(''), samba.arch)] }}"
+  loop: "{{ ansible_facts.packages[samba_package] | default([]) }}"
+  loop_control:
+    loop_var: samba
+
+- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default([]) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      samba_version: "{{ __samba_version | default(['Not Installed']) | join('\n') }}"
+
+...

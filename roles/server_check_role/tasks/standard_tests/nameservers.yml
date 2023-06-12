@@ -11,9 +11,9 @@
 
 - name: Add Namserver data to server_report_data from network manager or ansible facts"
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       nameservers: "{{ (resolv_conf.stdout_lines + ansible_dns['nameservers']) | unique }}"
 
 ...

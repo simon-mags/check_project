@@ -1,5 +1,5 @@
 ---
-# Author: Martin Pascoe
+
 - name: Execute 'sshd -T'
   become: true
   ansible.builtin.command: "/usr/sbin/sshd -T"
@@ -13,11 +13,11 @@
   vars:
     regexp: '(?<=permitrootlogin )+(.*)'
 
-- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+- name: "Add output of yml file to the server_report_data and combine it with the data_var"
   ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
-    additional_data:
+    data_var:
       ssh_permit_root_login: "{{ ssh_permit_root_login | join('\n') | default('ssh setting for root login not found')  }}"
 
 ...

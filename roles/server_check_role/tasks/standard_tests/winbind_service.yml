@@ -1,0 +1,11 @@
+---
+
+- name: "Add output of Service Facts to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default([]) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      winbind_service_status: "{{ ansible_facts.services[winbind_service].state | default('Not Found') }}"
+  when: ansible_facts.services[winbind_service].state is defined
+
+...
