@@ -1,0 +1,20 @@
+{
+  "server_report_data":
+  [
+    {{ '"' + report_field_list | join('","', attribute='label') + '"' }}
+    {% for host in vars['play_hosts'] %}
+    {%   set this_line = [] %}
+    {%   set data = hostvars[host]['server_report_data'] %}
+    {%-  for this_field in report_field_list %}
+    {%-    if this_field.is_manual | default(false) %}
+    {{       this_line.append("MANUAL") or "" }}
+    {%-    else %}
+    {{       this_line.append(data[this_field['field_name']] | default("NOVALUE")) or "" }}
+    {%-    endif %}
+    {%-  endfor %}
+    {{ '"' + this_line | join('","') + '"' }}
+    {% endfor %}
+  ]
+  "check_project_version": "{{ check_project_version }}",
+  "run_time": "{{ ansible_date_time.iso8601 }}"
+}
