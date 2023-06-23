@@ -2,7 +2,7 @@
 
 - name: Get details of open_vm_tools package
   ansible.builtin.set_fact:
-    __open_vm_tools: "{{ __open_vm_tools | default([]) + ['%s-%s.%s' | format(pkg_data.version, pkg_data.release | default(omit), pkg_data.arch)] }}" # noqa 204
+    __open_vm_tools: "{{ __open_vm_tools | default([]) + ['%s-%s.%s' | format(pkg_data.version, pkg_data.release | default(omit), pkg_data.arch)] }}"  # noqa 204
   loop: "{{ ansible_facts.packages[open_vm_tools_package] | default([]) }}"
   loop_control:
     loop_var: pkg_data

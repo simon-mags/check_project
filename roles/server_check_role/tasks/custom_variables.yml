@@ -10,7 +10,7 @@
 - name: Include common variables
   ansible.builtin.include_vars: "vars/report_output.yml"
 
-- name: Include the Operating System specific var files # noqa: var-naming[no-role-prefix]
+- name: Include the Operating System specific var files  # noqa: var-naming[no-role-prefix]
   ansible.builtin.include_vars: "{{ loop_vars }}"
   with_first_found:
     - files:

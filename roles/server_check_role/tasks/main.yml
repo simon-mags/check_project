@@ -16,13 +16,13 @@
   register: ignore_errors_register
 
 # Gather any hardware fact information about the hosts
-- name: Gather hardware facts # noqa: var-naming[no-role-prefix]
+- name: Gather hardware facts  # noqa: var-naming[no-role-prefix]
   ansible.builtin.setup:
     filter: ansible_product_name
   register: hardware_facts
 
 # Setup out Report Data Structure
-- name: Initialize compliance data # noqa: var-naming[no-role-prefix]
+- name: Initialize compliance data  # noqa: var-naming[no-role-prefix]
   ansible.builtin.set_fact:
     server_report_data: {}
 
