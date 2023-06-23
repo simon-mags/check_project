@@ -13,9 +13,12 @@
   block:
 
     - name: Search yum log
-      ansible.builtin.shell:
+      ansible.builtin.shell: |
+        set -o pipefail
+        awk -F'|' '$2 ~ /up(grade|date)/ { print $3;exit }'<<<$(yum history)
+      args:
         executable: /bin/bash
-        cmd: "awk -F'|' '$2 ~ /up(grade|date)/ { print $3;exit }'<<<$(yum history)"
+        warn: false
       changed_when: false
       register: yum_history_output
 
@@ -30,9 +33,12 @@
   block:
 
     - name: Search apt log
-      ansible.builtin.shell:
+      ansible.builtin.shell: |
+        set -o pipefail
+        tac /var/log/apt/history.log |awk '/^Commandline: apt.*upgrade/ {getline;print;exit}'
+      args:
         executable: /bin/bash
-        cmd: "tac /var/log/apt/history.log |awk '/^Commandline: apt.*upgrade/ {getline;print;exit}'"
+        warn: false
       changed_when: false
       register: apt_history_output
 
@@ -47,9 +53,12 @@
   block:
 
     - name: Search zypper log
-      ansible.builtin.shell:
+      ansible.builtin.shell: |
+        set -o pipefail
+        zypper-log | grep 'zypper up' | awk ' {print $1,$2}'
+      args:
         executable: /bin/bash
-        cmd: "zypper-log | grep 'zypper up' | awk ' {print $1,$2}'"
+        warn: false
       changed_when: false
       register: zypper_history_output
 

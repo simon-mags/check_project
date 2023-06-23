@@ -1,7 +1,13 @@
 ---
 
 - name: Gather the disk information for each mount point
-  ansible.builtin.shell: "/bin/df -hT -x tmpfs -x devtmpfs -x squashfs -x debugfs | /bin/tail -n +2"
+  ansible.builtin.shell: |
+    set -o pipefail
+    /bin/df -hT -x tmpfs -x devtmpfs -x squashfs -x debugfs | /bin/tail -n +2
+  args:
+    executable: /bin/bash
+    creates: /tmp/disk_usage_output.tmp
+    warn: false
   register: disk_usage_output
   changed_when: false
   check_mode: false
@@ -12,3 +18,8 @@
   vars:
     data_var:
       disk_usage: "{{ disk_usage_output.stdout_lines }}"
+
+- name: Remove temporary disk usage output file
+  ansible.builtin.file:
+    path: /tmp/disk_usage_output.tmp
+    state: absent

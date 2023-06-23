@@ -4,7 +4,7 @@
 collected_facts: {}
 
 # main common vars space for the server_check_role
-report_dir: "{{playbook_dir}}/report_sample_output/"
+report_dir: "{{ playbook_dir }}/report_sample_output/"
 report_file: "server_check_report.json"
 
 check_project_version: 1.1.101
@@ -13,16 +13,16 @@ os_tag_mapping:
   RedHat: redhat
   Solaris: solaris
 
-end_of_support: unknown # default fact value if distro is not supported by the task
-redhat_ess: 7 # ends June 30, 2024
-ubuntu_ess: 22.10 # ends July 2023
-ubuntu_lts_ess: 18.04 # ends April 2023
-suse_ess: 12 # ends 31 Oct 2024
+end_of_support: unknown  # default fact value if distro is not supported by the task
+redhat_ess: 7  # ends June 30, 2024
+ubuntu_ess: 22.10  # ends July 2023
+ubuntu_lts_ess: 18.04  # ends April 2023
+suse_ess: 12  # ends 31 Oct 2024
 
-end_of_life: unknown # default fact value if distro is not supported by the task
-redhat_eol: 6 # ends June 30, 2024
-ubuntu_eol: 22.10 # ends July 2023
-ubuntu_lts_eol: 14.04 # ends April 2024
-suse_eol: 12 # ends 31 Oct 2027
+end_of_life: unknown  # default fact value if distro is not supported by the task
+redhat_eol: 6  # ends June 30, 2024
+ubuntu_eol: 22.10  # ends July 2023
+ubuntu_lts_eol: 14.04  # ends April 2024
+suse_eol: 12  # ends 31 Oct 2027
 
 ...

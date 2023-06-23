@@ -1,12 +1,20 @@
 ---
 
 - name: Get Swapon information from host
-  ansible.builtin.shell:
-    cmd: swapon --show
+  ansible.builtin.shell: |
+    swapon --show
+  args:
+    executable: /bin/bash
+    warn: false
   register: swap_facts
+  changed_when: false
 
 - name: Get current free information for swap usage
-  ansible.builtin.shell: free -h | grep Swap
+  ansible.builtin.shell: |
+    free -h | grep Swap
+  args:
+    executable: /bin/bash
+    warn: false
   register: free_facts
   ignore_errors: true
   changed_when: false

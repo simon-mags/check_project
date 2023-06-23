@@ -3,6 +3,7 @@
   ansible.builtin.shell: awk '/PRETTY_NAME/ {print $0}' /etc/*release
   register: os_name_output
   when: ansible_distribution == 'Ubuntu'
+  changed_when: false
 
 - name: Set pretty name fact
   ansible.builtin.set_fact:

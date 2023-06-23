@@ -2,9 +2,12 @@
 
 - name: Execute 'last -1 -R root | head -1 | awk '{print $4 ,$5 ,$6}'' checks for last root login
   become: true
-  ansible.builtin.shell:
+  ansible.builtin.shell: |
+    set -o pipefail
+    last -1 -R root | head -1 | awk '{print $4, $5, $6}'
+  args:
     executable: /bin/bash
-    cmd: "last -1 -R root | head -1 | awk '{print $4, $5, $6}'"
+    warn: false
   register: __root_last_login
   changed_when: false
   failed_when: "__root_last_login.rc == -1"

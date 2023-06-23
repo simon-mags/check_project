@@ -6,9 +6,13 @@
   when: ansible_os_family == "RedHat"
   block:
     - name: Check for enabled repos
-      ansible.builtin.shell:
+      ansible.builtin.shell: |
+        set -o pipefail
+        awk -F'/' '/^Repo-baseurl/ { print $3}'<<<$(yum repolist -v enabled 2>&1)|uniq
+      args:
         executable: /bin/bash
-        cmd: "awk -F'/' '/^Repo-baseurl/ { print $3}'<<<$(yum repolist -v enabled 2>&1)|uniq"
+        creates: /tmp/enabled_yum_repos_output.tmp
+        warn: false
       changed_when: false
       register: yum_repolist
 
@@ -22,9 +26,13 @@
   when: ansible_os_family in ['Debian','Ubuntu']
   block:
     - name: Check for enabled repos
-      ansible.builtin.shell:
+      ansible.builtin.shell: |
+        set -o pipefail
+        grep -rhE ^deb /etc/apt/sources.list*|awk '{print $2}'|uniq
+      args:
         executable: /bin/bash
-        cmd: "grep -rhE ^deb /etc/apt/sources.list*|awk '{print $2}'|uniq"
+        creates: /tmp/enabled_apt_repos_output.tmp
+        warn: false
       changed_when: false
       register: apt_repolist
 
@@ -38,9 +46,13 @@
   when: ansible_os_family == "Suse"
   block:
     - name: Check for enabled repos
-      ansible.builtin.shell:
+      ansible.builtin.shell: |
+        set -o pipefail
+        zypper repos -d|awk -F'|' '// {print $9}'
+      args:
         executable: /bin/bash
-        cmd: "zypper repos -d|awk -F'|' '// {print $9}'"
+        creates: /tmp/enabled_zypper_repos_output.tmp
+        warn: false
       changed_when: false
       register: zypper_repolist
 

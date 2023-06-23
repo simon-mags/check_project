@@ -6,20 +6,4 @@
   roles:
     - server_check_role
 
-# want a way to call the role and pass in the variable name for the output file
-# then run a task to do a comparison or diff task as an ansible task, probaby with the diff module
-# The aim is for someone to run this role pre and post patching or pre and post a major server change
-# The diff would then highlight any changes an operator needs to look Inventory
-# Some of these changes could potentially trigger actions such as starting or restarting a servicethat has failed.
-
-  # tasks:
-  #   - name: Compare two files
-  #     diff:
-  #       src: /path/to/file1.json
-  #       dest: /path/to/file2.json
-
-
-  #   - name: Create a new file in the tmp directory with 755 permissions
-
-
 ...

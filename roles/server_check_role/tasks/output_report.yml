@@ -20,7 +20,7 @@
       ansible.builtin.debug:
         var: server_report_data
 
-    - name: Run the Template Task to create the report.json file and output
+    - name: Run the Template Task to create the report.json file and output # noqa: var-naming[no-role-prefix]
     # This task templates the report.json file from the compliance report data mentioned in the j2 file
       become: true
       ansible.builtin.template:

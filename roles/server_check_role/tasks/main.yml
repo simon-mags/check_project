@@ -10,19 +10,19 @@
   ansible.builtin.service_facts:
 
 # Gather all the Package Fact information from the hosts as we may look for specific info in some of our standard and custom tests
-- name: Gather package facts
+- name: Gather package facts # noqa: var-naming[no-role-prefix]
   ansible.builtin.package_facts:
   ignore_errors: true
   register: ignore_errors_register
 
 # Gather any hardware fact information about the hosts
-- name: Gather hardware facts
+- name: Gather hardware facts # noqa: var-naming[no-role-prefix]
   ansible.builtin.setup:
     filter: ansible_product_name
   register: hardware_facts
 
 # Setup out Report Data Structure
-- name: Initialize compliance data
+- name: Initialize compliance data # noqa: var-naming[no-role-prefix]
   ansible.builtin.set_fact:
     server_report_data: {}
 
