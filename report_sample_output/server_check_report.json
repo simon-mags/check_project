@@ -4,7 +4,7 @@
     "Hostname": "localhost",
     "Comment01": "This data is derived from the standard and custom Ansible tests",
     "server_report_data": {
-    "__server_uptime": "11 days, 4:25:21",
+    "__server_uptime": "11 days, 7:32:04",
     "ansible_package_info": "Package Information not found",
     "audit_repolist": "mirror.aarnet.edu.au\nrockylinux.mirror.digitalpacific.com.au\npackages.microsoft.com\nmirror.aarnet.edu.au\ndeveloper.download.nvidia.com\ndownload.docker.com\nfedora.mirror.serversaustralia.com.au\ngsl-syd.mm.fcix.net\nrockylinux.mirror.digitalpacific.com.au\npackages.gitlab.com\ndl.google.com",
     "disk_usage": [
@@ -29,9 +29,9 @@
     "last_patch_date": "2023-06-04 20:32 ",
     "latest_installed_kernel": "5.14.0-284.11.1.el9_2.x86_64",
     "logged_in_users": [
-        "username_here seat0        2023-06-12 15:38 (login screen)",
-        "username_here tty2         2023-06-12 15:38 (tty2)",
-        "username_here pts/5        2023-06-23 20:03 (127.0.0.1)"
+        "username seat0        2023-06-12 15:38 (login screen)",
+        "username tty2         2023-06-12 15:38 (tty2)",
+        "username pts/5        2023-06-23 23:09 (127.0.0.1)"
     ],
     "nameservers": [
         "1.1.1.2"
@@ -53,7 +53,7 @@
     "selinux_mode": "enforcing",
     "selinux_status": "enabled",
     "ssh_permit_root_login": "without-password",
-    "sudo_groups": "%wheel\tALL=(ALL)\tALL\n%username_here\tALL=(ALL)\tNOPASSWD  ALL",
+    "sudo_groups": "%wheel\tALL=(ALL)\tALL\n%username\tALL=(ALL)\tNOPASSWD  ALL",
     "sudo_users": "root\tALL=(ALL) \tALL",
     "swap": "NAME      TYPE      SIZE USED PRIO\n/dev/dm-1 partition 7.7G 1.2G   -2",
     "vmtoolsd_version": ""
@@ -96,17 +96,17 @@
     "date_time": {
         "date": "2023-06-23",
         "day": "23",
-        "epoch": "1687516333",
-        "epoch_int": "1687516333",
-        "hour": "20",
-        "iso8601": "2023-06-23T10:32:13Z",
-        "iso8601_basic": "20230623T200213268235",
-        "iso8601_basic_short": "20230623T200213",
-        "iso8601_micro": "2023-06-23T10:32:13.268235Z",
-        "minute": "02",
+        "epoch": "1687527536",
+        "epoch_int": "1687527536",
+        "hour": "23",
+        "iso8601": "2023-06-23T13:38:56Z",
+        "iso8601_basic": "20230623T230856498267",
+        "iso8601_basic_short": "20230623T230856",
+        "iso8601_micro": "2023-06-23T13:38:56.498267Z",
+        "minute": "08",
         "month": "06",
-        "second": "13",
-        "time": "20:02:13",
+        "second": "56",
+        "time": "23:08:56",
         "tz": "ACST",
         "tz_dst": "ACDT",
         "tz_offset": "+0930",
@@ -498,28 +498,28 @@
         "BASH_FUNC_which%%": "() {  ( alias;\n eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@\n}",
         "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
         "DEBUGINFOD_URLS": "https://debuginfod.centos.org/ ",
-        "HOME": "/home/username_here",
+        "HOME": "/home/username",
         "LANG": "en_AU.UTF-8",
         "LESSOPEN": "||/usr/bin/lesspipe.sh %s",
-        "LOGNAME": "username_here",
+        "LOGNAME": "username",
         "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:",
         "MOTD_SHOWN": "pam",
-        "PATH": "/home/username_here/.local/bin:/home/username_here/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin",
-        "PWD": "/home/username_here",
+        "PATH": "/home/username/.local/bin:/home/username/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin",
+        "PWD": "/home/username",
         "SELINUX_LEVEL_REQUESTED": "",
         "SELINUX_ROLE_REQUESTED": "",
         "SELINUX_USE_CURRENT_RANGE": "",
         "SHELL": "/bin/bash",
         "SHLVL": "1",
-        "SSH_CLIENT": "127.0.0.1 59982 22",
-        "SSH_CONNECTION": "127.0.0.1 59982 127.0.0.1 22",
+        "SSH_CLIENT": "127.0.0.1 58830 22",
+        "SSH_CONNECTION": "127.0.0.1 58830 127.0.0.1 22",
         "SSH_TTY": "/dev/pts/5",
         "TERM": "xterm-256color",
-        "USER": "username_here",
-        "XDG_DATA_DIRS": "/home/username_here/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share",
+        "USER": "username",
+        "XDG_DATA_DIRS": "/home/username/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share",
         "XDG_RUNTIME_DIR": "/run/user/1000",
         "XDG_SESSION_CLASS": "user",
-        "XDG_SESSION_ID": "20",
+        "XDG_SESSION_ID": "24",
         "XDG_SESSION_TYPE": "tty",
         "_": "/usr/bin/python3",
         "which_declare": "declare -f"
@@ -533,7 +533,7 @@
     ],
     "getent_shadow": {
         "root": [
-            "$6jhvkjghvkvkgvkjhvkjhbk;hblbljhlhvkvvliugb8707076087608769sbrSrL7Ecom88BZ/",
+            "$6$t/gv2VJF0p4mtsM5$O5dDq2ayGrHxSzWiiatXZ.V88Fyf/zf2DoJLbm7byUWx5m6Wl5Y5NjC94Y6Znw/9QuE1AEsbrSrL7Ecom88BZ/",
             "",
             "0",
             "99999",
@@ -546,9 +546,9 @@
     "hostname": "localhost",
     "hostnqn": "nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0037-5910-8053-c4c04f324832",
     "interfaces": [
-        "wlp2s0",
         "lo",
-        "enp0s31f6"
+        "enp0s31f6",
+        "wlp2s0"
     ],
     "is_chroot": false,
     "iscsi_iqn": "",
@@ -645,64 +645,64 @@
         "type": "loopback"
     },
     "loadavg": {
-        "15m": 1.25,
-        "1m": 1.87,
-        "5m": 1.6
+        "15m": 1.15,
+        "1m": 1.14,
+        "5m": 1.31
     },
     "lsb": {},
     "lvm": "N/A",
     "machine": "x86_64",
     "machine_id": "725a723a18f3401f8e7c3071353288e6",
-    "memfree_mb": 652,
+    "memfree_mb": 1423,
     "memory_mb": {
         "nocache": {
-            "free": 5829,
-            "used": 9771
+            "free": 6072,
+            "used": 9528
         },
         "real": {
-            "free": 652,
+            "free": 1423,
             "total": 15600,
-            "used": 14948
+            "used": 14177
         },
         "swap": {
-            "cached": 26,
-            "free": 6666,
+            "cached": 37,
+            "free": 6660,
             "total": 7923,
-            "used": 1257
+            "used": 1263
         }
     },
     "memtotal_mb": 15600,
     "module_setup": true,
     "mounts": [
         {
-            "block_available": 6400836,
+            "block_available": 6408785,
             "block_size": 4096,
             "block_total": 18341120,
-            "block_used": 11940284,
+            "block_used": 11932335,
             "device": "/dev/mapper/rl-root",
             "fstype": "xfs",
-            "inode_available": 36294041,
+            "inode_available": 36294043,
             "inode_total": 36700160,
-            "inode_used": 406119,
+            "inode_used": 406117,
             "mount": "/",
             "options": "rw,seclabel,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota",
-            "size_available": 26217824256,
+            "size_available": 26250383360,
             "size_total": 75125227520,
             "uuid": "f48286fa-40f2-4196-bb26-e0a5b904c7fe"
         },
         {
-            "block_available": 33490713,
+            "block_available": 33488627,
             "block_size": 4096,
             "block_total": 41699437,
-            "block_used": 8208724,
+            "block_used": 8210810,
             "device": "/dev/mapper/rl-home",
             "fstype": "xfs",
-            "inode_available": 83059871,
+            "inode_available": 83056507,
             "inode_total": 83439616,
-            "inode_used": 379745,
+            "inode_used": 383109,
             "mount": "/home",
             "options": "rw,seclabel,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota",
-            "size_available": 137177960448,
+            "size_available": 137169416192,
             "size_total": 170800893952,
             "uuid": "0aebf8be-0f6f-40fb-ac6e-9f8bfd0db0e8"
         },
@@ -19870,7 +19870,7 @@
     "ssh_host_key_ed25519_public_keytype": "ssh-ed25519",
     "ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABgQDEFR4URCVIyUtl8ScUvq/BGm/ufDvdddwACJ5usKbm6PyiAg8FlQ2LaszpQk6Be1LTBmJYFWLN+zGLbnHRJ17Q0dwHpk6ZWx66zTtIW63QSOHNoobBVF3TGv2prcL0lfRrXDcAVZn7vOZEtPD7P2ex9ho/stIMQRehNpTw9bBkAFoUhLk5iRld3AmOZt1SMc6ckZvP/CRguIb2FgRdJ66on3WjlThU8SNu9T0c9w6B0zgu4/4lTiaXMA8JgknCqGHnBRw9SzhZ/lznuEd8ixezuhSUqu+LshSqe5jwfd6lsRTguQsBTrxBobvZErpzMJrZmoyx99WJL9V9fa5PIRFzKD9g96OJpbeAbxSNYSNinC5Janco72+9H589ag7hadxOkUmuIhhyCWyAKpXdMxiQpPEPsFJpcKXclxIRelIEHORT/xKEIejlTPWBMcbFpOdi3IdyVfsg+IofXeLCsDKqkC2jSGh0DTmEap5y8CXi+jWrDFP/mr6B5qO/Vx6iYNU=",
     "ssh_host_key_rsa_public_keytype": "ssh-rsa",
-    "swapfree_mb": 6666,
+    "swapfree_mb": 6660,
     "swaptotal_mb": 7923,
     "system": "Linux",
     "system_capabilities": [
@@ -19878,11 +19878,11 @@
     ],
     "system_capabilities_enforced": "True",
     "system_vendor": "Dell Inc.",
-    "uptime_seconds": 966321,
-    "user_dir": "/home/username_here",
-    "user_gecos": "User Name",
+    "uptime_seconds": 977524,
+    "user_dir": "/home/username",
+    "user_gecos": "user name",
     "user_gid": 1000,
-    "user_id": "username_here",
+    "user_id": "username",
     "user_shell": "/bin/bash",
     "user_uid": 1000,
     "userspace_architecture": "x86_64",
@@ -19991,5 +19991,5 @@
   }
           ],
   "check_project_version": "1.1.101",
-  "run_time": "2023-06-23T10:32:13Z"
+  "run_time": "2023-06-23T13:38:56Z"
 }

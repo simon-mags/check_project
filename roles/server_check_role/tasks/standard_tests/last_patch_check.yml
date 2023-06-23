@@ -18,7 +18,6 @@
         awk -F'|' '$2 ~ /up(grade|date)/ { print $3;exit }'<<<$(yum history)
       args:
         executable: /bin/bash
-        warn: false
       changed_when: false
       register: yum_history_output
 
@@ -38,7 +37,6 @@
         tac /var/log/apt/history.log |awk '/^Commandline: apt.*upgrade/ {getline;print;exit}'
       args:
         executable: /bin/bash
-        warn: false
       changed_when: false
       register: apt_history_output
 
@@ -58,7 +56,6 @@
         zypper-log | grep 'zypper up' | awk ' {print $1,$2}'
       args:
         executable: /bin/bash
-        warn: false
       changed_when: false
       register: zypper_history_output
 

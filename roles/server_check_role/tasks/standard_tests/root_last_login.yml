@@ -7,7 +7,6 @@
     last -1 -R root | head -1 | awk '{print $4, $5, $6}'
   args:
     executable: /bin/bash
-    warn: false
   register: __root_last_login
   changed_when: false
   failed_when: "__root_last_login.rc == -1"

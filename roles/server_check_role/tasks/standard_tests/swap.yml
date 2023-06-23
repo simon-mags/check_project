@@ -5,7 +5,6 @@
     swapon --show
   args:
     executable: /bin/bash
-    warn: false
   register: swap_facts
   changed_when: false
 
@@ -14,7 +13,6 @@
     free -h | grep Swap
   args:
     executable: /bin/bash
-    warn: false
   register: free_facts
   ignore_errors: true
   changed_when: false

@@ -7,7 +7,6 @@
   args:
     executable: /bin/bash
     creates: /tmp/disk_usage_output.tmp
-    warn: false
   register: disk_usage_output
   changed_when: false
   check_mode: false

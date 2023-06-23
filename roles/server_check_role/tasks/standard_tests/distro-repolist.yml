@@ -12,7 +12,6 @@
       args:
         executable: /bin/bash
         creates: /tmp/enabled_yum_repos_output.tmp
-        warn: false
       changed_when: false
       register: yum_repolist
 
@@ -32,7 +31,6 @@
       args:
         executable: /bin/bash
         creates: /tmp/enabled_apt_repos_output.tmp
-        warn: false
       changed_when: false
       register: apt_repolist
 
@@ -52,7 +50,6 @@
       args:
         executable: /bin/bash
         creates: /tmp/enabled_zypper_repos_output.tmp
-        warn: false
       changed_when: false
       register: zypper_repolist
 

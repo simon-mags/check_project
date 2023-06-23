@@ -10,7 +10,7 @@
   ansible.builtin.service_facts:
 
 # Gather all the Package Fact information from the hosts as we may look for specific info in some of our standard and custom tests
-- name: Gather package facts # noqa: var-naming[no-role-prefix]
+- name: Gather package facts  # noqa: var-naming[no-role-prefix]
   ansible.builtin.package_facts:
   ignore_errors: true
   register: ignore_errors_register
