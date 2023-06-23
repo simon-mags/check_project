@@ -1,0 +1,13 @@
+# Default reviewers
+*       @simon-mags
+
+# Review rules for specific paths
+# /roles/server_check_role/*         @roles-team
+# /backend/*          @backend-team
+
+# Review rules based on file extensions
+# *.js                @javascript-experts
+# *.css               @css-experts
+
+# Individual or team mentions
+/docs/*             @documentation-team
