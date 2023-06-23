@@ -1,14 +1,14 @@
 {
   "server_report_data": [
     {% for host in vars['play_hosts'] %}
-    {
-      {% for field in report_field_list %}
-      "{{ field.field_name }}": "{{ hostvars[host]['server_report_data'][field.field_name] | default('NOVALUE') | to_json }}",
-      {% endfor %}
-
-      {{ hostvars[host]['ansible_facts'] }}
-
-    }
+  {
+    "Hostname": "{{ host }}",
+    "Comment01": "This data is derived from the standard and custom Ansible tests",
+    "server_report_data": {{ hostvars[host]['server_report_data'] | to_nice_json }},
+    "Comment02": "This data is derived from Ansible Facts",
+    "ansible_facts": {{ hostvars[host]['ansible_facts'] | to_nice_json }},
+    "End of report for": "{{ host }}"
+  }
     {% if not loop.last %},{% endif %}
     {% endfor %}
   ],
