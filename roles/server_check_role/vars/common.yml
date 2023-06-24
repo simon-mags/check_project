@@ -1,0 +1,19 @@
+# common variables
+internet_check_urls:
+  - http://www.google.com/
+  - https://www.redhat.com/
+administrative_groups:
+  - adm
+  - sudo
+  - wheel
+uptime_limit: 5200000
+open_vm_tools_package: 'open-vm-tools'
+
+# This sets the name of the Apache package to look out for
+httpd_package: httpd
+
+# Set the Samba Package name to look for
+samba_package: 'samba'
+
+# Set the name of the Winbind Service to look for
+winbind_service: 'winbind.service'

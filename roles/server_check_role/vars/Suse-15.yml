@@ -1,0 +1,19 @@
+---
+# vars file for firewall_check
+time_cmd: 'chronyc sources'
+time_service: 'chronyd.service'
+time_check_regex: '\^\*.*'
+firewall_cmd: 'firewall-cmd'
+
+firewalld_service: 'firewalld.service'
+iptables_service: 'iptables.service'
+# nftables_service:
+suse_firewall_service: 'SuSEfirewall2'
+iptables_sysv: 'iptables'
+ufw_sysv: 'ufw'
+firewalld_sysv: 'firewalld'
+nftables_sysv: 'nftables'
+
+selinux_cmd: 'getenforce'
+selinux_check_regex: 'Enforcing'
+repo_cmd: 'dnf repolist --quiet'

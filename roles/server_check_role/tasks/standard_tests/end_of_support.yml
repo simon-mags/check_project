@@ -1,0 +1,100 @@
+---
+- name: Get pretty name from the release file
+  ansible.builtin.shell: awk '/PRETTY_NAME/ {print $0}' /etc/*release
+  register: os_name_output
+  when: ansible_distribution == 'Ubuntu'
+  changed_when: false
+
+- name: Set pretty name fact
+  ansible.builtin.set_fact:
+    pretty_name: "{{ os_name_output.stdout.split('=')[1] | replace('\"', '') }}"
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Set OS facts
+  ansible.builtin.set_fact:
+    os_info:
+      name: "{{ ansible_distribution }}"
+      version: "{{ ansible_distribution_version }}"
+      major_version: "{{ ansible_distribution_major_version }}"
+      release: "{{ ansible_distribution_release }}"
+      pretty_name: "{{ pretty_name | default('') }}"
+
+# Checks to see if host is at OS version is at end of support
+
+- name: Check if Ubuntu servers are at the end of support lifecyle > version
+  ansible.builtin.set_fact:
+    end_of_support: false
+  when: os_info.name == 'Ubuntu' and (os_info.version | float) >= ubuntu_ess
+
+- name: Check if Ubuntu servers are at the end of support lifecyle < version
+  ansible.builtin.set_fact:
+    end_of_support: true
+  when: os_info.name == 'Ubuntu' and (os_info.version | float) < ubuntu_ess
+
+- name: Check if Ubuntu LTS servers are at the end of support lifecyle > version
+  ansible.builtin.set_fact:
+    end_of_support: false
+  when: os_info.name == 'Ubuntu' and os_info.pretty_name.endswith('LTS') and (os_info.version | float) >= ubuntu_lts_ess
+
+- name: Check if Ubuntu LTS servers are at the end of support lifecyle < version
+  ansible.builtin.set_fact:
+    end_of_support: true
+  when: os_info.name == 'Ubuntu' and os_info.pretty_name.endswith('LTS') and (os_info.version | float) < ubuntu_lts_ess
+
+- name: Check if RedHat servers are at the end of support lifecyle > version
+  ansible.builtin.set_fact:
+    end_of_support: false
+  when: (os_info.name == 'RedHat' or os_info.name == 'CentOS' or os_info.name == 'OracleLinux') and (os_info.major_version | int) >= redhat_ess
+
+- name: Check if RedHat servers are at the end of support lifecyle < version
+  ansible.builtin.set_fact:
+    end_of_support: true
+  when: (os_info.name == 'RedHat' or os_info.name == 'CentOS' or os_info.name == 'OracleLinux') and (os_info.major_version | int) < redhat_ess
+
+- name: Add end of support information to dictionary
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
+  vars:
+    data_var:
+      end_of_support_bool: "{{ end_of_support }}"
+
+# Checks to see if host is at OS version is at end of life
+
+- name: Check if Ubuntu servers are at the end of life lifecyle > version
+  ansible.builtin.set_fact:
+    end_of_life: false
+  when: os_info.name == 'Ubuntu' and (os_info.version | float) >= ubuntu_eol
+
+- name: Check if Ubuntu servers are at the end of life lifecyle < version
+  ansible.builtin.set_fact:
+    end_of_life: true
+  when: os_info.name == 'Ubuntu' and (os_info.version | float) < ubuntu_eol
+
+- name: Check if Ubuntu LTS servers are at the end of life lifecyle > version
+  ansible.builtin.set_fact:
+    end_of_life: false
+  when: os_info.name == 'Ubuntu' and os_info.pretty_name.endswith('LTS') and (os_info.version | float) >= ubuntu_lts_eol
+
+- name: Check if Ubuntu LTS servers are at the end of life lifecyle < version
+  ansible.builtin.set_fact:
+    end_of_life: true
+  when: os_info.name == 'Ubuntu' and os_info.pretty_name.endswith('LTS') and (os_info.version | float) < ubuntu_lts_eol
+
+- name: Check if RedHat servers are at the end of life lifecyle > version
+  ansible.builtin.set_fact:
+    end_of_life: false
+  when: (os_info.name == 'RedHat' or os_info.name == 'CentOS' or os_info.name == 'OracleLinux') and (os_info.major_version | int) >= redhat_eol
+
+- name: Check if RedHat servers are at the end of life lifecyle < version
+  ansible.builtin.set_fact:
+    end_of_life: true
+  when: (os_info.name == 'RedHat' or os_info.name == 'CentOS' or os_info.name == 'OracleLinux') and (os_info.major_version | int) < redhat_eol
+
+- name: Add end of life information to dictionary
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
+  vars:
+    data_var:
+      end_of_life_bool: "{{ end_of_life }}"
+
+...

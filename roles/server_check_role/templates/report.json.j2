@@ -1,0 +1,17 @@
+{
+  "server_report_data": [
+    {% for host in vars['play_hosts'] %}
+  {
+    "Hostname": "{{ host }}",
+    "Comment01": "This data is derived from the standard and custom Ansible tests",
+    "server_report_data": {{ hostvars[host]['server_report_data'] | to_nice_json }},
+    "Comment02": "This data is derived from Ansible Facts",
+    "ansible_facts": {{ hostvars[host]['ansible_facts'] | to_nice_json }},
+    "End of report for": "{{ host }}"
+  }
+    {% if not loop.last %},{% endif %}
+    {% endfor %}
+  ],
+  "check_project_version": "{{ check_project_version }}",
+  "run_time": "{{ ansible_date_time.iso8601 }}"
+}

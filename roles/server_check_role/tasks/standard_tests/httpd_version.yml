@@ -1,0 +1,19 @@
+---
+
+- name: Get version of installed httpd package
+  ansible.builtin.set_fact:
+    __httpd_version: "{{ __httpd_version | default([]) + ['%s-%s.%s' | format(httpd.version, httpd.release | default, httpd.arch)] }}"
+    # Variable: first matched package if not found default to empty list + version, release, arch, then run loop to see if there are more matching packages
+  loop: "{{ ansible_facts.packages[httpd_package] | default([]) }}"
+  loop_control:
+    loop_var: httpd
+  when: ansible_facts.packages[httpd_package] is defined
+
+- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default([]) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      httpd_version: "{{ __httpd_version | default(['Not Installed']) | join('\n') }}"
+
+...

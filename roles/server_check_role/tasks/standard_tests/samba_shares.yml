@@ -1,0 +1,61 @@
+---
+
+# Purpose: Grab the share names from the output of the TestParm command
+# from here to end of file
+- name: Execute 'testparm -s'
+  become: true
+  ansible.builtin.command: "testparm -s"
+  register: testparm
+  changed_when: false
+  failed_when: "testparm.rc == -1"
+  # Hack to make the task return "changed" if testparm is not found or fails
+
+- name: Extract shares (delegated to localhost)
+  when: testparm.stdout is defined
+  delegate_to: localhost
+  block:
+
+    - name: Create tmp directory for smb.conf
+      ansible.builtin.file:
+        path: /tmp/smb_conf/{{ ansible_hostname }}/
+        state: directory
+        mode: '0744'
+
+    - name: Write testparm output file
+      ansible.builtin.copy:
+        content: "{{ testparm.stdout }}"
+        dest: /tmp/smb_conf/{{ ansible_hostname }}/smb.conf
+        mode: '0744'
+
+    - name: Get sections from smb.conf
+      ansible.builtin.set_fact:
+        __smb_conf_sections: "{{ lookup('template', '/tmp/smb_conf/{{ ansible_hostname }}/smb.conf', errors='ignore') | regex_findall(regexp) }}"
+      vars:
+        regexp: '\[(.*?)\]'
+
+    - name: Set facts
+      ansible.builtin.set_fact:
+        __samba_shares: "{{ __samba_shares | default([]) + [smb_item + ': ' + share_path] }}"
+      vars:
+        share_path: "{{ lookup('ansible.builtin.ini', 'path', file=smb_conf_file, section=smb_item, allow_no_value=True, errors='ignore') }}"
+        smb_conf_file: '/tmp/smb_conf/{{ ansible_hostname }}/smb.conf'
+      loop: "{{ __smb_conf_sections }}"
+      loop_control:
+        loop_var: smb_item
+      when:
+        - smb_item != "global"
+
+    - name: Delete tmp directory
+      ansible.builtin.file:
+        path: /tmp/smb_conf/{{ ansible_hostname }}/
+        state: absent
+
+# Begin section to output the data to the data dictionary (Jinja Template)
+- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+  vars:
+    additional_data:
+      samba_shares: "{{ __samba_shares | default | join('\n') }}"
+
+...

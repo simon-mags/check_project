@@ -18,4 +18,12 @@
   ansible.builtin.debug:
     var: ansible_facts.packages
 
+- name: "Add output of software information into the server_report_data and combine it with the data_var"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
+  vars:
+    data_var:
+      ansible_package_info: "{{ ansible_package_info | default('Package Information not found') }}"
+
+
 ...

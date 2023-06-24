@@ -1,0 +1,21 @@
+---
+# vars file for firewall_check
+time_cmd: 'timedatectl'
+time_service: 'systemd-timesyncd.service'
+time_check_regex: 'synchronized: yes'
+firewall_cmd: 'ufw'
+repo_cmd: 'grep -r --include "*.list" "^deb " /etc/apt/sources.list /etc/apt/sources.list.d/ | cut -d: -f2-'
+apparmor: 'apparmor'
+apparmor_service: 'apparmor.service'
+iptables_service: 'netfilter-persistent.service'
+ufw_service: 'ufw.service'
+firewalld_service: 'firewalld.service'
+nftables_service: 'nftables.service'
+iptables_sysv: 'iptables'
+ufw_sysv: 'ufw'
+firewalld_sysv: 'firewalld'
+nftables_sysv: 'nftables'
+
+# SAR-related vars
+sar_package: sysstat
+sar_config: '/etc/sysstat/sysstat'

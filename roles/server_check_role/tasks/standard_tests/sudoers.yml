@@ -1,0 +1,28 @@
+---
+- name: Execute 'grep/awk' to check if locally defined users are in sudoers*
+  become: true
+  ansible.builtin.shell: |
+    awk -F: '!a[$2]++ {for (i=2;i<=NF;i++) printf("%s%s", $i, (i==NF) ? "\n" : OFS)}'<<<"$(grep -R ^[a-z] /etc/sudoers*)"
+  args:
+    executable: /bin/bash
+  register: sudo_users_list
+  changed_when: sudo_users_list.rc != -1
+
+- name: Execute 'grep/awk' to check if groups are in sudoers*
+  become: true
+  ansible.builtin.shell: |
+    awk -F: '!a[$2]++ {for (i=2;i<=NF;i++) printf("%s%s", $i, (i==NF) ? "\n" : OFS)}'<<<"$(grep -Re ^[A-Z][A-Z] -e ^% /etc/sudoers*)"
+  args:
+    executable: /bin/bash
+  register: sudo_group_list
+  changed_when: sudo_group_list.rc != -1
+
+- name: Add sudoers data to server_report_data  / combine it with the data_var"
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
+  vars:
+    data_var:
+      sudo_users: "{{ sudo_users_list.stdout | default }}"
+      sudo_groups: "{{ sudo_group_list.stdout | default }}"
+
+...

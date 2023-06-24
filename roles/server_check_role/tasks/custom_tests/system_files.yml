@@ -1,0 +1,23 @@
+---
+
+- name: Get current grub config
+  ansible.builtin.command: "cat /etc/default/grub"
+  register: grub_output
+  changed_when: false
+  check_mode: false
+
+- name: Get current fstab information
+  ansible.builtin.command: "cat /etc/fstab"
+  register: fstab_output
+  changed_when: false
+  check_mode: false
+
+- name: Add System File Facts to the server_report_data
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | combine(data_var) }}"
+  vars:
+    data_var:
+      grub_config: "{{ grub_output.stdout }}"
+      fstab_config: "{{ fstab_output.stdout }}"
+
+...

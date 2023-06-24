@@ -1,0 +1,28 @@
+---
+
+- name: Get Swapon information from host
+  ansible.builtin.shell: |
+    swapon --show
+  args:
+    executable: /bin/bash
+  register: swap_facts
+  changed_when: false
+
+- name: Get current free information for swap usage
+  ansible.builtin.shell: |
+    free -h | grep Swap
+  args:
+    executable: /bin/bash
+  register: free_facts
+  ignore_errors: true
+  changed_when: false
+  check_mode: false
+
+- name: Add System File Facts to the server_report_data
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | combine(data_var) }}"
+  vars:
+    data_var:
+      swap: "{{ swap_facts.stdout }}"
+      free: "{{ free_facts.stdout }}"
+  when: swap_facts is defined or free_facts is defined

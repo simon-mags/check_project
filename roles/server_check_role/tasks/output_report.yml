@@ -1,0 +1,40 @@
+---
+
+# This playbook generates a Server Status report with included output from all the standard and custom check sub tasks.
+- name: A block that is delegated to localhost and set to run once
+  delegate_to: localhost
+  run_once: true
+  block:
+    # This task creates the directory on the localhost to store the output report.
+    - name: Create output destination directory
+      become: true
+      ansible.builtin.file:
+        path: "{{ report_dir }}"
+        state: directory
+        mode: '0764'
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+
+    # Debug to output the data from the custom tests and standard tests
+    - name: Debug of vars in all the places
+      ansible.builtin.debug:
+        var: server_report_data
+
+    - name: Run the Template Task to create the report.json file and output  # noqa: var-naming[no-role-prefix]
+    # This task templates the report.json file from the compliance report data mentioned in the j2 file
+      become: true
+      ansible.builtin.template:
+        src: "report.json.j2"
+        dest: "{{ report_dir }}{{ report_file }}"
+        mode: '0755'
+        owner: "{{ ansible_user_id }}"
+        group: "{{ ansible_user_id }}"
+      register: report_output_file
+      loop: "{{ play_hosts }}"
+      loop_control:
+        loop_var: host
+
+    - name: Show the output path
+      ansible.builtin.debug:
+        msg: "A new report has been generated with output at {{ report_output_file.dest }}"
+      when: report_output_file.dest is defined

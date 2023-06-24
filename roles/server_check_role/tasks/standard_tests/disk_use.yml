@@ -1,23 +1,24 @@
 ---
 
-# - name: Gather the disk information for each mount point
-#   ansible.builtin.shell: |
-#     set -o pipefail
-#     "df -hT -x tmpfs -x devtmpfs -x squashfs -x debugfs | tail -n +2"
-#   register: disk_usage_output
-#   changed_when: false
-#   check_mode: false
+- name: Gather the disk information for each mount point
+  ansible.builtin.shell: |
+    set -o pipefail
+    /bin/df -hT -x tmpfs -x devtmpfs -x squashfs -x debugfs | /bin/tail -n +2
+  args:
+    executable: /bin/bash
+    creates: /tmp/disk_usage_output.tmp
+  register: disk_usage_output
+  changed_when: false
+  check_mode: false
 
-# - name: Format the disk output into a new Fact
-#   ansible.builtin.set_fact:
-#     disk_usage_by_mount_point: "{{ disk_usage_output.stdout_lines |
-#       map('split') |
-#       map({'mount_point': '{{ item[6] }}',
-#       'total': '{{ item[2] }}',
-#       'used': '{{ item[3] }}',
-#       'free': '{{ item[4] }}',
-#       'percent_free': '{{ item[5] }}'}) |
-#       list }}"
-#   when: disk_usage_output is defined
-#   changed_when: false
-#   check_mode: false
+- name: Add Disk Use data through to the server_report_data and Jinja2 Template output
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
+  vars:
+    data_var:
+      disk_usage: "{{ disk_usage_output.stdout_lines }}"
+
+- name: Remove temporary disk usage output file
+  ansible.builtin.file:
+    path: /tmp/disk_usage_output.tmp
+    state: absent

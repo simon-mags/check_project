@@ -1,0 +1,30 @@
+---
+
+- name: Get the status of selinux (ansible_facts.selinux)
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
+    selinux_satisfied: true
+  when:
+    - ansible_facts.selinux.status is defined
+  vars:
+    data_var:
+      selinux_status: "{{ ansible_facts.selinux.status }}"
+      selinux_mode: "{{ ansible_facts.selinux.mode | default('N/A') }}"
+      selinux_config_mode: "{{ ansible_facts.selinux.config_mode | default('N/A') }}"
+
+# ansible_facts.selinux* doesn't appear all of the time, so if it didn't,
+# use ansible_selinux.
+
+- name: Get the status of selinux (ansible_selinux, but disabled)
+  ansible.builtin.set_fact:
+    server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
+  when:
+    - selinux_satisfied is not defined
+    - ansible_selinux.status is defined
+  vars:
+    data_var:
+      selinux_status: "{{ ansible_selinux.status }}"
+      selinux_mode: "{{ ansible_selinux.mode | default('N/A') }}"
+      selinux_config_mode: "{{ ansible_selinux.config_mode | default('N/A') }}"
+
+...
