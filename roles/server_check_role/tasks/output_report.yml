@@ -25,7 +25,7 @@
       become: true
       ansible.builtin.template:
         src: "report.json.j2"
-        dest: "{{ report_dir }}{{ report_file }}"
+        dest: "{{ report_dir }}{{ report_state | default ('before') }}_{{ report_file }}"
         mode: '0755'
         owner: "{{ ansible_user_id }}"
         group: "{{ ansible_user_id }}"

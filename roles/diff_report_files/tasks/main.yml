@@ -1,0 +1,26 @@
+---
+# tasks file for diff_report_files
+- name: Compare before and after reports
+  ansible.builtin.shell: "diff -u {{ report_dir }}before_{{ report_file }} {{ report_dir }}after_{{ report_file }}"
+  register: diff_output
+  changed_when: false
+  ignore_errors: true
+  when:
+    - "{{ report_dir }}'before_'{{ report_file }}" is defined
+    - "{{ report_dir }}'after_'{{ report_file }}" is defined
+
+
+- name: Process diff output
+  ansible.builtin.set_fact:
+    diff_lines: "{{ diff_output.stdout_lines }}"
+  when: diff_output.rc == 0
+
+- name: Ignore custom rules in diff output
+  ansible.builtin.set_fact:
+    diff_lines_ignored: "{{ diff_lines | map('regex_replace', '^[-+].*date.*$', '') | list }}"
+  when: diff_lines is defined
+
+- name: Display diff output
+  debug:
+    var: diff_lines_ignored
+  when: diff_lines_ignored | length > 0
