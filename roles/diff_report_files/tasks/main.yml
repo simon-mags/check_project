@@ -1,16 +1,16 @@
 ---
 
-- name: Read 'before' report file  # noqa: var-naming[no-role-prefix]
+- name: Diff Role - Main | Read 'before' report file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.slurp:
-    src: "/path/to/before_report.json"
+    src: "{{ report_dir }}before_{{ report_file }}"
   register: before_report_file
 
-- name: Read 'after' report file  # noqa: var-naming[no-role-prefix]
+- name: Diff Role - Main | Read 'after' report file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.slurp:
-    src: "/path/to/after_report.json"
+    src: "{{ report_dir }}after_{{ report_file }}"
   register: after_report_file
 
-- name: Compare files and ignore specific changes  # noqa: var-naming[no-role-prefix]
+- name: Diff Role - Main | Compare files and ignore specific changes  # noqa: var-naming[no-role-prefix]
   ansible.builtin.assert:
     that:
       - before_report_file['content'] | b64decode | from_json != after_report_file['content'] | b64decode | from_json
