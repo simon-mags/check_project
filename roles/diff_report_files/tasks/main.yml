@@ -1,26 +1,25 @@
 ---
-# tasks file for diff_report_files
-- name: Compare before and after reports
-  ansible.builtin.shell: "diff -u {{ report_dir }}before_{{ report_file }} {{ report_dir }}after_{{ report_file }}"
-  register: diff_output
-  changed_when: false
-  ignore_errors: true
-  when:
-    - "{{ report_dir }}'before_'{{ report_file }}" is defined
-    - "{{ report_dir }}'after_'{{ report_file }}" is defined
 
+- name: Read 'before' report file  # noqa: var-naming[no-role-prefix]
+  ansible.builtin.slurp:
+    src: "/path/to/before_report.json"
+  register: before_report_file
 
-- name: Process diff output
-  ansible.builtin.set_fact:
-    diff_lines: "{{ diff_output.stdout_lines }}"
-  when: diff_output.rc == 0
+- name: Read 'after' report file  # noqa: var-naming[no-role-prefix]
+  ansible.builtin.slurp:
+    src: "/path/to/after_report.json"
+  register: after_report_file
 
-- name: Ignore custom rules in diff output
-  ansible.builtin.set_fact:
-    diff_lines_ignored: "{{ diff_lines | map('regex_replace', '^[-+].*date.*$', '') | list }}"
-  when: diff_lines is defined
-
-- name: Display diff output
-  debug:
-    var: diff_lines_ignored
-  when: diff_lines_ignored | length > 0
+- name: Compare files and ignore specific changes  # noqa: var-naming[no-role-prefix]
+  ansible.builtin.assert:
+    that:
+      - before_report_file['content'] | b64decode | from_json != after_report_file['content'] | b64decode | from_json
+    quiet: true
+    success_msg: "Files are identical"
+    fail_msg: "Files differ"
+    diff_msg: "Diff:"
+    ignore_lines: "{{ ignore_lines }}"
+  vars:
+    ignore_lines:
+      - ".*disk_size.*"
+      - ".*date.*"

@@ -57,6 +57,6 @@
 - name: Run the output_report.yml file to produce the report output    # noqa: var-naming[no-role-prefix]
   ansible.builtin.include_tasks: output_report.yml
   vars:
-    report_state: "{{ report_state | default ('before') }}"
+    report_state_input: "{{ report_state | default('before') }}"
 
 ...
