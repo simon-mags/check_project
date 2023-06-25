@@ -1,4 +1,10 @@
 ---
+# Use module_defaults to set default modules, reducing repetition of 'ansible.builtin'
+# module_defaults:
+#   group:
+#     builtin:
+#       set_fact: []
+
 - name: Build a list of installed kernel versions (Ansible native)
   ansible.builtin.set_fact:
     __installed_kernels: "{{ __installed_kernels | default([]) + ['%s-%s.%s' | format(kpkg.version, kpkg.release, kpkg.arch)] }}"
@@ -7,27 +13,26 @@
   loop_control:
     loop_var: kpkg
 
-- name: Build a list of installed kernel versions (Non-Native)
-  when: ansible_facts.packages.kernel is not defined
+- name: Build a list of installed kernel versions (Non-Native) if not already defined
+  when: ansible_facts.packages.kernel is not defined and ansible_os_family == 'RedHat'
   block:
     - name: Get newest kernel in /boot
       ansible.builtin.shell: |
         set -o pipefail
-        [[ -f "/boot/vmlinux*" ]] && ls -1 /boot/vmlinuz-* | sed -e 's/.*vmlinuz-//' || echo "no local kernel installed"
+        [[ -f "/boot/vmlinuz*" ]] && ls -1 /boot/vmlinuz-* | sed -e 's/.*vmlinuz-//' || echo "no local kernel installed"
       args:
         executable: /bin/bash
       register: __installed_kernels_transient
       changed_when: false
 
-    - name: Set variable
+    - name: Register kernel versions into a variable
       ansible.builtin.set_fact:
         __installed_kernels: "{{ __installed_kernels_transient.stdout_lines }}"
 
-- name: Add latest kernel to server_report_data
+- name: Append latest kernel to server report data
   ansible.builtin.set_fact:
+    # Combine server report data with latest installed kernel version
     server_report_data: "{{ server_report_data | default({}) | combine(data_var) }}"
   vars:
     data_var:
       latest_installed_kernel: "{{ __installed_kernels | sort | last }}"
-
-...
