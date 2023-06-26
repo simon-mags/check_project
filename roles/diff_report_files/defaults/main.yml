@@ -1,2 +1,5 @@
 ---
 # defaults file for diff_report_files
+# main common vars space for the diff_report_files, mostly used in testing
+report_dir: "{{ playbook_dir }}/report_sample_output/"
+report_file: "server_check_report.json"

@@ -1,25 +1,28 @@
 ---
 
-- name: Diff Role - Main | Read 'before' report file  # noqa: var-naming[no-role-prefix]
-  ansible.builtin.slurp:
-    src: "{{ report_dir }}before_{{ report_file }}"
-  register: before_report_file
-
-- name: Diff Role - Main | Read 'after' report file  # noqa: var-naming[no-role-prefix]
-  ansible.builtin.slurp:
-    src: "{{ report_dir }}after_{{ report_file }}"
-  register: after_report_file
-
-- name: Diff Role - Main | Compare files and ignore specific changes  # noqa: var-naming[no-role-prefix]
-  ansible.builtin.assert:
-    that:
-      - before_report_file['content'] | b64decode | from_json != after_report_file['content'] | b64decode | from_json
-    quiet: true
-    success_msg: "Files are identical"
-    fail_msg: "Files differ"
-    diff_msg: "Diff:"
-    ignore_lines: "{{ ignore_lines }}"
+- name: Run custom file comparison  # noqa: var-naming[no-role-prefix]
+  compare_files:
+    before_file: "{{ report_dir }}before_{{ report_file }}"
+    after_file: "{{ report_dir }}after_{{ report_file }}"
+  register: compare_result
   vars:
-    ignore_lines:
-      - ".*disk_size.*"
-      - ".*date.*"
+    ignore_list:
+      - "['server_report_data'][0]['ansible_facts']['date_time']['date']"
+      - "['server_report_data'][0]['ansible_facts']['date_time']['day']"
+      - "['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
+      - "['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']"
+
+- name: Display differences  # noqa: var-naming[no-role-prefix]
+  ansible.builtin.debug:
+    var: compare_result.result.differences
+  tags:
+    - debug
+    - never
+
+- name: Output diff to file
+  ansible.builtin.copy:
+    content: "{{ diff_content }}"
+    dest: "{{ report_dir }}diff_output.json"
+  vars:
+    diff_content: "{{ compare_result.result.differences | to_nice_json }}"
+  when: compare_result.result.differences is defined and compare_result.result.differences | length > 0
