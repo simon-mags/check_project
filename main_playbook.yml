@@ -5,5 +5,21 @@
   gather_facts: true
   roles:
     - server_check_role
-    - diff_report_files
-...
+  tasks:
+  - name: Check if before file exists
+    ansible.builtin.stat:
+      path: "{{ report_dir }}before_{{ report_file }}"
+      # "{{ report_dir }}after_{{ report_file }}"  # Specify the path to the "before" file
+    register: before_file_stat
+
+  - name: Check if after file exists
+    ansible.builtin.stat:
+      path: "{{ report_dir }}after_{{ report_file }}"  # Specify the path to the "after" file
+    register: after_file_stat
+
+  - name: Include diff_report_files role
+    include_role:
+      name: diff_report_files
+    when:
+      - before_file_stat.stat.exists
+      - after_file_stat.stat.exists
