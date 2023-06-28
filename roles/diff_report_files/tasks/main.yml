@@ -1,23 +1,32 @@
 ---
 
+- name: Ensure boto and boto3 modules are installed
+  pip:
+    name: deepdiff
+  delegate_to: localhost
+
 - name: Run custom file comparison  # noqa: var-naming[no-role-prefix]
   compare_files:
     before_file: "{{ report_dir }}before_{{ report_file }}"
     after_file: "{{ report_dir }}after_{{ report_file }}"
+    ignore_list: "{{ ignore_list }}"
   register: compare_result
   vars:
     ignore_list:
-      - "['server_report_data'][0]['ansible_facts']['date_time']['date']"
-      - "['server_report_data'][0]['ansible_facts']['date_time']['day']"
-      - "['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
-      - "['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']"
+      - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
+      - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']"
+      - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic']"
+      - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic_short']"
+      - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_micro']"
+      - "root['server_report_data'][0]['ansible_facts']['date_time']['minute']"
+      - "root['server_report_data'][0]['ansible_facts']['date_time']['second']"
 
-- name: Display differences  # noqa: var-naming[no-role-prefix]
+- name: Display the entire results file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
-    var: compare_result.result.differences
-  tags:
-    - debug
-    - never
+    var: compare_result
+  # tags:
+  #   - debug
+  #   - never
 
 - name: Output diff to file
   ansible.builtin.copy:

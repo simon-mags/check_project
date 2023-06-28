@@ -3,6 +3,7 @@
 - name: Run a task to Gather Facts and run custom tests across the Inventory of servers
   hosts: localhost
   gather_facts: true
+
   roles:
     - server_check_role
   tasks:
