@@ -13,13 +13,10 @@
   register: compare_result
   vars:
     ignore_list:
-      - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
-      - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']"
-      - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic']"
-      - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic_short']"
-      - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_micro']"
-      - "root['server_report_data'][0]['ansible_facts']['date_time']['minute']"
-      - "root['server_report_data'][0]['ansible_facts']['date_time']['second']"
+      # - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
+      - ".*\\['date_time'\\].*"
+      - ".*\\['memory_mb'\\].*"
+      - ".*\\['uptime_seconds'\\].*"
 
 - name: Display the entire results file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
