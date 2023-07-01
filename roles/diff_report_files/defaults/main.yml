@@ -3,3 +3,13 @@
 # main common vars space for the diff_report_files, mostly used in testing
 report_dir: "{{ playbook_dir }}/report_sample_output/"
 report_file: "server_check_report.json"
+
+diff_ignore_list:
+  # - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
+  - ".*\\['date_time'\\].*"
+  - ".*\\['memory_mb'\\].*"
+  - ".*\\['uptime_seconds'\\].*"
+
+diff_output_file: "{{ report_dir }}diff_output.json"
+diff_before_file: "{{ report_dir }}before_{{ report_file }}"
+diff_after_file: "{{ report_dir }}after_{{ report_file }}"

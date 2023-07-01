@@ -1,34 +1,24 @@
 ---
 
-- name: Ensure boto and boto3 modules are installed
-  pip:
-    name: deepdiff
-  delegate_to: localhost
-
 - name: Run custom file comparison  # noqa: var-naming[no-role-prefix]
   compare_files:
-    before_file: "{{ report_dir }}before_{{ report_file }}"
-    after_file: "{{ report_dir }}after_{{ report_file }}"
-    ignore_list: "{{ ignore_list }}"
+    before_file: "{{ diff_before_file }}"
+    after_file: "{{ diff_after_file }}"
+    ignore_list: "{{ diff_ignore_list }}"
   register: compare_result
-  vars:
-    ignore_list:
-      # - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
-      - ".*\\['date_time'\\].*"
-      - ".*\\['memory_mb'\\].*"
-      - ".*\\['uptime_seconds'\\].*"
 
 - name: Display the entire results file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
     var: compare_result
-  # tags:
-  #   - debug
-  #   - never
+  tags:
+    - debug
+    - never
 
-- name: Output diff to file
+- name: Output diff to file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.copy:
     content: "{{ diff_content }}"
-    dest: "{{ report_dir }}diff_output.json"
+    dest: "{{ diff_output_file }}"
+    mode: '0644'
   vars:
     diff_content: "{{ compare_result.result.differences | to_nice_json }}"
   when: compare_result.result.differences is defined and compare_result.result.differences | length > 0
