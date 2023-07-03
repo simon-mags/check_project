@@ -35,6 +35,10 @@ def compare_files():
     after_file = module.params['after_file']
     ignore_list = module.params['ignore_list']
 
+    print(f"before_file: {before_file}")
+    print(f"after_file: {after_file}")
+    print(f"ignore_list: {ignore_list}")
+
     try:
         # Load the JSON data from the before and after files
         with open(before_file, 'r') as f:
@@ -51,16 +55,17 @@ def compare_files():
                 # If the item starts with '/', consider it a whole line to ignore
                 ignored_paths.append(ignore_item)
             else:
-                # If it doesn't start with '/', treat it as a regular expression pattern
-                # regex_pattern = re.escape(ignore_item)
-                regex_pattern = ignore_item.replace(r"\.", ".")
+                # If it doesn't start with '/', treat it as a regex pattern
+                regex = re.compile(ignore_item)
                 # Find paths matching the regex pattern and add them to ignored_paths
                 paths_to_ignore = [
                     path
                     for path in DeepDiff(before_data, after_data, view='tree')
-                    if re.search(regex_pattern, path)
+                    if regex.search(path)
                 ]
                 ignored_paths.extend(paths_to_ignore)
+
+        print(f"ignored_paths: {ignored_paths}")
 
         # Use the ignored_paths in the DeepDiff call to exclude them from the comparison
         differences = DeepDiff(before_data, after_data, exclude_paths=ignored_paths)
@@ -74,11 +79,14 @@ def compare_files():
             'differences': differences.to_dict()
         }
 
+        print(f"result: {result}")
+
         # Exit the module execution and return the result
         module.exit_json(changed=False, result=result)
 
     except Exception as e:
         # If any exception occurs, fail the module and return the error message
+        print(f"An error occurred: {e}")
         module.fail_json(msg=str(e))
 
 def main():
@@ -88,3 +96,33 @@ def main():
 if __name__ == '__main__':
     # Invoke the main function when the script is run directly
     main()
+
+# Define the variables for the file paths and ignore list
+after_file = "/home/smaginnity/Documents/git2/check_project/report_sample_output/after_server_check_report.json"
+before_file = "/home/smaginnity/Documents/git2/check_project/report_sample_output/before_server_check_report.json"
+ignore_list = [
+    "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']",
+    "root['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']",
+    "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic']",
+    "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic_short']",
+    "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_micro']",
+    "root['server_report_data'][0]['ansible_facts']['date_time']['minute']",
+    "root['server_report_data'][0]['ansible_facts']['date_time']['second']"
+]
+
+
+# Create a dictionary to hold the module arguments
+module_args = {
+    'before_file': before_file,
+    'after_file': after_file,
+    'ignore_list': ignore_list
+}
+
+# Create an AnsibleModule instance with the provided module arguments
+module = AnsibleModule(
+    argument_spec=module_args,
+    supports_check_mode=True
+)
+
+# Call the compare_files function to execute the module logic
+compare_files()

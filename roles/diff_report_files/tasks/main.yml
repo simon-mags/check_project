@@ -13,7 +13,7 @@
     ignore_list: "{{ diff_ignore_list }}"
   register: compare_result
   delegate_to: localhost
-  
+
 - name: Display the entire results file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
     var: compare_result

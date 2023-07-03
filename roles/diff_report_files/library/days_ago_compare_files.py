@@ -51,14 +51,13 @@ def compare_files():
                 # If the item starts with '/', consider it a whole line to ignore
                 ignored_paths.append(ignore_item)
             else:
-                # If it doesn't start with '/', treat it as a regular expression pattern
-                # regex_pattern = re.escape(ignore_item)
-                regex_pattern = ignore_item.replace(r"\.", ".")
+                # If it doesn't start with '/', treat it as a regex pattern
+                regex = re.compile(ignore_item)
                 # Find paths matching the regex pattern and add them to ignored_paths
                 paths_to_ignore = [
                     path
                     for path in DeepDiff(before_data, after_data, view='tree')
-                    if re.search(regex_pattern, path)
+                    if regex.search(path)
                 ]
                 ignored_paths.extend(paths_to_ignore)
 
