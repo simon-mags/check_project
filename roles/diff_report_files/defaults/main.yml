@@ -4,15 +4,15 @@
 report_dir: "{{ playbook_dir }}/report_sample_output/"
 report_file: "server_check_report.json"
 
-# If the item starts with '/', consider it a whole line to ignore
-diff_ignore_list:
-  - "root['run_time']"
-  - "root['server_report_data'][0]['ansible_facts']['uptime_seconds']"
-  # - ".*\\['date_time'\\].*"
-  # - ".*\\['memory_mb'\\].*"
-  # - ".*\\['uptime_seconds'\\].*"
-
-
 diff_output_file: "{{ report_dir }}diff_output.json"
 diff_before_file: "{{ report_dir }}before_{{ report_file }}"
 diff_after_file: "{{ report_dir }}after_{{ report_file }}"
+
+diff_ignore_list:
+  - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
+  - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']"
+  - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic']"
+  - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic_short']"
+  - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_micro']"
+  - "root['server_report_data'][0]['ansible_facts']['date_time']['minute']"
+  - "root['server_report_data'][0]['ansible_facts']['date_time']['second']"

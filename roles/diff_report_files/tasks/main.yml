@@ -6,14 +6,14 @@
     state: present
   delegate_to: localhost
 
-- name: Run the custom python library file to do a file comparison for the before and after files   # noqa: var-naming[no-role-prefix]
+- name: Run the custom python library file to do a file comparison for the before and after files  # noqa: var-naming[no-role-prefix]
   compare_files:
     before_file: "{{ diff_before_file }}"
     after_file: "{{ diff_after_file }}"
     ignore_list: "{{ diff_ignore_list }}"
   register: compare_result
   delegate_to: localhost
-
+  
 - name: Display the entire results file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
     var: compare_result

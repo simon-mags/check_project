@@ -3,6 +3,7 @@
 from ansible.module_utils.basic import AnsibleModule
 import json
 import subprocess
+import re
 
 # def install_dependencies():
 #     try:
