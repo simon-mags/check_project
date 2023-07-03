@@ -51,15 +51,31 @@ def compare_files():
                 # If the item starts with '/', consider it a whole line to ignore
                 ignored_paths.append(ignore_item)
             else:
-                # If it doesn't start with '/', treat it as a regex pattern
-                regex = re.compile(ignore_item)
+                # If it doesn't start with '/', treat it as a regular expression pattern
+                # regex_pattern = re.escape(ignore_item)
+                regex_pattern = ignore_item.replace(r"\.", ".")
                 # Find paths matching the regex pattern and add them to ignored_paths
-                paths_to_ignore = [
-                    path
-                    for path in DeepDiff(before_data, after_data, view='tree')
-                    if regex.search(path)
-                ]
-                ignored_paths.extend(paths_to_ignore)
+                from deepdiff.helper import py3round
+                from deepdiff.helper import py3str
+
+                def find_matching_paths(obj, path):
+                    if regex.search(".".join(map(py3str, path))):
+                        yield path
+
+                    if isinstance(obj, dict):
+                        for k, v in obj.items():
+                            yield from find_matching_paths(v, path + [k])
+                    elif isinstance(obj, (list, set, tuple)):
+                        for i, v in enumerate(obj):
+                            yield from find_matching_paths(v, path + [i])
+                    elif hasattr(obj, "__dict__"):
+                        for k, v in obj.__dict__.items():
+                            yield from find_matching_paths(v, path + [k])
+                    else:
+                        yield from ()
+
+                ignored_paths = list(find_matching_paths(before_data, []))
+
 
         # Use the ignored_paths in the DeepDiff call to exclude them from the comparison
         differences = DeepDiff(before_data, after_data, exclude_paths=ignored_paths)

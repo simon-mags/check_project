@@ -1,5 +1,10 @@
 ---
 
+- name: Ensure that our required python pip module deepdiff is installed
+  pip:
+    name: deepdiff
+    state: present
+
 - name: Run custom file comparison  # noqa: var-naming[no-role-prefix]
   compare_files:
     before_file: "{{ diff_before_file }}"
@@ -14,6 +19,20 @@
     - debug
     - never
 
+- name: Display the ignore list from the python compare module  # noqa: var-naming[no-role-prefix]
+  ansible.builtin.debug:
+    var: compare_result.result.ignore_list
+  tags:
+    - debug
+    - never
+
+- name: Display the ignored paths from the python compare module  # noqa: var-naming[no-role-prefix]
+  ansible.builtin.debug:
+    var: compare_result.result.ignored_paths
+  tags:
+    - debug
+    - never
+
 - name: Output diff to file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.copy:
     content: "{{ diff_content }}"
@@ -22,3 +41,25 @@
   vars:
     diff_content: "{{ compare_result.result.differences | to_nice_json }}"
   when: compare_result.result.differences is defined and compare_result.result.differences | length > 0
+
+
+# Consider adding the following to some sort of task rescue block if the output to diff task above fails for any reason
+# - name: Install pyenv
+#   git:
+#     repo: https://github.com/pyenv/pyenv.git
+#     dest: ~/.pyenv
+#     version: master
+#   become: yes
+
+# - name: Configure pyenv
+#   lineinfile:
+#     dest: ~/.bashrc
+#     line: 'export PYENV_ROOT="$HOME/.pyenv"'
+#   become: yes
+
+# - name: Install Python 3.8.12 using pyenv
+#   shell: pyenv install 3.8.12
+#   become: yes
+#   args:
+#     executable: /bin/bash
+#     creates: ~/.pyenv/versions/3.8.12
