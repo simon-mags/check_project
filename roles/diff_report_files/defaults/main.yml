@@ -6,11 +6,11 @@ report_file: "server_check_report.json"
 
 # If the item starts with '/', consider it a whole line to ignore
 diff_ignore_list:
-  - "/root['run_time']"
-  - "/root['server_report_data'][0]['ansible_facts']['uptime_seconds']"
-  - ".*\\['date_time'\\].*"
-  - ".*\\['memory_mb'\\].*"
-  - ".*\\['uptime_seconds'\\].*"
+  - "root['run_time']"
+  - "root['server_report_data'][0]['ansible_facts']['uptime_seconds']"
+  # - ".*\\['date_time'\\].*"
+  # - ".*\\['memory_mb'\\].*"
+  # - ".*\\['uptime_seconds'\\].*"
 
 
 diff_output_file: "{{ report_dir }}diff_output.json"

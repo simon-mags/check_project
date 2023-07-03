@@ -1,5 +1,9 @@
 ---
 
+# output directory owner and group
+output_owner: "{{ ansible_user_id }}"
+output_group: "users"
+
 # Example variable for collected facts
 collected_facts: {}
 

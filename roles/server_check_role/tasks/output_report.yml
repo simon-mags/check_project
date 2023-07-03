@@ -12,8 +12,8 @@
         path: "{{ report_dir }}"
         state: directory
         mode: '0764'
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        owner: "{{ output_owner }}"
+        group: "{{ output_group }}"
 
     # Debug to output the data from the custom tests and standard tests
     - name: Debug of vars in all the places
@@ -26,9 +26,9 @@
       ansible.builtin.template:
         src: "report.json.j2"
         dest: "{{ report_dir }}{{ report_state_input }}_{{ report_file }}"
-        mode: '0755'
-        owner: "{{ ansible_user_id }}"
-        group: "{{ ansible_user_id }}"
+        mode: '0744'
+        owner: "{{ output_owner }}"
+        group: "{{ output_group }}"
       register: report_output_file
       loop: "{{ play_hosts }}"
       loop_control:

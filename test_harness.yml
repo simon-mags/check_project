@@ -4,5 +4,11 @@
   hosts: localhost
   gather_facts: true
 
+  pre_tasks:
+    - name: Configure the local instance with the packages we need
+      ansible.builtin.pip:
+        name: deepdiff
+        state: present
+
   roles:
-   - diff_report_files
+    - diff_report_files

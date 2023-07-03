@@ -1,16 +1,18 @@
 ---
 
 - name: Ensure that our required python pip module deepdiff is installed
-  pip:
+  ansible.builtin.pip:
     name: deepdiff
     state: present
+  delegate_to: localhost
 
-- name: Run custom file comparison  # noqa: var-naming[no-role-prefix]
+- name: Run custom file comparison  # noqa: var-naming[no-role-prefix] 
   compare_files:
     before_file: "{{ diff_before_file }}"
     after_file: "{{ diff_after_file }}"
     ignore_list: "{{ diff_ignore_list }}"
   register: compare_result
+  delegate_to: localhost
 
 - name: Display the entire results file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
@@ -18,6 +20,7 @@
   tags:
     - debug
     - never
+  delegate_to: localhost
 
 - name: Display the ignore list from the python compare module  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
@@ -25,14 +28,16 @@
   tags:
     - debug
     - never
-
+  delegate_to: localhost
+  
 - name: Display the ignored paths from the python compare module  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
     var: compare_result.result.ignored_paths
   tags:
     - debug
     - never
-
+  delegate_to: localhost
+  
 - name: Output diff to file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.copy:
     content: "{{ diff_content }}"
@@ -41,7 +46,7 @@
   vars:
     diff_content: "{{ compare_result.result.differences | to_nice_json }}"
   when: compare_result.result.differences is defined and compare_result.result.differences | length > 0
-
+  delegate_to: localhost
 
 # Consider adding the following to some sort of task rescue block if the output to diff task above fails for any reason
 # - name: Install pyenv
