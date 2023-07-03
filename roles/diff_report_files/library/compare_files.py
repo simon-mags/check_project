@@ -18,7 +18,7 @@ def compare_files():
     module_args = dict(
         before_file=dict(type='str', required=True),
         after_file=dict(type='str', required=True),
-        ignore_list=dict(type='list', elements='str')  # Add ignore_list parameter here
+        ignore_list=dict(type='list', elements='str', default=[])  # Add default value and type validation
     )
 
     module = AnsibleModule(
@@ -30,6 +30,8 @@ def compare_files():
     after_file = module.params['after_file']
     ignore_list = module.params['ignore_list']  # Retrieve the ignore_list value
 
+    if not isinstance(ignore_list, list):
+        module.fail_json(msg="ignore_list must be a list of strings.")
 
     try:
         with open(before_file, 'r') as f:
@@ -46,7 +48,6 @@ def compare_files():
             'ignore_list': ignore_list,  # Include ignore_list in the result
             'differences': differences.to_dict()
         }
-
 
         module.exit_json(changed=False, result=result)
 
