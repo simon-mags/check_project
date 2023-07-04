@@ -6,15 +6,26 @@
     state: present
   delegate_to: localhost
 
-- name: Run the custom python library file to do a file comparison for the before and after files  # noqa: var-naming[no-role-prefix]
+- name: Display the entire results file
+  ansible.builtin.debug:
+    msg:
+      # - "ignore whole lines: {{ diff_ignore_whole_lines }}"
+      - "whole lines type: {{ diff_ignore_whole_lines | type_debug }}"
+      - "first in whole lines type: {{ diff_ignore_whole_lines | first | type_debug }}"
+      #- "ignore regex patterns: {{ diff_ignore_regex_patterns }}"
+      - "regex patterns type: {{ diff_ignore_regex_patterns | type_debug }}"
+      - "first in regex patterns type: {{ diff_ignore_regex_patterns | first | type_debug }}"
+
+- name: Run the custom python library file to do a file comparison for the before and after files
   compare_files:
     before_file: "{{ diff_before_file }}"
     after_file: "{{ diff_after_file }}"
-    ignore_list: "{{ diff_ignore_list }}"
+    ignore_whole_lines: "{{ diff_ignore_whole_lines }}"
+    ignore_regex_patterns: "{{ diff_ignore_regex_patterns }}"
   register: compare_result
   delegate_to: localhost
 
-- name: Display the entire results file  # noqa: var-naming[no-role-prefix]
+- name: Display the comparison result
   ansible.builtin.debug:
     var: compare_result
   tags:
