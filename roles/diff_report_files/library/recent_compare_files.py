@@ -1,9 +1,14 @@
-from ansible.module_utils.basic import AnsibleModule
 import json
-import subprocess
 import re
+import subprocess
 from deepdiff import DeepDiff
-import traceback
+
+def install_dependencies():
+    # Install required dependencies using pip
+    try:
+        subprocess.check_call(["pip", "install", "deepdiff"])
+    except subprocess.CalledProcessError as e:
+        raise Exception(f"Failed to install dependencies: {e}")
 
 def convert_to_string(item):
     # Convert byte strings to string
@@ -11,15 +16,16 @@ def convert_to_string(item):
         return item.decode('utf-8')
     return str(item)
 
-# Custom Python module
-def compare_files(module, before_file, after_file, ignore_whole_lines, ignore_regex_patterns):
-    # Convert AnsibleUnicode to regular Python strings
-    ignore_whole_lines = [str(line) for line in ignore_whole_lines]
-    ignore_regex_patterns = [str(pattern) for pattern in ignore_regex_patterns]
+def compare_files(module):
+    # Retrieve the values of the module arguments
+    before_file = module.params['before_file']
+    after_file = module.params['after_file']
+    ignore_whole_lines = module.params['ignore_whole_lines'] or []
+    ignore_regex_patterns = module.params['ignore_regex_patterns'] or []
 
-    # Print the data types and values of ignore_whole_lines and ignore_regex_patterns
-    print(f"ignore_whole_lines - type: {type(ignore_whole_lines)}, value: {ignore_whole_lines}")
-    print(f"ignore_regex_patterns - type: {type(ignore_regex_patterns)}, value: {ignore_regex_patterns}")
+    # Print the ignore_whole_lines and ignore_regex_patterns
+    print(f"Ignore whole lines: {', '.join(map(convert_to_string, ignore_whole_lines))}")
+    print(f"Ignore regex patterns: {', '.join(map(convert_to_string, ignore_regex_patterns))}")
 
     try:
         # Load the JSON data from the before and after files
@@ -64,8 +70,6 @@ def compare_files(module, before_file, after_file, ignore_whole_lines, ignore_re
         module.exit_json(changed=False, result=result)
 
     except Exception as e:
-        # Print the full traceback
-        traceback.print_exc()
         # If any exception occurs, fail the module and return the error message
         module.fail_json(msg=str(e))
 
@@ -85,13 +89,7 @@ def main():
     )
 
     # Call the compare_files function to execute the module logic
-    compare_files(
-        module,
-        module.params['before_file'],
-        module.params['after_file'],
-        module.params['ignore_whole_lines'],
-        module.params['ignore_regex_patterns']
-    )
+    compare_files(module)  # Pass the 'module' argument here
 
 if __name__ == '__main__':
     # Invoke the main function when the script is run directly
