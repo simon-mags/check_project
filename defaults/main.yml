@@ -1,0 +1,3 @@
+# main common vars space for the server_check_role
+report_dir: "{{ playbook_dir }}/report_sample_output/"
+report_file: "server_check_report.json"

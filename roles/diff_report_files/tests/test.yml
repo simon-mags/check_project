@@ -1,0 +1,36 @@
+- name: Test - Read 'before' and 'after' report files
+  hosts: localhost
+  gather_facts: false
+
+  # To test run this role you could use the following command
+  # ansible-test integration --roles-path=./roles diff_report_files
+  #
+
+  tasks:
+    - name: Include diff_report_files role
+      ansible.builtin.include_role:
+        name: diff_report_files
+
+    - name: Test - Read 'before' report file
+      ansible.builtin.slurp:
+        src: "{{ report_dir }}before_{{ report_file }}"
+      register: before_report_file
+
+    - name: Test - Read 'after' report file
+      ansible.builtin.slurp:
+        src: "{{ report_dir }}after_{{ report_file }}"
+      register: after_report_file
+
+    - name: Test - Compare files and ignore specific changes
+      ansible.builtin.assert:
+        that:
+          - before_report_file.content | b64decode | from_json != after_report_file.content | b64decode | from_json
+        quiet: true
+        success_msg: "Files are identical"
+        fail_msg: "Files differ"
+        diff_msg: "Diff:"
+        ignore_lines: "{{ ignore_lines }}"
+      vars:
+        ignore_lines:
+          - ".*disk_size.*"
+          - ".*date.*"

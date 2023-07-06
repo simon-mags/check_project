@@ -1,6 +1,6 @@
 galaxy_info:
-  author: Simon Maginnity
-  description: A Framework to complete a number of tests with Ansible and compile the results into a Report in Mark Down format
+  author: Simon Mags
+  description: This role can be used to compare files on the local directory
   company: SM Inc Pty Ltd
 
   # If the issue tracker for your role is not on github, uncomment the
@@ -16,7 +16,7 @@ galaxy_info:
   # - CC-BY-4.0
   license: MIT
 
-  min_ansible_version: "2.14"
+  min_ansible_version: '2.15'
 
   # If this a Container Enabled role, provide the minimum Ansible Container version.
   # min_ansible_container_version:
@@ -31,7 +31,7 @@ galaxy_info:
     - name: Fedora
       versions:
         - all
-  #  - 25
+  #   - 25
   # - name: SomePlatform
   #   versions:
   #   - all
