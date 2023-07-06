@@ -33,17 +33,11 @@
     - never
   delegate_to: localhost
 
-- name: Display the ignore list from the python compare module  # noqa: var-naming[no-role-prefix]
+- name: Display all the results from the python compare module  # noqa: var-naming[no-role-prefix]
   ansible.builtin.debug:
-    var: compare_result.result.ignore_list
-  tags:
-    - debug
-    - never
-  delegate_to: localhost
-
-- name: Display the ignored paths from the python compare module  # noqa: var-naming[no-role-prefix]
-  ansible.builtin.debug:
-    var: compare_result.result.ignored_paths
+    msg:
+      - "{{ compare_result.result.ignore_whole_lines }}"
+      - "{{ compare_result.result.ignore_regex_patterns }}"
   tags:
     - debug
     - never

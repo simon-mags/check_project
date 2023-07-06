@@ -62,7 +62,7 @@ def compare_files(module, before_file, after_file, ignore_whole_lines, ignore_re
             'after_file': after_file,
             'ignore_whole_lines': ignore_whole_lines,
             'ignore_regex_patterns': ignore_regex_patterns,
-            'differences': differences.to_dict()
+            #'differences': differences.to_dict()
         }
 
         # Exit the module execution and return the result
