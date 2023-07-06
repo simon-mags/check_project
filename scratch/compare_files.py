@@ -14,14 +14,14 @@ import traceback
 def compare_files():
 
     # Convert AnsibleUnicode to regular Python strings
-    ignore_whole_lines = [str(line) for line in ignore_whole_lines]
-    ignore_regex_patterns = [str(pattern) for pattern in ignore_regex_patterns]
+    # ignore_whole_lines = [str(line) for line in ignore_whole_lines]
+    # ignore_regex_patterns = [str(pattern) for pattern in ignore_regex_patterns]
 
     # Retrieve the values of the module arguments
     # Define the variables for the file paths and ignore list
     after_file = "after_server_check_report.json"
     before_file = "before_server_check_report.json"
-    diff_ignore_whole_lines = [
+    ignore_whole_lines = [
         "bob"
         "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
         "root['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']"
@@ -31,7 +31,7 @@ def compare_files():
         "root['server_report_data'][0]['ansible_facts']['date_time']['minute']"
         "root['server_report_data'][0]['ansible_facts']['date_time']['second']"
     ]
-    diff_ignore_regex_patterns = [
+    ignore_regex_patterns = [
         "bobby b"
         ".*\\[\\'memory_mb\\'\\].*"
         ".*\\[\\'uptime_seconds\\'\\].*"
@@ -99,6 +99,8 @@ def compare_files():
         print(f"exception happened, panic!")
 
 def main():
+
+    compare_files()
     # Define the expected module arguments
     # module_args = dict(
     #     before_file=dict(type='str', required=True),
@@ -121,13 +123,5 @@ def main():
     #               module.params['ignore_regex_patterns']
     #               )
 
-    compare_files(
-        before_fil,
-        after_file,
-        ignore_whole_lines,
-        ignore_regex_patterns
-        )
-
 if __name__ == '__main__':
-    # Invoke the main function when the script is run directly
     main()
