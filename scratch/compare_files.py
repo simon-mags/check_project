@@ -22,7 +22,6 @@ def compare_files():
     after_file = "after_server_check_report.json"
     before_file = "before_server_check_report.json"
     ignore_whole_lines = [
-        "bob"
         "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
         "root['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']"
         "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic']"
@@ -32,7 +31,6 @@ def compare_files():
         "root['server_report_data'][0]['ansible_facts']['date_time']['second']"
     ]
     ignore_regex_patterns = [
-        "bobby b"
         ".*\\[\\'memory_mb\\'\\].*"
         ".*\\[\\'uptime_seconds\\'\\].*"
     ]
