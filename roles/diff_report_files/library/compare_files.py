@@ -41,15 +41,18 @@ def compare_files(module, before_file, after_file, ignore_whole_lines, ignore_re
 
         # Check if ignore_regex_patterns is empty or contains only one data type
         if ignore_regex_patterns:
-            # Add regex patterns to ignored_paths
-            regex_patterns = [re.escape(pattern) for pattern in ignore_regex_patterns]
-            paths_to_ignore = [
-                path
-                for path in DeepDiff(before_data, after_data, view='tree')
-                for pattern in regex_patterns
-                if re.search(pattern, path)
-            ]
-            ignored_paths.extend(paths_to_ignore)
+            # Add regex patterns to ignored_paths if not empty
+            ignored_paths.extend(ignore_regex_patterns)
+
+            # # Add regex patterns to ignored_paths
+            # for path in DeepDiff(before_data, after_data, view='tree'):
+            #     for pattern in ignore_regex_patterns:
+            #         if re.match(pattern, path):
+            #             ignored_paths.append(path)
+            #             break
+            differences = DeepDiff(before_data, after_data, exclude_paths=ignored_paths)
+        else:
+            differences = DeepDiff(before_data, after_data)
 
         print(f"Types in ignored_paths: {[type(item) for item in ignored_paths]}")
 
@@ -62,7 +65,7 @@ def compare_files(module, before_file, after_file, ignore_whole_lines, ignore_re
             'after_file': after_file,
             'ignore_whole_lines': ignore_whole_lines,
             'ignore_regex_patterns': ignore_regex_patterns,
-            #'differences': differences.to_dict()
+            'differences': differences.to_dict()
         }
 
         # Exit the module execution and return the result

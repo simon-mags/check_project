@@ -9,7 +9,6 @@ diff_before_file: "{{ report_dir }}before_{{ report_file }}"
 diff_after_file: "{{ report_dir }}after_{{ report_file }}"
 
 diff_ignore_whole_lines:
-  - "bob"
   - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch']"
   - "root['server_report_data'][0]['ansible_facts']['date_time']['epoch_int']"
   - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_basic']"
@@ -17,8 +16,15 @@ diff_ignore_whole_lines:
   - "root['server_report_data'][0]['ansible_facts']['date_time']['iso8601_micro']"
   - "root['server_report_data'][0]['ansible_facts']['date_time']['minute']"
   - "root['server_report_data'][0]['ansible_facts']['date_time']['second']"
+  - "root['server_report_data'][0]['ansible_facts']['memfree_mb']"
+  - "root['server_report_data'][0]['ansible_facts']['memory_mb']['nocache']['free']"
+  - "root['server_report_data'][0]['ansible_facts']['memory_mb']['nocache']['used']"
+  - "root['server_report_data'][0]['ansible_facts']['memory_mb']['real']['free']"
+  - "root['server_report_data'][0]['ansible_facts']['memory_mb']['real']['used']"
+  - "root['server_report_data'][0]['ansible_facts']['memory_mb']['swap']['used']"
+  - "root['server_report_data'][0]['ansible_facts']['memory_mb']['swap']['cached']"
+  - "root['server_report_data'][0]['ansible_facts']['memory_mb']['swap']['free']"
 
 diff_ignore_regex_patterns:
-  - "bobby b"
   - ".*\\[\\'memory_mb\\'\\].*"
   - ".*\\[\\'uptime_seconds\\'\\].*"

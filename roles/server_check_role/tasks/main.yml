@@ -1,56 +1,43 @@
 ---
 # tasks file for check_role
-- name: Include variables task
+- name: Server_check_role - Main | Include variables task
   ansible.builtin.include_tasks: custom_variables.yml
   tags:
     - always
 
 # Gather all the Service Fact information from the hosts
-- name: Gather Service facts
+- name: Server_check_role - Main | Gather Service facts
   ansible.builtin.service_facts:
 
 # Gather all the Package Fact information from the hosts as we may look for specific info in some of our standard and custom tests
-- name: Gather package facts  # noqa: var-naming[no-role-prefix]
+- name: Server_check_role - Main | Gather package facts  # noqa: var-naming[no-role-prefix]
   ansible.builtin.package_facts:
   ignore_errors: true
   register: ignore_errors_register
 
 # Gather any hardware fact information about the hosts
-- name: Gather hardware facts  # noqa: var-naming[no-role-prefix]
+- name: Server_check_role - Main | Gather hardware facts  # noqa: var-naming[no-role-prefix]
   ansible.builtin.setup:
     filter: ansible_product_name
   register: hardware_facts
 
 # Setup out Report Data Structure
-- name: Initialize compliance data  # noqa: var-naming[no-role-prefix]
+- name: Server_check_role - Main | Initialize compliance data  # noqa: var-naming[no-role-prefix]
   ansible.builtin.set_fact:
     server_report_data: {}
 
-# - name: Initialize the data set to hold all of the server report data
-#   ansible.builtin.set_fact:
-#     to collect server report data: {}
-
-
 # Run Standard checks and tests with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
-- name: Run Standard tests from subfolder to collect server report data
+- name: Server_check_role - Main | Run Standard tests from subfolder to collect server report data
   ansible.builtin.include_tasks: "{{ item }}"
   loop: "{{ query('fileglob', './standard_tests/*.yml') }}"
   when: item is match('.*\.yml$')
   # tags: "{{ os_tag_mapping[ansible_facts['ansible_os_family']] }}"
 
 # Run any custom checks with this code, drop a new *.yml file into the "custom tests" folder and it will be run as part of this role
-- name: Run custom tests from subfolder to collect server report data
+- name: Server_check_role - Main | Run custom tests from subfolder to collect server report data
   ansible.builtin.include_tasks: "{{ item }}"
   loop: "{{ query('ansible.builtin.fileglob', './custom_tests/*.yml') }}"
   when: item is match('.*\.yml$')
-  # tags: "{{ os_tag_mapping[ansible_facts['ansible_os_family']] }}"
-
-# - name: Run a debug to show what we collected in the server report data
-#   ansible.builtin.debug:
-#     var: report_fields
-#   tags:
-#     - never
-#     - debug
 
 # Run a task to call the output_report.yml file, which adds the server check report data to a variable "to collect server report data"
 # this var can be debugged and all output shown as per above, or the file can be emailed or stored locally in the specified output location

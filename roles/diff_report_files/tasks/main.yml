@@ -1,22 +1,23 @@
 ---
 
-- name: Ensure that our required python pip module deepdiff is installed
+- name: Diff_report_files - Main | Ensure that our required python pip module deepdiff is installed
   ansible.builtin.pip:
     name: deepdiff
     state: present
   delegate_to: localhost
 
-- name: Display the entire results file
+- name: Diff_report_files - Main | Display the entire results file
   ansible.builtin.debug:
     msg:
-      # - "ignore whole lines: {{ diff_ignore_whole_lines }}"
       - "whole lines type: {{ diff_ignore_whole_lines | type_debug }}"
       - "first in whole lines type: {{ diff_ignore_whole_lines | first | type_debug }}"
-      #- "ignore regex patterns: {{ diff_ignore_regex_patterns }}"
       - "regex patterns type: {{ diff_ignore_regex_patterns | type_debug }}"
       - "first in regex patterns type: {{ diff_ignore_regex_patterns | first | type_debug }}"
+  tags:
+    - debug
+    - never
 
-- name: Run the custom python library file to do a file comparison for the before and after files
+- name: Diff_report_files - Main | Run the custom python library file to do a file comparison for the before and after files
   compare_files:
     before_file: "{{ diff_before_file }}"
     after_file: "{{ diff_after_file }}"
@@ -25,7 +26,7 @@
   register: compare_result
   delegate_to: localhost
 
-- name: Display the comparison result
+- name: Diff_report_files - Main | Display the comparison result
   ansible.builtin.debug:
     var: compare_result
   tags:
@@ -33,17 +34,7 @@
     - never
   delegate_to: localhost
 
-- name: Display all the results from the python compare module  # noqa: var-naming[no-role-prefix]
-  ansible.builtin.debug:
-    msg:
-      - "{{ compare_result.result.ignore_whole_lines }}"
-      - "{{ compare_result.result.ignore_regex_patterns }}"
-  tags:
-    - debug
-    - never
-  delegate_to: localhost
-
-- name: Output diff to file  # noqa: var-naming[no-role-prefix]
+- name: Diff_report_files - Main | Output diff to file  # noqa: var-naming[no-role-prefix]
   ansible.builtin.copy:
     content: "{{ diff_content }}"
     dest: "{{ diff_output_file }}"
@@ -53,23 +44,4 @@
   when: compare_result.result.differences is defined and compare_result.result.differences | length > 0
   delegate_to: localhost
 
-# Consider adding the following to some sort of task rescue block if the output to diff task above fails for any reason
-# - name: Install pyenv
-#   git:
-#     repo: https://github.com/pyenv/pyenv.git
-#     dest: ~/.pyenv
-#     version: master
-#   become: yes
-
-# - name: Configure pyenv
-#   lineinfile:
-#     dest: ~/.bashrc
-#     line: 'export PYENV_ROOT="$HOME/.pyenv"'
-#   become: yes
-
-# - name: Install Python 3.8.12 using pyenv
-#   shell: pyenv install 3.8.12
-#   become: yes
-#   args:
-#     executable: /bin/bash
-#     creates: ~/.pyenv/versions/3.8.12
+...
