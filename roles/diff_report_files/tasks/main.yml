@@ -1,0 +1,47 @@
+---
+
+- name: Diff_report_files - Main | Ensure that our required python pip module deepdiff is installed
+  ansible.builtin.pip:
+    name: deepdiff
+    state: present
+  delegate_to: localhost
+
+- name: Diff_report_files - Main | Display the entire results file
+  ansible.builtin.debug:
+    msg:
+      - "whole lines type: {{ diff_ignore_whole_lines | type_debug }}"
+      - "first in whole lines type: {{ diff_ignore_whole_lines | first | type_debug }}"
+      - "regex patterns type: {{ diff_ignore_regex_patterns | type_debug }}"
+      - "first in regex patterns type: {{ diff_ignore_regex_patterns | first | type_debug }}"
+  tags:
+    - debug
+    - never
+
+- name: Diff_report_files - Main | Run python library to do file comparison on before and after files  # noqa: var-naming[no-role-prefix]
+  compare_files:
+    before_file: "{{ diff_before_file }}"
+    after_file: "{{ diff_after_file }}"
+    ignore_whole_lines: "{{ diff_ignore_whole_lines }}"
+    ignore_regex_patterns: "{{ diff_ignore_regex_patterns }}"
+  register: compare_result
+  delegate_to: localhost
+
+- name: Diff_report_files - Main | Display the comparison result
+  ansible.builtin.debug:
+    var: compare_result
+  tags:
+    - debug
+    - never
+  delegate_to: localhost
+
+- name: Diff_report_files - Main | Output diff to file  # noqa: var-naming[no-role-prefix]
+  ansible.builtin.copy:
+    content: "{{ diff_content }}"
+    dest: "{{ diff_output_file }}"
+    mode: '0644'
+  vars:
+    diff_content: "{{ compare_result.result.differences | to_nice_json }}"
+  when: compare_result.result.differences is defined and compare_result.result.differences | length > 0
+  delegate_to: localhost
+
+...

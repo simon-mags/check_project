@@ -2,3 +2,9 @@ ansible-navigator.log
 main_playbook-artifact*.json
 collections/ansible_collections
 
+# custom python module files
+roles/diff_report_files/library/__pycache__/file_diff.cpython-311.pyc
+roles/diff_report_files/library/__pycache__/compare_files.cpython-311.pyc
+
+scratch/
+roles/diff_report_files/filter_plugins/__pycache__/convert_to_string.cpython-311.pyc

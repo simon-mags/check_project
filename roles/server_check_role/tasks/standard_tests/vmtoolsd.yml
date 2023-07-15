@@ -1,24 +1,35 @@
----
+- name: Vmtoolsd | Check if vmtoolsd service is present
+  ansible.builtin.assert:
+    that: "'vmtoolsd' in ansible_facts.services"
+  register: vmtoolsd_service_present
+  ignore_errors: true
 
-- name: Execute 'vmtoolsd --version'
-  become: true
-  ansible.builtin.command: "vmtoolsd --version"
-  register: __vmtoolsd_version_output
-  changed_when: false
-  failed_when: "__vmtoolsd_version_output.rc == -1"
-  # Hack to make the task return "changed"
-
-- name: Set the vmtoolsd version fact
+- name: Vmtoolsd | Set vmtoolsd_installed fact
   ansible.builtin.set_fact:
-    __vmtoolsd_version: "{{ __vmtoolsd_version_output.stdout | default() | regex_search(regexp, '\\1') }}"
-  vars:
-    regexp: '(\d+.*)\s'
+    vmtoolsd_installed: "{{ vmtoolsd_service_present | bool }}"
 
-- name: "Add output of yml file to the server_report_data and output / combine it into additional data"
-  ansible.builtin.set_fact:
-    server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
-  vars:
-    additional_data:
-      vmtoolsd_version: "{{ __vmtoolsd_version | default(['Not Found']) | join('\n') }}"
+- name: Vmtoolsd | Run a Block for further tasks on vmtoolsd
+  block:
+    - name: Vmtoolsd | Execute 'vmtoolsd --version'
+      become: true
+      ansible.builtin.command: "vmtoolsd --version"
+      register: __vmtoolsd_version_output
+      changed_when: false
+      failed_when: "__vmtoolsd_version_output.rc == -1"
+      # Hack to make the task return "changed"
+      when: vmtoolsd_installed
 
-...
+    - name: Vmtoolsd | Set the vmtoolsd version fact
+      ansible.builtin.set_fact:
+        __vmtoolsd_version: "{{ __vmtoolsd_version_output.stdout | default() | regex_search(regexp, '\\1') }}"
+      vars:
+        regexp: '(\d+.*)\s'
+      when: vmtoolsd_installed
+
+    - name: "Vmtoolsd | Add output of yml file to the server_report_data and output / combine it into additional data"
+      ansible.builtin.set_fact:
+        server_report_data: "{{ server_report_data | default({}) | combine(additional_data) }}"
+      vars:
+        additional_data:
+          vmtoolsd_version: "{{ __vmtoolsd_version | default(['Not Found']) | join('\n') }}"
+      when: vmtoolsd_installed

@@ -4,34 +4,33 @@
     "Hostname": "localhost",
     "Comment01": "This data is derived from the standard and custom Ansible tests",
     "server_report_data": {
-    "__server_uptime": "11 days, 7:32:04",
+    "__server_uptime": "8 days, 8:20:41",
     "ansible_package_info": "Package Information not found",
-    "audit_repolist": "mirror.aarnet.edu.au\nrockylinux.mirror.digitalpacific.com.au\npackages.microsoft.com\nmirror.aarnet.edu.au\ndeveloper.download.nvidia.com\ndownload.docker.com\nfedora.mirror.serversaustralia.com.au\ngsl-syd.mm.fcix.net\nrockylinux.mirror.digitalpacific.com.au\npackages.gitlab.com\ndl.google.com",
+    "audit_repolist": "rocky-linux-australia-southeast2.production.gcp.mirrors.ctrliq.cloud\npackages.microsoft.com\nmirror.aarnet.edu.au\ndeveloper.download.nvidia.com\ndownload.docker.com\ngsl-syd.mm.fcix.net\nepel.mirror.digitalpacific.com.au\nrockylinux.mirror.digitalpacific.com.au\npackages.gitlab.com\ndl.google.com",
     "disk_usage": [
-        "/dev/mapper/rl-root xfs    70G   46G   25G  66% /",
+        "/dev/mapper/rl-root xfs    70G   53G   18G  76% /",
+        "/dev/sda2           xfs  1014M  408M  607M  41% /boot",
         "/dev/mapper/rl-home xfs   160G   32G  128G  20% /home",
-        "/dev/sda2           xfs  1014M  445M  570M  44% /boot",
         "/dev/sda1           vfat  599M  7.0M  592M   2% /boot/efi"
     ],
     "end_of_life_bool": "unknown",
     "end_of_support_bool": "unknown",
     "firewall_running": true,
     "firewall_service_list": "firewalld",
-    "free": "Swap:          7.7Gi       1.2Gi       6.5Gi",
+    "free": "Swap:          7.7Gi       2.5Gi       5.2Gi",
     "fstab_config": "\n#\n# /etc/fstab\n# Created by anaconda on Sat Sep 17 00:06:50 2022\n#\n# Accessible filesystems, by reference, are maintained under '/dev/disk/'.\n# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.\n#\n# After editing this file, run 'systemctl daemon-reload' to update systemd\n# units generated from this file.\n#\n/dev/mapper/rl-root     /                       xfs     defaults        0 0\nUUID=1fb7b207-7874-47e3-a809-58728c4db22c /boot                   xfs     defaults        0 0\nUUID=F976-6E7D          /boot/efi               vfat    umask=0077,shortname=winnt 0 2\n/dev/mapper/rl-home     /home                   xfs     defaults        0 0\n/dev/mapper/rl-swap     none                    swap    defaults        0 0",
     "grub_config": "GRUB_TIMEOUT=5\nGRUB_DISTRIBUTOR=\"$(sed 's, release .*$,,g' /etc/system-release)\"\nGRUB_DEFAULT=saved\nGRUB_DISABLE_SUBMENU=true\nGRUB_TERMINAL_OUTPUT=\"console\"\nGRUB_CMDLINE_LINUX=\"crashkernel=1G-4G:192M,4G-64G:256M,64G-:512M resume=/dev/mapper/rl-swap rd.lvm.lv=rl/root rd.lvm.lv=rl/swap rd.driver.blacklist=nouveau\"\nGRUB_DISABLE_RECOVERY=\"true\"\nGRUB_ENABLE_BLSCFG=true",
     "hostname": "localhost.localdomain",
     "httpd_version": "Not Installed",
-    "ip_address": "192.168.1.207",
-    "ipv4_address": "192.168.1.207",
+    "ip_address": "192.168.1.217",
+    "ipv4_address": "192.168.1.217",
     "ipv6_address": "ipv6 address not found",
     "kernel_version": "5.14.0-284.11.1.el9_2.x86_64",
-    "last_patch_date": "2023-06-04 20:32 ",
-    "latest_installed_kernel": "5.14.0-284.11.1.el9_2.x86_64",
+    "last_patch_date": "2023-07-01 18:05 ",
+    "latest_installed_kernel": "5.14.0-284.18.1.el9_2.x86_64",
     "logged_in_users": [
-        "username seat0        2023-06-12 15:38 (login screen)",
-        "username tty2         2023-06-12 15:38 (tty2)",
-        "username pts/5        2023-06-23 23:09 (127.0.0.1)"
+        "username seat0        2023-06-25 10:28 (login screen)",
+        "username tty2         2023-06-25 10:28 (tty2)"
     ],
     "nameservers": [
         "1.1.1.2"
@@ -45,7 +44,7 @@
     "package_manager": "dnf ",
     "root_last_changed": "1970-01-01",
     "root_last_login": "",
-    "route_info": "default via 192.168.1.1 dev wlp2s0 proto dhcp src 192.168.1.207 metric 600 \n192.168.1.0/24 dev wlp2s0 proto kernel scope link src 192.168.1.207 metric 600 ",
+    "route_info": "default via 192.168.1.1 dev wlp2s0 proto dhcp src 192.168.1.217 metric 600 \n192.168.1.0/24 dev wlp2s0 proto kernel scope link src 192.168.1.217 metric 600 ",
     "running_kernel_version": "5.14.0-284.11.1.el9_2.x86_64",
     "samba_shares": "",
     "samba_version": "Not Installed",
@@ -55,14 +54,13 @@
     "ssh_permit_root_login": "without-password",
     "sudo_groups": "%wheel\tALL=(ALL)\tALL\n%username\tALL=(ALL)\tNOPASSWD  ALL",
     "sudo_users": "root\tALL=(ALL) \tALL",
-    "swap": "NAME      TYPE      SIZE USED PRIO\n/dev/dm-1 partition 7.7G 1.2G   -2",
-    "vmtoolsd_version": ""
+    "swap": "NAME      TYPE      SIZE USED PRIO\n/dev/dm-1 partition 7.7G 2.5G   -2"
 },
     "Comment02": "This data is derived from Ansible Facts",
     "ansible_facts": {
     "_ansible_facts_gathered": true,
     "all_ipv4_addresses": [
-        "192.168.1.207"
+        "192.168.1.217"
     ],
     "all_ipv6_addresses": [
         "fe80::9d3f:3b56:82d5:a3fd"
@@ -94,29 +92,29 @@
         "root": "/dev/mapper/rl-root"
     },
     "date_time": {
-        "date": "2023-06-23",
-        "day": "23",
-        "epoch": "1687527536",
-        "epoch_int": "1687527536",
-        "hour": "23",
-        "iso8601": "2023-06-23T13:38:56Z",
-        "iso8601_basic": "20230623T230856498267",
-        "iso8601_basic_short": "20230623T230856",
-        "iso8601_micro": "2023-06-23T13:38:56.498267Z",
-        "minute": "08",
-        "month": "06",
-        "second": "56",
-        "time": "23:08:56",
+        "date": "2023-07-03",
+        "day": "03",
+        "epoch": "1688375916",
+        "epoch_int": "1688375916",
+        "hour": "18",
+        "iso8601": "2023-07-03T09:18:36Z",
+        "iso8601_basic": "20230703T184836489352",
+        "iso8601_basic_short": "20230703T184836",
+        "iso8601_micro": "2023-07-03T09:18:36.489352Z",
+        "minute": "48",
+        "month": "07",
+        "second": "36",
+        "time": "18:48:36",
         "tz": "ACST",
         "tz_dst": "ACDT",
         "tz_offset": "+0930",
-        "weekday": "Friday",
-        "weekday_number": "5",
-        "weeknumber": "25",
+        "weekday": "Monday",
+        "weekday_number": "1",
+        "weeknumber": "27",
         "year": "2023"
     },
     "default_ipv4": {
-        "address": "192.168.1.207",
+        "address": "192.168.1.217",
         "alias": "wlp2s0",
         "broadcast": "192.168.1.255",
         "gateway": "192.168.1.1",
@@ -397,7 +395,6 @@
             "wwn": "0x500a075116898f97"
         }
     },
-    "discovered_interpreter_python": "/usr/bin/python3",
     "distribution": "Rocky",
     "distribution_file_parsed": true,
     "distribution_file_path": "/etc/redhat-release",
@@ -447,7 +444,7 @@
             "rx_vlan_stag_filter": "off [fixed]",
             "rx_vlan_stag_hw_parse": "off [fixed]",
             "scatter_gather": "on",
-            "tcp_segmentation_offload": "off",
+            "tcp_segmentation_offload": "on",
             "tls_hw_record": "off [fixed]",
             "tls_hw_rx_offload": "off [fixed]",
             "tls_hw_tx_offload": "off [fixed]",
@@ -471,10 +468,10 @@
             "tx_scatter_gather": "on",
             "tx_scatter_gather_fraglist": "off [fixed]",
             "tx_sctp_segmentation": "off [fixed]",
-            "tx_tcp6_segmentation": "off [requested on]",
+            "tx_tcp6_segmentation": "on",
             "tx_tcp_ecn_segmentation": "off [fixed]",
             "tx_tcp_mangleid_segmentation": "off",
-            "tx_tcp_segmentation": "off [requested on]",
+            "tx_tcp_segmentation": "on",
             "tx_tunnel_remcsum_segmentation": "off [fixed]",
             "tx_udp_segmentation": "off [fixed]",
             "tx_udp_tnl_csum_segmentation": "off [fixed]",
@@ -495,33 +492,76 @@
         "type": "ether"
     },
     "env": {
+        "ANSIBLE_FORCE_COLOR": "0",
         "BASH_FUNC_which%%": "() {  ( alias;\n eval ${which_declare} ) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@\n}",
+        "CHROME_DESKTOP": "code-url-handler.desktop",
+        "COLORTERM": "truecolor",
         "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
         "DEBUGINFOD_URLS": "https://debuginfod.centos.org/ ",
+        "DESKTOP_SESSION": "gnome",
+        "DISPLAY": ":0",
+        "ELECTRON_RUN_AS_NODE": "1",
+        "GDK_BACKEND": "x11",
+        "GDMSESSION": "gnome",
+        "GDM_LANG": "en_AU.UTF-8",
+        "GIO_LAUNCHED_DESKTOP_FILE": "/usr/share/applications/code.desktop",
+        "GIO_LAUNCHED_DESKTOP_FILE_PID": "3537",
+        "GIT_ASKPASS": "/usr/share/code/resources/app/extensions/git/dist/askpass.sh",
+        "GJS_DEBUG_OUTPUT": "stderr",
+        "GJS_DEBUG_TOPICS": "JS ERROR;JS LOG",
+        "GNOME_SETUP_DISPLAY": ":1",
+        "HISTCONTROL": "ignoredups",
+        "HISTSIZE": "1000",
         "HOME": "/home/username",
+        "HOSTNAME": "localhost",
+        "INVOCATION_ID": "d32945ecc0c444bf88d593d4fe69a57d",
+        "JOURNAL_STREAM": "8:34998",
         "LANG": "en_AU.UTF-8",
         "LESSOPEN": "||/usr/bin/lesspipe.sh %s",
         "LOGNAME": "username",
         "LS_COLORS": "rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=01;36:*.au=01;36:*.flac=01;36:*.m4a=01;36:*.mid=01;36:*.midi=01;36:*.mka=01;36:*.mp3=01;36:*.mpc=01;36:*.ogg=01;36:*.ra=01;36:*.wav=01;36:*.oga=01;36:*.opus=01;36:*.spx=01;36:*.xspf=01;36:",
-        "MOTD_SHOWN": "pam",
-        "PATH": "/home/username/.local/bin:/home/username/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin",
-        "PWD": "/home/username",
-        "SELINUX_LEVEL_REQUESTED": "",
-        "SELINUX_ROLE_REQUESTED": "",
-        "SELINUX_USE_CURRENT_RANGE": "",
+        "MAIL": "/var/spool/mail/username",
+        "MANAGERPID": "2518",
+        "NO_AT_BRIDGE": "1",
+        "ORIGINAL_XDG_CURRENT_DESKTOP": "GNOME",
+        "PATH": "/bin:/home/username/.local/bin:/home/username/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin",
+        "PWD": "/home/username/Documents/git2/check_project",
+        "PYTHONBREAKPOINT": "0",
+        "QT_IM_MODULE": "ibus",
+        "SESSION_MANAGER": "local/unix:@/tmp/.ICE-unix/2621,unix/unix:/tmp/.ICE-unix/2621",
         "SHELL": "/bin/bash",
-        "SHLVL": "1",
-        "SSH_CLIENT": "127.0.0.1 58830 22",
-        "SSH_CONNECTION": "127.0.0.1 58830 127.0.0.1 22",
-        "SSH_TTY": "/dev/pts/5",
+        "SHLVL": "2",
+        "SSH_AUTH_SOCK": "/run/user/1000/keyring/ssh",
+        "SYSTEMD_EXEC_PID": "2648",
         "TERM": "xterm-256color",
+        "TERM_PROGRAM": "vscode",
+        "TERM_PROGRAM_VERSION": "1.79.2",
         "USER": "username",
-        "XDG_DATA_DIRS": "/home/username/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share",
+        "USERNAME": "username",
+        "VIRTUAL_ENV": "/",
+        "VSCODE_AMD_ENTRYPOINT": "vs/workbench/api/node/extensionHostProcess",
+        "VSCODE_CODE_CACHE_PATH": "/home/username/.config/Code/CachedData/695af097c7bd098fbf017ce3ac85e09bbc5dda06",
+        "VSCODE_CRASH_REPORTER_PROCESS_TYPE": "extensionHost",
+        "VSCODE_CWD": "/home/username",
+        "VSCODE_GIT_ASKPASS_EXTRA_ARGS": "--ms-enable-electron-run-as-node",
+        "VSCODE_GIT_ASKPASS_MAIN": "/usr/share/code/resources/app/extensions/git/dist/askpass-main.js",
+        "VSCODE_GIT_ASKPASS_NODE": "/usr/share/code/code",
+        "VSCODE_GIT_IPC_HANDLE": "/run/user/1000/vscode-git-d36e4b7e2c.sock",
+        "VSCODE_HANDLES_UNCAUGHT_ERRORS": "true",
+        "VSCODE_IPC_HOOK": "/run/user/1000/vscode-5697161f-1.79-main.sock",
+        "VSCODE_NLS_CONFIG": "{\"locale\":\"en-us\",\"osLocale\":\"en-au\",\"availableLanguages\":{},\"_languagePackSupport\":true}",
+        "VSCODE_PID": "3537",
+        "WAYLAND_DISPLAY": "wayland-0",
+        "XAUTHORITY": "/run/user/1000/.mutter-Xwaylandauth.1A7T61",
+        "XDG_CURRENT_DESKTOP": "GNOME",
+        "XDG_DATA_DIRS": "/home/username/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/",
+        "XDG_MENU_PREFIX": "gnome-",
         "XDG_RUNTIME_DIR": "/run/user/1000",
         "XDG_SESSION_CLASS": "user",
-        "XDG_SESSION_ID": "24",
-        "XDG_SESSION_TYPE": "tty",
-        "_": "/usr/bin/python3",
+        "XDG_SESSION_DESKTOP": "gnome",
+        "XDG_SESSION_TYPE": "wayland",
+        "XMODIFIERS": "@im=ibus",
+        "_": "/usr/bin/python3.11",
         "which_declare": "declare -f"
     },
     "fibre_channel_wwn": [],
@@ -546,8 +586,8 @@
     "hostname": "localhost",
     "hostnqn": "nqn.2014-08.org.nvmexpress:uuid:4c4c4544-0037-5910-8053-c4c04f324832",
     "interfaces": [
-        "lo",
         "enp0s31f6",
+        "lo",
         "wlp2s0"
     ],
     "is_chroot": false,
@@ -645,82 +685,82 @@
         "type": "loopback"
     },
     "loadavg": {
-        "15m": 1.15,
-        "1m": 1.14,
-        "5m": 1.31
+        "15m": 0.99,
+        "1m": 2.04,
+        "5m": 1.27
     },
     "lsb": {},
     "lvm": "N/A",
     "machine": "x86_64",
     "machine_id": "725a723a18f3401f8e7c3071353288e6",
-    "memfree_mb": 1423,
+    "memfree_mb": 274,
     "memory_mb": {
         "nocache": {
-            "free": 6072,
-            "used": 9528
+            "free": 6234,
+            "used": 9366
         },
         "real": {
-            "free": 1423,
+            "free": 274,
             "total": 15600,
-            "used": 14177
+            "used": 15326
         },
         "swap": {
-            "cached": 37,
-            "free": 6660,
+            "cached": 196,
+            "free": 5364,
             "total": 7923,
-            "used": 1263
+            "used": 2559
         }
     },
     "memtotal_mb": 15600,
     "module_setup": true,
     "mounts": [
         {
-            "block_available": 6408785,
+            "block_available": 4567119,
             "block_size": 4096,
             "block_total": 18341120,
-            "block_used": 11932335,
+            "block_used": 13774001,
             "device": "/dev/mapper/rl-root",
             "fstype": "xfs",
-            "inode_available": 36294043,
+            "inode_available": 36275937,
             "inode_total": 36700160,
-            "inode_used": 406117,
+            "inode_used": 424223,
             "mount": "/",
             "options": "rw,seclabel,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota",
-            "size_available": 26250383360,
+            "size_available": 18706919424,
             "size_total": 75125227520,
             "uuid": "f48286fa-40f2-4196-bb26-e0a5b904c7fe"
         },
         {
-            "block_available": 33488627,
-            "block_size": 4096,
-            "block_total": 41699437,
-            "block_used": 8210810,
-            "device": "/dev/mapper/rl-home",
-            "fstype": "xfs",
-            "inode_available": 83056507,
-            "inode_total": 83439616,
-            "inode_used": 383109,
-            "mount": "/home",
-            "options": "rw,seclabel,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota",
-            "size_available": 137169416192,
-            "size_total": 170800893952,
-            "uuid": "0aebf8be-0f6f-40fb-ac6e-9f8bfd0db0e8"
-        },
-        {
-            "block_available": 145749,
+            "block_available": 155138,
             "block_size": 4096,
             "block_total": 259584,
-            "block_used": 113835,
+            "block_used": 104446,
             "device": "/dev/sda2",
             "fstype": "xfs",
-            "inode_available": 524250,
+            "inode_available": 524251,
             "inode_total": 524288,
-            "inode_used": 38,
+            "inode_used": 37,
             "mount": "/boot",
             "options": "rw,seclabel,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota",
-            "size_available": 596987904,
+            "size_available": 635445248,
             "size_total": 1063256064,
             "uuid": "1fb7b207-7874-47e3-a809-58728c4db22c"
+        },
+        {
+            "block_available": 33390216,
+            "block_size": 4096,
+            "block_total": 41699437,
+            "block_used": 8309221,
+            "device": "/dev/mapper/rl-home",
+            "fstype": "xfs",
+            "inode_available": 83015856,
+            "inode_total": 83439616,
+            "inode_used": 423760,
+            "mount": "/home",
+            "options": "rw,seclabel,relatime,attr2,inode64,logbufs=8,logbsize=32k,noquota",
+            "size_available": 136766324736,
+            "size_total": 170800893952,
+            "uuid": "0aebf8be-0f6f-40fb-ac6e-9f8bfd0db0e8"
         },
         {
             "block_available": 151504,
@@ -767,7 +807,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "NetworkManager",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -777,7 +817,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "NetworkManager-adsl",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -787,7 +827,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "NetworkManager-bluetooth",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -797,7 +837,7 @@
                 "arch": "noarch",
                 "epoch": 1,
                 "name": "NetworkManager-config-server",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -807,7 +847,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "NetworkManager-libnm",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -817,7 +857,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "NetworkManager-team",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -827,7 +867,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "NetworkManager-tui",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -837,7 +877,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "NetworkManager-wifi",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -847,7 +887,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "NetworkManager-wwan",
-                "release": "1.el9",
+                "release": "3.el9_2",
                 "source": "rpm",
                 "version": "1.42.2"
             }
@@ -1012,6 +1052,16 @@
                 "version": "40.1.1"
             }
         ],
+        "adwaita-gtk2-theme": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "adwaita-gtk2-theme",
+                "release": "14.el9",
+                "source": "rpm",
+                "version": "3.28"
+            }
+        ],
         "adwaita-icon-theme": [
             {
                 "arch": "noarch",
@@ -1077,7 +1127,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "ansible-core",
-                "release": "4.el9",
+                "release": "5.el9_2",
                 "source": "rpm",
                 "version": "2.14.2"
             }
@@ -1100,6 +1150,16 @@
                 "release": "20220302.el9_0.1",
                 "source": "rpm",
                 "version": "9"
+            }
+        ],
+        "asciidoc": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "asciidoc",
+                "release": "3.el9",
+                "source": "rpm",
+                "version": "9.1.0"
             }
         ],
         "at": [
@@ -1227,7 +1287,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "avahi",
-                "release": "12.el9",
+                "release": "12.el9_2.1",
                 "source": "rpm",
                 "version": "0.8"
             }
@@ -1237,7 +1297,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "avahi-glib",
-                "release": "12.el9",
+                "release": "12.el9_2.1",
                 "source": "rpm",
                 "version": "0.8"
             }
@@ -1247,7 +1307,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "avahi-libs",
-                "release": "12.el9",
+                "release": "12.el9_2.1",
                 "source": "rpm",
                 "version": "0.8"
             }
@@ -1422,12 +1482,52 @@
                 "version": "0.9.5"
             }
         ],
+        "boost-filesystem": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "boost-filesystem",
+                "release": "8.el9",
+                "source": "rpm",
+                "version": "1.75.0"
+            }
+        ],
+        "boost-regex": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "boost-regex",
+                "release": "8.el9",
+                "source": "rpm",
+                "version": "1.75.0"
+            }
+        ],
+        "boost-system": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "boost-system",
+                "release": "8.el9",
+                "source": "rpm",
+                "version": "1.75.0"
+            }
+        ],
+        "boost-thread": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "boost-thread",
+                "release": "8.el9",
+                "source": "rpm",
+                "version": "1.75.0"
+            }
+        ],
         "bpftool": [
             {
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "bpftool",
-                "release": "284.11.1.el9_2",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "7.0.0"
             }
@@ -1462,6 +1562,16 @@
                 "version": "0.4.1"
             }
         ],
+        "byacc": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "byacc",
+                "release": "4.el9",
+                "source": "rpm",
+                "version": "2.0.20210109"
+            }
+        ],
         "bzip2": [
             {
                 "arch": "x86_64",
@@ -1487,7 +1597,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "c-ares",
-                "release": "5.el9",
+                "release": "5.el9_2.1",
                 "source": "rpm",
                 "version": "1.17.1"
             }
@@ -1697,9 +1807,9 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "code",
-                "release": "1686149197.el7",
+                "release": "1686734266.el7",
                 "source": "rpm",
-                "version": "1.79.0"
+                "version": "1.79.2"
             }
         ],
         "cogl": [
@@ -1867,7 +1977,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "criu",
-                "release": "4.el9",
+                "release": "5.el9_2",
                 "source": "rpm",
                 "version": "3.17"
             }
@@ -1877,7 +1987,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "criu-libs",
-                "release": "4.el9",
+                "release": "5.el9_2",
                 "source": "rpm",
                 "version": "3.17"
             }
@@ -1969,7 +2079,7 @@
                 "name": "cuda",
                 "release": "1",
                 "source": "rpm",
-                "version": "12.1.1"
+                "version": "12.2.0"
             }
         ],
         "cuda-11-7": [
@@ -2012,6 +2122,16 @@
                 "version": "12.1.1"
             }
         ],
+        "cuda-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
+            }
+        ],
         "cuda-cccl-11-7": [
             {
                 "arch": "x86_64",
@@ -2050,6 +2170,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.109"
+            }
+        ],
+        "cuda-cccl-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-cccl-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
             }
         ],
         "cuda-command-line-tools-11-7": [
@@ -2092,6 +2222,16 @@
                 "version": "12.1.1"
             }
         ],
+        "cuda-command-line-tools-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-command-line-tools-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
+            }
+        ],
         "cuda-compiler-11-7": [
             {
                 "arch": "x86_64",
@@ -2130,6 +2270,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.1"
+            }
+        ],
+        "cuda-compiler-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-compiler-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
             }
         ],
         "cuda-cudart-11-7": [
@@ -2172,6 +2322,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-cudart-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-cudart-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-cudart-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -2210,6 +2370,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-cudart-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-cudart-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
             }
         ],
         "cuda-cuobjdump-11-7": [
@@ -2252,6 +2422,16 @@
                 "version": "12.1.111"
             }
         ],
+        "cuda-cuobjdump-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-cuobjdump-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-cupti-11-7": [
             {
                 "arch": "x86_64",
@@ -2290,6 +2470,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-cupti-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-cupti-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.60"
             }
         ],
         "cuda-cuxxfilt-11-7": [
@@ -2332,6 +2522,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-cuxxfilt-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-cuxxfilt-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-demo-suite-11-7": [
             {
                 "arch": "x86_64",
@@ -2370,6 +2570,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-demo-suite-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-demo-suite-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
             }
         ],
         "cuda-documentation-11-7": [
@@ -2412,6 +2622,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-documentation-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-documentation-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-driver-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -2452,6 +2672,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-driver-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-driver-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-drivers": [
             {
                 "arch": "x86_64",
@@ -2459,7 +2689,7 @@
                 "name": "cuda-drivers",
                 "release": "1",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "cuda-gdb-11-7": [
@@ -2502,6 +2732,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-gdb-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-gdb-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-libraries-11-7": [
             {
                 "arch": "x86_64",
@@ -2542,6 +2782,16 @@
                 "version": "12.1.1"
             }
         ],
+        "cuda-libraries-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-libraries-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
+            }
+        ],
         "cuda-libraries-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -2580,6 +2830,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.1"
+            }
+        ],
+        "cuda-libraries-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-libraries-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
             }
         ],
         "cuda-memcheck-11-7": [
@@ -2642,6 +2902,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-nsight-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nsight-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-nsight-compute-11-7": [
             {
                 "arch": "x86_64",
@@ -2680,6 +2950,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.1"
+            }
+        ],
+        "cuda-nsight-compute-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nsight-compute-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
             }
         ],
         "cuda-nsight-systems-11-7": [
@@ -2722,6 +3002,16 @@
                 "version": "12.1.1"
             }
         ],
+        "cuda-nsight-systems-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nsight-systems-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
+            }
+        ],
         "cuda-nvcc-11-7": [
             {
                 "arch": "x86_64",
@@ -2760,6 +3050,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-nvcc-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvcc-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.91"
             }
         ],
         "cuda-nvdisasm-11-7": [
@@ -2802,6 +3102,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-nvdisasm-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvdisasm-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-nvml-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -2840,6 +3150,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-nvml-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvml-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.81"
             }
         ],
         "cuda-nvprof-11-7": [
@@ -2882,6 +3202,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-nvprof-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvprof-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.60"
+            }
+        ],
         "cuda-nvprune-11-7": [
             {
                 "arch": "x86_64",
@@ -2920,6 +3250,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-nvprune-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvprune-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
             }
         ],
         "cuda-nvrtc-11-7": [
@@ -2962,6 +3302,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-nvrtc-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvrtc-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.91"
+            }
+        ],
         "cuda-nvrtc-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -3000,6 +3350,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-nvrtc-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvrtc-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.91"
             }
         ],
         "cuda-nvtx-11-7": [
@@ -3042,6 +3402,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-nvtx-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvtx-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-nvvp-11-7": [
             {
                 "arch": "x86_64",
@@ -3082,6 +3452,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-nvvp-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-nvvp-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.60"
+            }
+        ],
         "cuda-opencl-12-0": [
             {
                 "arch": "x86_64",
@@ -3102,6 +3482,16 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-opencl-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-opencl-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-opencl-devel-12-0": [
             {
                 "arch": "x86_64",
@@ -3120,6 +3510,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-opencl-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-opencl-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
             }
         ],
         "cuda-profiler-api-11-8": [
@@ -3150,6 +3550,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-profiler-api-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-profiler-api-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
             }
         ],
         "cuda-runtime-11-7": [
@@ -3192,6 +3602,16 @@
                 "version": "12.1.1"
             }
         ],
+        "cuda-runtime-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-runtime-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
+            }
+        ],
         "cuda-sanitizer-11-7": [
             {
                 "arch": "x86_64",
@@ -3230,6 +3650,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "cuda-sanitizer-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-sanitizer-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
             }
         ],
         "cuda-toolkit-11-7": [
@@ -3322,6 +3752,26 @@
                 "version": "12.1.105"
             }
         ],
+        "cuda-toolkit-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-toolkit-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
+            }
+        ],
+        "cuda-toolkit-12-2-config-common": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "cuda-toolkit-12-2-config-common",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.53"
+            }
+        ],
         "cuda-toolkit-12-config-common": [
             {
                 "arch": "noarch",
@@ -3329,7 +3779,7 @@
                 "name": "cuda-toolkit-12-config-common",
                 "release": "1",
                 "source": "rpm",
-                "version": "12.1.105"
+                "version": "12.2.53"
             }
         ],
         "cuda-toolkit-config-common": [
@@ -3339,7 +3789,7 @@
                 "name": "cuda-toolkit-config-common",
                 "release": "1",
                 "source": "rpm",
-                "version": "12.1.105"
+                "version": "12.2.53"
             }
         ],
         "cuda-tools-11-7": [
@@ -3382,6 +3832,16 @@
                 "version": "12.1.1"
             }
         ],
+        "cuda-tools-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-tools-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
+            }
+        ],
         "cuda-visual-tools-11-7": [
             {
                 "arch": "x86_64",
@@ -3420,6 +3880,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.1"
+            }
+        ],
+        "cuda-visual-tools-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "cuda-visual-tools-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.0"
             }
         ],
         "cups": [
@@ -3732,6 +4202,16 @@
                 "version": "0.9.0"
             }
         ],
+        "diffstat": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "diffstat",
+                "release": "6.el9",
+                "source": "rpm",
+                "version": "1.64"
+            }
+        ],
         "diffutils": [
             {
                 "arch": "x86_64",
@@ -3810,6 +4290,26 @@
                 "release": "6.el9",
                 "source": "rpm",
                 "version": "2.85"
+            }
+        ],
+        "docbook-dtds": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "docbook-dtds",
+                "release": "79.el9",
+                "source": "rpm",
+                "version": "1.0"
+            }
+        ],
+        "docbook-style-xsl": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "docbook-style-xsl",
+                "release": "16.el9",
+                "source": "rpm",
+                "version": "1.79.2"
             }
         ],
         "dos2unix": [
@@ -3902,6 +4402,16 @@
                 "version": "0.14"
             }
         ],
+        "dyninst": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "dyninst",
+                "release": "1.el9",
+                "source": "rpm",
+                "version": "12.1.0"
+            }
+        ],
         "e2fsprogs": [
             {
                 "arch": "x86_64",
@@ -3982,6 +4492,16 @@
                 "version": "1.1.9"
             }
         ],
+        "elfutils": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "elfutils",
+                "release": "3.el9",
+                "source": "rpm",
+                "version": "0.188"
+            }
+        ],
         "elfutils-debuginfod-client": [
             {
                 "arch": "x86_64",
@@ -3997,6 +4517,16 @@
                 "arch": "noarch",
                 "epoch": null,
                 "name": "elfutils-default-yama-scope",
+                "release": "3.el9",
+                "source": "rpm",
+                "version": "0.188"
+            }
+        ],
+        "elfutils-devel": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "elfutils-devel",
                 "release": "3.el9",
                 "source": "rpm",
                 "version": "0.188"
@@ -4277,9 +4807,9 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "firefox",
-                "release": "2.el9_2",
+                "release": "1.el9_2",
                 "source": "rpm",
-                "version": "102.11.0"
+                "version": "102.12.0"
             }
         ],
         "firewalld": [
@@ -4652,6 +5182,26 @@
                 "version": "2.3.2"
             }
         ],
+        "gdb": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "gdb",
+                "release": "10.el9",
+                "source": "rpm",
+                "version": "10.2"
+            }
+        ],
+        "gdb-headless": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "gdb-headless",
+                "release": "10.el9",
+                "source": "rpm",
+                "version": "10.2"
+            }
+        ],
         "gdbm-libs": [
             {
                 "arch": "x86_64",
@@ -4742,6 +5292,16 @@
                 "version": "1.6.1.9"
             }
         ],
+        "gds-tools-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "gds-tools-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "1.7.0.149"
+            }
+        ],
         "gedit": [
             {
                 "arch": "x86_64",
@@ -4787,6 +5347,26 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "gettext",
+                "release": "7.el9",
+                "source": "rpm",
+                "version": "0.21"
+            }
+        ],
+        "gettext-common-devel": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "gettext-common-devel",
+                "release": "7.el9",
+                "source": "rpm",
+                "version": "0.21"
+            }
+        ],
+        "gettext-devel": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "gettext-devel",
                 "release": "7.el9",
                 "source": "rpm",
                 "version": "0.21"
@@ -5469,7 +6049,7 @@
                 "name": "google-chrome-stable",
                 "release": "1",
                 "source": "rpm",
-                "version": "114.0.5735.106"
+                "version": "114.0.5735.198"
             }
         ],
         "google-droid-sans-fonts": [
@@ -5664,6 +6244,16 @@
                 "release": "9.el9",
                 "source": "rpm",
                 "version": "1.3.14"
+            }
+        ],
+        "graphviz": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "graphviz",
+                "release": "25.el9",
+                "source": "rpm",
+                "version": "2.44.0"
             }
         ],
         "grep": [
@@ -5884,6 +6474,16 @@
                 "release": "2.el9",
                 "source": "rpm",
                 "version": "3.24.31"
+            }
+        ],
+        "gtk2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "gtk2",
+                "release": "8.el9",
+                "source": "rpm",
+                "version": "2.24.33"
             }
         ],
         "gtk3": [
@@ -6246,6 +6846,16 @@
                 "version": "1.5.25"
             }
         ],
+        "ibus-gtk2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "ibus-gtk2",
+                "release": "2.el9.rocky.0.1",
+                "source": "rpm",
+                "version": "1.5.25"
+            }
+        ],
         "ibus-gtk3": [
             {
                 "arch": "x86_64",
@@ -6334,6 +6944,16 @@
                 "release": "1.el9",
                 "source": "rpm",
                 "version": "10.11.5"
+            }
+        ],
+        "intltool": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "intltool",
+                "release": "20.el9",
+                "source": "rpm",
+                "version": "0.51.0"
             }
         ],
         "iproute": [
@@ -6676,6 +7296,16 @@
                 "version": "2.1"
             }
         ],
+        "jna": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "jna",
+                "release": "8.el9",
+                "source": "rpm",
+                "version": "5.6.0"
+            }
+        ],
         "jomolhari-fonts": [
             {
                 "arch": "noarch",
@@ -6761,14 +7391,6 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "kernel",
-                "release": "162.18.1.el9_1",
-                "source": "rpm",
-                "version": "5.14.0"
-            },
-            {
-                "arch": "x86_64",
-                "epoch": null,
-                "name": "kernel",
                 "release": "162.23.1.el9_1",
                 "source": "rpm",
                 "version": "5.14.0"
@@ -6778,6 +7400,14 @@
                 "epoch": null,
                 "name": "kernel",
                 "release": "284.11.1.el9_2",
+                "source": "rpm",
+                "version": "5.14.0"
+            },
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "kernel",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
@@ -6787,14 +7417,6 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "kernel-core",
-                "release": "162.18.1.el9_1",
-                "source": "rpm",
-                "version": "5.14.0"
-            },
-            {
-                "arch": "x86_64",
-                "epoch": null,
-                "name": "kernel-core",
                 "release": "162.23.1.el9_1",
                 "source": "rpm",
                 "version": "5.14.0"
@@ -6804,6 +7426,14 @@
                 "epoch": null,
                 "name": "kernel-core",
                 "release": "284.11.1.el9_2",
+                "source": "rpm",
+                "version": "5.14.0"
+            },
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "kernel-core",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
@@ -6813,14 +7443,6 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "kernel-devel",
-                "release": "162.18.1.el9_1",
-                "source": "rpm",
-                "version": "5.14.0"
-            },
-            {
-                "arch": "x86_64",
-                "epoch": null,
-                "name": "kernel-devel",
                 "release": "162.23.1.el9_1",
                 "source": "rpm",
                 "version": "5.14.0"
@@ -6830,6 +7452,14 @@
                 "epoch": null,
                 "name": "kernel-devel",
                 "release": "284.11.1.el9_2",
+                "source": "rpm",
+                "version": "5.14.0"
+            },
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "kernel-devel",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
@@ -6839,7 +7469,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "kernel-devel-matched",
-                "release": "284.11.1.el9_2",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
@@ -6849,20 +7479,12 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "kernel-headers",
-                "release": "284.11.1.el9_2",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
         ],
         "kernel-modules": [
-            {
-                "arch": "x86_64",
-                "epoch": null,
-                "name": "kernel-modules",
-                "release": "162.18.1.el9_1",
-                "source": "rpm",
-                "version": "5.14.0"
-            },
             {
                 "arch": "x86_64",
                 "epoch": null,
@@ -6876,6 +7498,14 @@
                 "epoch": null,
                 "name": "kernel-modules",
                 "release": "284.11.1.el9_2",
+                "source": "rpm",
+                "version": "5.14.0"
+            },
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "kernel-modules",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
@@ -6886,6 +7516,14 @@
                 "epoch": null,
                 "name": "kernel-modules-core",
                 "release": "284.11.1.el9_2",
+                "source": "rpm",
+                "version": "5.14.0"
+            },
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "kernel-modules-core",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
@@ -6905,7 +7543,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "kernel-tools",
-                "release": "284.11.1.el9_2",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
@@ -6915,7 +7553,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "kernel-tools-libs",
-                "release": "284.11.1.el9_2",
+                "release": "284.18.1.el9_2",
                 "source": "rpm",
                 "version": "5.14.0"
             }
@@ -6925,7 +7563,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "kexec-tools",
-                "release": "13.el9_2",
+                "release": "13.el9_2.1",
                 "source": "rpm",
                 "version": "2.0.25"
             }
@@ -6987,7 +7625,7 @@
                 "name": "kmod-nvidia-latest-dkms",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "kpartx": [
@@ -7025,7 +7663,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "krb5-libs",
-                "release": "8.el9",
+                "release": "9.el9_2",
                 "source": "rpm",
                 "version": "1.20.1"
             }
@@ -7095,7 +7733,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "less",
-                "release": "1.el9_0",
+                "release": "2.el9_2",
                 "source": "rpm",
                 "version": "590"
             }
@@ -7188,6 +7826,16 @@
                 "release": "8.el9",
                 "source": "rpm",
                 "version": "1.0.9"
+            }
+        ],
+        "libXaw": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libXaw",
+                "release": "19.el9",
+                "source": "rpm",
+                "version": "1.0.13"
             }
         ],
         "libXcomposite": [
@@ -7500,6 +8148,16 @@
                 "version": "2.5.1"
             }
         ],
+        "libbabeltrace": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libbabeltrace",
+                "release": "10.el9",
+                "source": "rpm",
+                "version": "1.5.8"
+            }
+        ],
         "libbasicobjects": [
             {
                 "arch": "x86_64",
@@ -7645,6 +8303,16 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "libcanberra",
+                "release": "26.el9",
+                "source": "rpm",
+                "version": "0.30"
+            }
+        ],
+        "libcanberra-gtk2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcanberra-gtk2",
                 "release": "26.el9",
                 "source": "rpm",
                 "version": "0.30"
@@ -7800,6 +8468,16 @@
                 "version": "12.1.3.1"
             }
         ],
+        "libcublas-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcublas-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.1.16"
+            }
+        ],
         "libcublas-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -7838,6 +8516,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.3.1"
+            }
+        ],
+        "libcublas-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcublas-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.1.16"
             }
         ],
         "libcufft-11-7": [
@@ -7880,6 +8568,16 @@
                 "version": "11.0.2.54"
             }
         ],
+        "libcufft-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcufft-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "11.0.8.15"
+            }
+        ],
         "libcufft-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -7918,6 +8616,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "11.0.2.54"
+            }
+        ],
+        "libcufft-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcufft-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "11.0.8.15"
             }
         ],
         "libcufile-11-7": [
@@ -7960,6 +8668,16 @@
                 "version": "1.6.1.9"
             }
         ],
+        "libcufile-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcufile-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "1.7.0.149"
+            }
+        ],
         "libcufile-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -7998,6 +8716,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "1.6.1.9"
+            }
+        ],
+        "libcufile-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcufile-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "1.7.0.149"
             }
         ],
         "libcurand-11-7": [
@@ -8040,6 +8768,16 @@
                 "version": "10.3.2.106"
             }
         ],
+        "libcurand-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcurand-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "10.3.3.53"
+            }
+        ],
         "libcurand-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -8078,6 +8816,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "10.3.2.106"
+            }
+        ],
+        "libcurand-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcurand-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "10.3.3.53"
             }
         ],
         "libcurl": [
@@ -8130,6 +8878,16 @@
                 "version": "11.4.5.107"
             }
         ],
+        "libcusolver-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcusolver-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "11.5.0.53"
+            }
+        ],
         "libcusolver-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -8168,6 +8926,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "11.4.5.107"
+            }
+        ],
+        "libcusolver-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcusolver-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "11.5.0.53"
             }
         ],
         "libcusparse-11-7": [
@@ -8210,6 +8978,16 @@
                 "version": "12.1.0.106"
             }
         ],
+        "libcusparse-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcusparse-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.1.1.53"
+            }
+        ],
         "libcusparse-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -8248,6 +9026,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.0.106"
+            }
+        ],
+        "libcusparse-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libcusparse-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.1.1.53"
             }
         ],
         "libcxx": [
@@ -8900,6 +9688,16 @@
                 "version": "2.8.2"
             }
         ],
+        "libipt": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libipt",
+                "release": "5.el9",
+                "source": "rpm",
+                "version": "2.0.4"
+            }
+        ],
         "libiptcdata": [
             {
                 "arch": "x86_64",
@@ -9045,9 +9843,9 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "libmd",
-                "release": "2.el9",
+                "release": "1.el9",
                 "source": "rpm",
-                "version": "1.0.4"
+                "version": "1.1.0"
             }
         ],
         "libmediaart": [
@@ -9270,6 +10068,16 @@
                 "version": "12.1.0.40"
             }
         ],
+        "libnpp-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libnpp-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.1.1.14"
+            }
+        ],
         "libnpp-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -9310,6 +10118,16 @@
                 "version": "12.1.0.40"
             }
         ],
+        "libnpp-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libnpp-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.1.1.14"
+            }
+        ],
         "libnsl2": [
             {
                 "arch": "x86_64",
@@ -9340,6 +10158,16 @@
                 "version": "12.1.105"
             }
         ],
+        "libnvjitlink-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libnvjitlink-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.91"
+            }
+        ],
         "libnvjitlink-devel-12-0": [
             {
                 "arch": "x86_64",
@@ -9358,6 +10186,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.1.105"
+            }
+        ],
+        "libnvjitlink-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libnvjitlink-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.2.91"
             }
         ],
         "libnvjpeg-11-7": [
@@ -9400,6 +10238,16 @@
                 "version": "12.2.0.2"
             }
         ],
+        "libnvjpeg-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libnvjpeg-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.1.1.14"
+            }
+        ],
         "libnvjpeg-devel-11-7": [
             {
                 "arch": "x86_64",
@@ -9438,6 +10286,16 @@
                 "release": "1",
                 "source": "rpm",
                 "version": "12.2.0.2"
+            }
+        ],
+        "libnvjpeg-devel-12-2": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libnvjpeg-devel-12-2",
+                "release": "1",
+                "source": "rpm",
+                "version": "12.1.1.14"
             }
         ],
         "libnvme": [
@@ -10135,7 +10993,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "libtiff",
-                "release": "7.el9",
+                "release": "8.el9_2",
                 "source": "rpm",
                 "version": "4.4.0"
             }
@@ -10148,6 +11006,16 @@
                 "release": "1.el9",
                 "source": "rpm",
                 "version": "1.3.3"
+            }
+        ],
+        "libtool": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libtool",
+                "release": "45.el9",
+                "source": "rpm",
+                "version": "2.4.6"
             }
         ],
         "libtool-ltdl": [
@@ -10550,6 +11418,16 @@
                 "version": "1.5.1"
             }
         ],
+        "libzstd-devel": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "libzstd-devel",
+                "release": "2.el9",
+                "source": "rpm",
+                "version": "1.5.1"
+            }
+        ],
         "lightworks": [
             {
                 "arch": "x86_64",
@@ -10748,6 +11626,16 @@
                 "release": "6.el9",
                 "source": "rpm",
                 "version": "0.32"
+            }
+        ],
+        "ltrace": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "ltrace",
+                "release": "43.el9",
+                "source": "rpm",
+                "version": "0.7.91"
             }
         ],
         "lua": [
@@ -11025,7 +11913,7 @@
                 "arch": "noarch",
                 "epoch": 4,
                 "name": "microcode_ctl",
-                "release": "2.el9",
+                "release": "2.20230214.1.el9_2",
                 "source": "rpm",
                 "version": "20220809"
             }
@@ -11360,6 +12248,16 @@
                 "version": "2023.1.1.4"
             }
         ],
+        "nsight-compute-2023.2.0": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "nsight-compute-2023.2.0",
+                "release": "1",
+                "source": "rpm",
+                "version": "2023.2.0.16"
+            }
+        ],
         "nsight-systems-2022.1.3": [
             {
                 "arch": "x86_64",
@@ -11388,6 +12286,16 @@
                 "release": "0",
                 "source": "rpm",
                 "version": "2023.1.2.43_32377213v0"
+            }
+        ],
+        "nsight-systems-2023.2.3": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "nsight-systems-2023.2.3",
+                "release": "0",
+                "source": "rpm",
+                "version": "2023.2.3.1001_32894139v0"
             }
         ],
         "nspr": [
@@ -11440,6 +12348,16 @@
                 "version": "3.79.0"
             }
         ],
+        "nss-tools": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "nss-tools",
+                "release": "18.el9_1",
+                "source": "rpm",
+                "version": "3.79.0"
+            }
+        ],
         "nss-util": [
             {
                 "arch": "x86_64",
@@ -11487,7 +12405,7 @@
                 "name": "nvidia-driver",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-driver-NVML": [
@@ -11497,7 +12415,7 @@
                 "name": "nvidia-driver-NVML",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-driver-NvFBCOpenGL": [
@@ -11507,7 +12425,7 @@
                 "name": "nvidia-driver-NvFBCOpenGL",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-driver-cuda": [
@@ -11517,7 +12435,7 @@
                 "name": "nvidia-driver-cuda",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-driver-cuda-libs": [
@@ -11527,7 +12445,7 @@
                 "name": "nvidia-driver-cuda-libs",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-driver-devel": [
@@ -11537,7 +12455,7 @@
                 "name": "nvidia-driver-devel",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-driver-libs": [
@@ -11547,7 +12465,7 @@
                 "name": "nvidia-driver-libs",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-kmod-common": [
@@ -11557,7 +12475,7 @@
                 "name": "nvidia-kmod-common",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-libXNVCtrl": [
@@ -11567,7 +12485,7 @@
                 "name": "nvidia-libXNVCtrl",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-libXNVCtrl-devel": [
@@ -11577,7 +12495,7 @@
                 "name": "nvidia-libXNVCtrl-devel",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-modprobe": [
@@ -11587,7 +12505,7 @@
                 "name": "nvidia-modprobe",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-persistenced": [
@@ -11597,7 +12515,7 @@
                 "name": "nvidia-persistenced",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-settings": [
@@ -11607,7 +12525,7 @@
                 "name": "nvidia-settings",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvidia-xconfig": [
@@ -11617,7 +12535,7 @@
                 "name": "nvidia-xconfig",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "530.30.02"
+                "version": "535.54.03"
             }
         ],
         "nvme-cli": [
@@ -11765,7 +12683,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "openssl",
-                "release": "6.el9_2",
+                "release": "16.el9_2",
                 "source": "rpm",
                 "version": "3.0.7"
             }
@@ -11775,7 +12693,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "openssl-devel",
-                "release": "6.el9_2",
+                "release": "16.el9_2",
                 "source": "rpm",
                 "version": "3.0.7"
             }
@@ -11785,7 +12703,7 @@
                 "arch": "x86_64",
                 "epoch": 1,
                 "name": "openssl-libs",
-                "release": "6.el9_2",
+                "release": "16.el9_2",
                 "source": "rpm",
                 "version": "3.0.7"
             }
@@ -11978,6 +12896,26 @@
                 "release": "12.el9",
                 "source": "rpm",
                 "version": "0.80"
+            }
+        ],
+        "patch": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "patch",
+                "release": "16.el9",
+                "source": "rpm",
+                "version": "2.7.6"
+            }
+        ],
+        "patchutils": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "patchutils",
+                "release": "7.el9",
+                "source": "rpm",
+                "version": "0.4.2"
             }
         ],
         "pcaudiolib": [
@@ -12668,6 +13606,16 @@
                 "release": "480.el9",
                 "source": "rpm",
                 "version": "1.13"
+            }
+        ],
+        "perl-Fedora-VSP": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "perl-Fedora-VSP",
+                "release": "23.el9",
+                "source": "rpm",
+                "version": "0.001"
             }
         ],
         "perl-File-Basename": [
@@ -14080,6 +15028,16 @@
                 "version": "6.02"
             }
         ],
+        "perl-XML-Parser": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "perl-XML-Parser",
+                "release": "9.el9",
+                "source": "rpm",
+                "version": "2.46"
+            }
+        ],
         "perl-autodie": [
             {
                 "arch": "noarch",
@@ -14238,6 +15196,16 @@
                 "release": "480.el9",
                 "source": "rpm",
                 "version": "1.03"
+            }
+        ],
+        "perl-generators": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "perl-generators",
+                "release": "12.el9",
+                "source": "rpm",
+                "version": "1.11"
             }
         ],
         "perl-if": [
@@ -14548,6 +15516,16 @@
                 "release": "480.el9",
                 "source": "rpm",
                 "version": "1.04"
+            }
+        ],
+        "pesign": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "pesign",
+                "release": "6.el9_1.rocky.2",
+                "source": "rpm",
+                "version": "115"
             }
         ],
         "pigz": [
@@ -15065,7 +16043,7 @@
                 "arch": "noarch",
                 "epoch": null,
                 "name": "python-unversioned-command",
-                "release": "1.el9",
+                "release": "1.el9_2.1",
                 "source": "rpm",
                 "version": "3.9.16"
             }
@@ -15075,7 +16053,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "python3",
-                "release": "1.el9",
+                "release": "1.el9_2.1",
                 "source": "rpm",
                 "version": "3.9.16"
             }
@@ -15335,7 +16313,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "python3-libs",
-                "release": "1.el9",
+                "release": "1.el9_2.1",
                 "source": "rpm",
                 "version": "3.9.16"
             }
@@ -15685,7 +16663,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "python3.11",
-                "release": "2.el9",
+                "release": "2.el9_2.1",
                 "source": "rpm",
                 "version": "3.11.2"
             }
@@ -15715,7 +16693,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "python3.11-libs",
-                "release": "2.el9",
+                "release": "2.el9_2.1",
                 "source": "rpm",
                 "version": "3.11.2"
             }
@@ -15785,7 +16763,7 @@
                 "arch": "x86_64",
                 "epoch": 17,
                 "name": "qemu-guest-agent",
-                "release": "14.el9_2",
+                "release": "14.el9_2.1",
                 "source": "rpm",
                 "version": "7.2.0"
             }
@@ -15895,7 +16873,7 @@
                 "arch": "noarch",
                 "epoch": null,
                 "name": "rocky-gpg-keys",
-                "release": "1.5.el9",
+                "release": "1.6.el9",
                 "source": "rpm",
                 "version": "9.2"
             }
@@ -15925,7 +16903,7 @@
                 "arch": "noarch",
                 "epoch": null,
                 "name": "rocky-release",
-                "release": "1.5.el9",
+                "release": "1.6.el9",
                 "source": "rpm",
                 "version": "9.2"
             }
@@ -15935,7 +16913,7 @@
                 "arch": "noarch",
                 "epoch": null,
                 "name": "rocky-repos",
-                "release": "1.5.el9",
+                "release": "1.6.el9",
                 "source": "rpm",
                 "version": "9.2"
             }
@@ -15955,6 +16933,16 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "rpm",
+                "release": "22.el9",
+                "source": "rpm",
+                "version": "4.16.1.3"
+            }
+        ],
+        "rpm-build": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "rpm-build",
                 "release": "22.el9",
                 "source": "rpm",
                 "version": "4.16.1.3"
@@ -16005,6 +16993,16 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "rpm-plugin-systemd-inhibit",
+                "release": "22.el9",
+                "source": "rpm",
+                "version": "4.16.1.3"
+            }
+        ],
+        "rpm-sign": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "rpm-sign",
                 "release": "22.el9",
                 "source": "rpm",
                 "version": "4.16.1.3"
@@ -16195,7 +17193,7 @@
                 "arch": "noarch",
                 "epoch": null,
                 "name": "selinux-policy",
-                "release": "2.el9_2.2",
+                "release": "2.el9_2.3",
                 "source": "rpm",
                 "version": "38.1.11"
             }
@@ -16205,7 +17203,7 @@
                 "arch": "noarch",
                 "epoch": null,
                 "name": "selinux-policy-targeted",
-                "release": "2.el9_2.2",
+                "release": "2.el9_2.3",
                 "source": "rpm",
                 "version": "38.1.11"
             }
@@ -16268,6 +17266,16 @@
                 "release": "9.el9",
                 "source": "rpm",
                 "version": "1.47"
+            }
+        ],
+        "sgml-common": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "sgml-common",
+                "release": "58.el9",
+                "source": "rpm",
+                "version": "0.6.3"
             }
         ],
         "shadow-utils": [
@@ -16417,7 +17425,7 @@
                 "name": "sos",
                 "release": "1.el9",
                 "source": "rpm",
-                "version": "4.5.3"
+                "version": "4.5.4"
             }
         ],
         "sound-theme-freedesktop": [
@@ -16438,6 +17446,16 @@
                 "release": "8.el9",
                 "source": "rpm",
                 "version": "2.1.1"
+            }
+        ],
+        "source-highlight": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "source-highlight",
+                "release": "11.el9",
+                "source": "rpm",
+                "version": "3.1.9"
             }
         ],
         "speech-dispatcher": [
@@ -16725,7 +17743,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "systemd",
-                "release": "13.el9_2",
+                "release": "14.el9_2.1",
                 "source": "rpm",
                 "version": "252"
             }
@@ -16735,7 +17753,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "systemd-boot-unsigned",
-                "release": "13.el9_2",
+                "release": "14.el9_2.1",
                 "source": "rpm",
                 "version": "252"
             }
@@ -16745,7 +17763,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "systemd-libs",
-                "release": "13.el9_2",
+                "release": "14.el9_2.1",
                 "source": "rpm",
                 "version": "252"
             }
@@ -16755,7 +17773,7 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "systemd-pam",
-                "release": "13.el9_2",
+                "release": "14.el9_2.1",
                 "source": "rpm",
                 "version": "252"
             }
@@ -16765,7 +17783,7 @@
                 "arch": "noarch",
                 "epoch": null,
                 "name": "systemd-rpm-macros",
-                "release": "13.el9_2",
+                "release": "14.el9_2.1",
                 "source": "rpm",
                 "version": "252"
             }
@@ -16775,9 +17793,49 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "systemd-udev",
-                "release": "13.el9_2",
+                "release": "14.el9_2.1",
                 "source": "rpm",
                 "version": "252"
+            }
+        ],
+        "systemtap": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "systemtap",
+                "release": "2.el9",
+                "source": "rpm",
+                "version": "4.8"
+            }
+        ],
+        "systemtap-client": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "systemtap-client",
+                "release": "2.el9",
+                "source": "rpm",
+                "version": "4.8"
+            }
+        ],
+        "systemtap-devel": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "systemtap-devel",
+                "release": "2.el9",
+                "source": "rpm",
+                "version": "4.8"
+            }
+        ],
+        "systemtap-runtime": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "systemtap-runtime",
+                "release": "2.el9",
+                "source": "rpm",
+                "version": "4.8"
             }
         ],
         "systemtap-sdt-devel": [
@@ -16808,6 +17866,16 @@
                 "release": "6.el9_1",
                 "source": "rpm",
                 "version": "1.34"
+            }
+        ],
+        "tbb": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "tbb",
+                "release": "8.el9",
+                "source": "rpm",
+                "version": "2020.3"
             }
         ],
         "tcl": [
@@ -16845,7 +17913,7 @@
                 "arch": "x86_64",
                 "epoch": 9,
                 "name": "texlive-lib",
-                "release": "25.el9",
+                "release": "26.el9_2",
                 "source": "rpm",
                 "version": "20200406"
             }
@@ -17248,6 +18316,26 @@
                 "release": "11.el9_2",
                 "source": "rpm",
                 "version": "2.37.4"
+            }
+        ],
+        "valgrind": [
+            {
+                "arch": "x86_64",
+                "epoch": 1,
+                "name": "valgrind",
+                "release": "3.el9",
+                "source": "rpm",
+                "version": "3.19.0"
+            }
+        ],
+        "valgrind-devel": [
+            {
+                "arch": "x86_64",
+                "epoch": 1,
+                "name": "valgrind-devel",
+                "release": "3.el9",
+                "source": "rpm",
+                "version": "3.19.0"
             }
         ],
         "vdo": [
@@ -17730,6 +18818,16 @@
                 "version": "1.0.0"
             }
         ],
+        "xorg-x11-fonts-ISO8859-1-100dpi": [
+            {
+                "arch": "noarch",
+                "epoch": null,
+                "name": "xorg-x11-fonts-ISO8859-1-100dpi",
+                "release": "33.el9",
+                "source": "rpm",
+                "version": "7.5"
+            }
+        ],
         "xorg-x11-fonts-Type1": [
             {
                 "arch": "noarch",
@@ -17835,6 +18933,16 @@
                 "arch": "x86_64",
                 "epoch": null,
                 "name": "xz",
+                "release": "8.el9_0",
+                "source": "rpm",
+                "version": "5.2.5"
+            }
+        ],
+        "xz-devel": [
+            {
+                "arch": "x86_64",
+                "epoch": null,
+                "name": "xz-devel",
                 "release": "8.el9_0",
                 "source": "rpm",
                 "version": "5.2.5"
@@ -18008,25 +19116,25 @@
     "product_uuid": "NA",
     "product_version": "NA",
     "python": {
-        "executable": "/usr/bin/python3",
+        "executable": "/usr/bin/python3.11",
         "has_sslcontext": true,
         "type": "cpython",
         "version": {
             "major": 3,
-            "micro": 16,
-            "minor": 9,
+            "micro": 2,
+            "minor": 11,
             "releaselevel": "final",
             "serial": 0
         },
         "version_info": [
             3,
-            9,
-            16,
+            11,
+            2,
             "final",
             0
         ]
     },
-    "python_version": "3.9.16",
+    "python_version": "3.11.2",
     "real_group_id": 1000,
     "real_user_id": 1000,
     "selinux": {
@@ -18987,6 +20095,12 @@
             "state": "inactive",
             "status": "static"
         },
+        "pesign.service": {
+            "name": "pesign.service",
+            "source": "systemd",
+            "state": "inactive",
+            "status": "disabled"
+        },
         "plexmediaserver.service": {
             "name": "plexmediaserver.service",
             "source": "systemd",
@@ -19870,7 +20984,7 @@
     "ssh_host_key_ed25519_public_keytype": "ssh-ed25519",
     "ssh_host_key_rsa_public": "AAAAB3NzaC1yc2EAAAADAQABAAABgQDEFR4URCVIyUtl8ScUvq/BGm/ufDvdddwACJ5usKbm6PyiAg8FlQ2LaszpQk6Be1LTBmJYFWLN+zGLbnHRJ17Q0dwHpk6ZWx66zTtIW63QSOHNoobBVF3TGv2prcL0lfRrXDcAVZn7vOZEtPD7P2ex9ho/stIMQRehNpTw9bBkAFoUhLk5iRld3AmOZt1SMc6ckZvP/CRguIb2FgRdJ66on3WjlThU8SNu9T0c9w6B0zgu4/4lTiaXMA8JgknCqGHnBRw9SzhZ/lznuEd8ixezuhSUqu+LshSqe5jwfd6lsRTguQsBTrxBobvZErpzMJrZmoyx99WJL9V9fa5PIRFzKD9g96OJpbeAbxSNYSNinC5Janco72+9H589ag7hadxOkUmuIhhyCWyAKpXdMxiQpPEPsFJpcKXclxIRelIEHORT/xKEIejlTPWBMcbFpOdi3IdyVfsg+IofXeLCsDKqkC2jSGh0DTmEap5y8CXi+jWrDFP/mr6B5qO/Vx6iYNU=",
     "ssh_host_key_rsa_public_keytype": "ssh-rsa",
-    "swapfree_mb": 6660,
+    "swapfree_mb": 5364,
     "swaptotal_mb": 7923,
     "system": "Linux",
     "system_capabilities": [
@@ -19878,7 +20992,7 @@
     ],
     "system_capabilities_enforced": "True",
     "system_vendor": "Dell Inc.",
-    "uptime_seconds": 977524,
+    "uptime_seconds": 721241,
     "user_dir": "/home/username",
     "user_gecos": "user name",
     "user_gid": 1000,
@@ -19965,7 +21079,7 @@
         },
         "hw_timestamp_filters": [],
         "ipv4": {
-            "address": "192.168.1.207",
+            "address": "192.168.1.217",
             "broadcast": "192.168.1.255",
             "netmask": "255.255.255.0",
             "network": "192.168.1.0",
@@ -19991,5 +21105,5 @@
   }
           ],
   "check_project_version": "1.1.101",
-  "run_time": "2023-06-23T13:38:56Z"
+  "run_time": "2023-07-03T09:18:36Z"
 }

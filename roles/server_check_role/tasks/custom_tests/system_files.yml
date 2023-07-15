@@ -1,23 +1,49 @@
----
+- name: System Files | Stat task to verify that the /etc/default/grub file exists
+  ansible.builtin.stat:
+    path: /etc/default/grub
+  register: grub_file
+  failed_when: grub_file.stat.exists == false
+  ignore_errors: true
 
-- name: Get current grub config
-  ansible.builtin.command: "cat /etc/default/grub"
+# Read the contents of the /etc/default/grub file using the slurp module
+# Register the output in the grub_output variable
+# Set changed_when and check_mode to false to indicate that this task doesn't modify the system
+- name: System Files | Get current grub config
+  ansible.builtin.slurp:
+    path: /etc/default/grub
   register: grub_output
   changed_when: false
   check_mode: false
+  when: grub_file is defined and grub_file.stat.exists
 
-- name: Get current fstab information
-  ansible.builtin.command: "cat /etc/fstab"
+
+- name: System Files | Stat task to verify that the /etc/fstab file exists
+  ansible.builtin.stat:
+    path: /etc/fstab
+  register: fstab_file
+  failed_when: fstab_file.stat.exists == false
+  ignore_errors: true
+
+# Read the contents of the /etc/fstab file using the slurp module
+# Register the output in the fstab_output variable
+# Set changed_when and check_mode to false to indicate that this task doesn't modify the system
+- name: System Files | Get current fstab information
+  ansible.builtin.slurp:
+    path: /etc/fstab
   register: fstab_output
   changed_when: false
   check_mode: false
+  when: fstab_file is defined and fstab_file.stat.exists
 
-- name: Add System File Facts to the server_report_data
+# Add the system file facts to the server_report_data using the set_fact module
+# Create a data_var dictionary with keys for grub_config and fstab_config
+# Decode the content attribute of grub_output and fstab_output from base64 using the b64decode filter
+# Combine the data_var dictionary with the existing server_report_data using the combine filter
+- name: System Files | Add System File Facts to the server_report_data
   ansible.builtin.set_fact:
     server_report_data: "{{ server_report_data | combine(data_var) }}"
   vars:
     data_var:
-      grub_config: "{{ grub_output.stdout }}"
-      fstab_config: "{{ fstab_output.stdout }}"
-
+      grub_config: "{{ grub_output.content | b64decode | default('') }}"
+      fstab_config: "{{ fstab_output.content | b64decode | default('') }}"
 ...
