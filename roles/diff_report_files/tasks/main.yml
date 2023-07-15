@@ -17,7 +17,7 @@
     - debug
     - never
 
-- name: Diff_report_files - Main | Run the custom python library file to do a file comparison for the before and after files
+- name: Diff_report_files - Main | Run python library to do file comparison on before and after files  # noqa: var-naming[no-role-prefix]
   compare_files:
     before_file: "{{ diff_before_file }}"
     after_file: "{{ diff_after_file }}"

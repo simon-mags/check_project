@@ -6,7 +6,7 @@
 
   roles:
     - server_check_role
-  
+
   tasks:
     - name: Check if before file exists
       ansible.builtin.stat:
@@ -20,7 +20,7 @@
       register: after_file_stat
 
     - name: Include diff_report_files role
-      include_role:
+      ansible.builtin.include_role:
         name: diff_report_files
       when:
         - before_file_stat.stat.exists
